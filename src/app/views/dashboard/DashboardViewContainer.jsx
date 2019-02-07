@@ -1,14 +1,23 @@
-import React from 'react';
-import DashboardViewComponent from './DashboardViewComponent';
+import { withFirebase } from 'react-redux-firebase';
+import { compose, withHandlers } from 'recompose';
 import { UserIsAuthenticated } from '../../../utils/siteAuth';
+
+
+import DashboardViewComponent from './DashboardViewComponent';
 
 
 // this is where we would normally do the redux stuffz
 
 
-const testUserName = 'Bob';
+const enhance = compose(
+  withFirebase,
+  withHandlers({
+    logOutUser: props => () => {
+      return props.firebase.logout()
+    }
+  }),
+  UserIsAuthenticated
+);
 
-const DashboardViewContainer = () => <DashboardViewComponent userName={testUserName} />;
 
-
-export default UserIsAuthenticated(DashboardViewContainer);
+export default enhance(DashboardViewComponent);

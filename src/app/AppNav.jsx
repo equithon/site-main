@@ -3,7 +3,7 @@ import { Route, Link, Switch } from 'react-router-dom';
 
 // VIEW CONTAINERS
 import DashboardViewContainer from './views/dashboard/DashboardViewContainer';
-import LoginViewContainer from './views/login+signup/LoginViewContainer';
+import LoginSignupViewContainer from './views/login+signup/LoginSignupViewContainer';
 import ApplicationViewContainer from './views/application/ApplicationViewContainer';
 import AppReviewViewContainer from './views/appreview/AppReviewViewContainer';
 import AttendeesViewContainer from './views/attendees/AttendeesViewContainer';
@@ -57,7 +57,7 @@ class AppNav extends React.Component {
 
         {/* MAIN VIEW ROUTE SWITCHER */}
         <Switch location={isModal ? this.previousLocation : location}>
-          <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginViewContainer} />
+          <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginSignupViewContainer} />
           <Route exact path={ROUTES.HOME} component={DashboardViewContainer} />
           <Route exact path={ROUTES.APPLICATION} component={ApplicationViewContainer} />
           <Route exact path={ROUTES.APP_REVIEW} component={AppReviewViewContainer} />
