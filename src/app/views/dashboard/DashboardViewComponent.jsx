@@ -1,6 +1,6 @@
 import React from 'react';
 
-class DashboardComponent extends React.Component {
+class DashboardViewComponent extends React.Component {
   render() {
     const { userName } = this.props;
 
@@ -12,4 +12,4 @@ class DashboardComponent extends React.Component {
   }
 }
 
-export default DashboardComponent;
+export default DashboardViewComponent;

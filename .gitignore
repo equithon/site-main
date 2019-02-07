@@ -80,7 +80,9 @@ yarn-error.log
 # misc
 .DS_Store
 .env.local
+.env.development
 .env.development.local
+.env.test
 .env.test.local
 .env.production.local
 

@@ -5,3 +5,5 @@ export const APP_REVIEW = '/appreview';
 export const ATTENDEELIST = '/attendees';
 export const MAP = '/map';
 export const SCHEDULE = '/schedule';
+export const PROFILE = '/profile';
+export const EVENT = '/event';
