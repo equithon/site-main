@@ -1,4 +1,5 @@
 import React from 'react';
+import { UserIsAuthenticated } from '../../../utils/siteAuth';
 
 
 // this is where we would normally do the redux stuffz
@@ -7,4 +8,4 @@ import React from 'react';
 const EventModalContainer = () => <div> this is a test event modal </div>;
 
 
-export default EventModalContainer;
+export default UserIsAuthenticated(EventModalContainer);

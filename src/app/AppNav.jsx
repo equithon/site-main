@@ -17,6 +17,8 @@ import EventModalContainer from './modals/event/EventModalContainer';
 
 import * as ROUTES from '../utils/siteRoutes';
 
+
+
 class AppNav extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +44,7 @@ class AppNav extends React.Component {
     const isModal = location.state && location.state.modal;
     return (
       <div>
-        <div className="testNavigationBarShouldRemoveLater">
+        <div className="FOR_TESTING_REMOVE_LATER">
           <div><Link to={ROUTES.HOME}>Dashboard</Link></div>
           <div><Link to={ROUTES.SIGNUP_LOGIN}>Sign Up/Log In</Link></div>
           <div><Link to={ROUTES.APPLICATION}>My Application</Link></div>
