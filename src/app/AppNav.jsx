@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Route, Link, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // VIEW CONTAINERS
 import DashboardViewContainer from './views/dashboard/DashboardViewContainer';
@@ -9,7 +9,7 @@ import AppReviewViewContainer from './views/appreview/AppReviewViewContainer';
 import AttendeesViewContainer from './views/attendees/AttendeesViewContainer';
 import MapViewContainer from './views/map/MapViewContainer';
 import ScheduleViewContainer from './views/schedule/ScheduleViewContainer';
-
+import Error404Container from './views/404/Error404Container';
 
 // MODAL CONTAINERS
 import ProfileModalContainer from './modals/profile/ProfileModalContainer';
@@ -18,11 +18,9 @@ import EventModalContainer from './modals/event/EventModalContainer';
 import * as ROUTES from '../utils/siteRoutes';
 
 
-
 class AppNav extends React.Component {
   constructor(props) {
     super(props);
-
     this.previousLocation = this.props.location;
   }
 
@@ -42,28 +40,23 @@ class AppNav extends React.Component {
   render() {
     const { location } = this.props;
     const isModal = location.state && location.state.modal;
+    const curLocation = isModal ? { pathname: location.state.onTopOf, search: "", hash: "" } : location;
+
     return (
       <div>
-        <div className="FOR_TESTING_REMOVE_LATER">
-          <div><Link to={ROUTES.HOME}>Dashboard</Link></div>
-          <div><Link to={ROUTES.SIGNUP_LOGIN}>Sign Up/Log In</Link></div>
-          <div><Link to={ROUTES.APPLICATION}>My Application</Link></div>
-          <div><Link to={ROUTES.APP_REVIEW}>Application Review Tool</Link></div>
-          <div><Link to={ROUTES.ATTENDEELIST}>Attendee List</Link></div>
-          <div><Link to={ROUTES.MAP}>Event Map</Link></div>
-          <div><Link to={ROUTES.SCHEDULE}>Event Schedule</Link></div>
-        </div>
-
 
         {/* MAIN VIEW ROUTE SWITCHER */}
-        <Switch location={isModal ? this.previousLocation : location}>
+        <Switch location={curLocation}>
           <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginSignupViewContainer} />
-          <Route exact path={ROUTES.HOME} component={DashboardViewContainer} />
           <Route exact path={ROUTES.APPLICATION} component={ApplicationViewContainer} />
           <Route exact path={ROUTES.APP_REVIEW} component={AppReviewViewContainer} />
           <Route exact path={ROUTES.ATTENDEELIST} component={AttendeesViewContainer} />
           <Route exact path={ROUTES.MAP} component={MapViewContainer} />
           <Route exact path={ROUTES.SCHEDULE} component={ScheduleViewContainer} />
+          <Route exact path={ROUTES.HOME} component={DashboardViewContainer} />
+          <Route exact path={ROUTES.PAGENOTFOUND} component={Error404Container} />
+          <Redirect to="/404" />
+          {/* TODO: get 404 page working */}
         </Switch>
 
         {/* MODAL DISPLAY */}
@@ -73,6 +66,7 @@ class AppNav extends React.Component {
             <Route exact path={ROUTES.EVENT} component={EventModalContainer} />
           </Switch>
         </div>
+
       </div>
     );
   }

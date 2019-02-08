@@ -30,6 +30,7 @@
   "homepage": "https://github.com/equithon/site-personal#readme",
   "dependencies": {
     "firebase": "^5.8.2",
+    "formik": "^1.4.3",
     "history": "^4.7.2",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",

@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import { withFirebase } from 'react-redux-firebase';
 import { compose, withHandlers } from 'recompose';
 import { UserIsAuthenticated } from '../../../utils/siteAuth';
@@ -6,10 +7,14 @@ import { UserIsAuthenticated } from '../../../utils/siteAuth';
 import DashboardViewComponent from './DashboardViewComponent';
 
 
-// this is where we would normally do the redux stuffz
-
-
 const enhance = compose(
+  connect(
+    (state) => {
+      return {
+        profile: state.firebase.profile // profile passed as props.profile
+      }
+    }
+  ),
   withFirebase,
   withHandlers({
     logOutUser: props => () => {
