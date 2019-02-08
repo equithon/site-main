@@ -1,73 +1,33 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import styled from 'styled-components';
 
+import LogoButtonHeader from '../../common/LogoButtonHeader/LogoButtonHeaderComponent';
+import LoginFormComponent from './components/LoginFormComponent';
+import SignUpFormComponent from './components/SignUpFormComponent';
+import WavesComponent from './components/WavesComponent';
+
+
+const ViewContainer = styled.div`
+  height: 90vh;
+  padding: 5vh 10vw;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 
 const LoginSignupViewComponent = ({ logInUser, signUpUser }) => (
-  <div>
-    Log in or sign up to continue.
+  <ViewContainer>
 
-    <Formik
-      initialValues={{email: '', password: ''}}
-      onSubmit={(values, actions) => {
-        logInUser(values)
-        .then(() => {
-          actions.setSubmitting(false);
-        })
-        .catch(err => {
-          console.log(err);
-          actions.setSubmitting(false);
-        })
-      }}
-      render={({ errors, status, touched, isSubmitting }) => (
-        <Form>
+    <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
 
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
+    <LoginFormComponent logIn={logInUser} />
+    {/* <SignUpFormComponent signUp={signUpUser} />
+    */}
 
-          <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-
-          <button type="submit" disabled={isSubmitting}>
-            Log In
-          </button>
-
-        </Form>
-      )}
-    />
-
-    <Formik
-      initialValues={{name: '', email: '', password: ''}}
-      onSubmit={(values, actions) => {
-        signUpUser(values)
-        .then(() => {
-          actions.setSubmitting(false);
-        })
-        .catch(err => {
-          console.log(err);
-          actions.setSubmitting(false);
-        })
-      }}
-      render={({ errors, status, touched, isSubmitting }) => (
-        <Form>
-
-          <Field type="text" name="name" />
-          <ErrorMessage name="name" component="div" />
-
-          <Field type="email" name="email" />
-          <ErrorMessage name="email" component="div" />
-
-          <Field type="password" name="password" />
-          <ErrorMessage name="password" component="div" />
-
-          <button type="submit" disabled={isSubmitting}>
-            Sign Up
-          </button>
-
-        </Form>
-      )}
-    />
-  </div>
+    <WavesComponent />
+  </ViewContainer>
 );
 
 export default LoginSignupViewComponent;

@@ -1,47 +1,29 @@
 import * as React from 'react';
-
 import { BrowserRouter as AppRouter, Route } from 'react-router-dom';
-
 import { Provider } from 'react-redux';
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
+import { ThemeProvider } from 'styled-components';
 
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-
-import { firebaseConfig, rrfConfig } from '../utils/siteConfig';
 import appStore from '../ducks/store';
+import reactReduxFirebase from '../utils/setupFirebase';
+import * as siteStyles from '../utils/siteStyles';
+import { GlobalStyles } from '../utils/siteTools';
 
-
-import AppNav from './AppNav';
-
-
-
-/* -------------- FIREBASE SETUP -------------- */
-const curFbConfig = (process.env.NODE_ENV === 'production') ? firebaseConfig.prod : firebaseConfig.dev;
-firebase.initializeApp(curFbConfig);
-
-/* -------------- REDUX SETUP -------------- */
-
-
-
-
-const rrfProps = {
-  firebase,
-  createFirestoreInstance,
-  config: rrfConfig,
-  dispatch: appStore.dispatch,
-};
+import AppNav from './common/AppNav/AppNav';
 
 
 
 const App = () => (
   <Provider store={appStore}>
-    <ReactReduxFirebaseProvider {...rrfProps}>
-      <AppRouter>
-        <Route component={AppNav} />
-      </AppRouter>
+    <ReactReduxFirebaseProvider {...reactReduxFirebase}>
+      <ThemeProvider theme={siteStyles}>
+        <>
+          <GlobalStyles />
+          <AppRouter>
+            <Route component={AppNav} />
+          </AppRouter>
+        </>
+      </ThemeProvider>
     </ReactReduxFirebaseProvider>
   </Provider>
 );

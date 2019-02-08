@@ -9,17 +9,13 @@ import DashboardViewComponent from './DashboardViewComponent';
 
 const enhance = compose(
   connect(
-    (state) => {
-      return {
+    (state) => ({
         profile: state.firebase.profile // profile passed as props.profile
-      }
-    }
+      })
   ),
   withFirebase,
   withHandlers({
-    logOutUser: props => () => {
-      return props.firebase.logout()
-    }
+    logOutUser: props => () => props.firebase.logout()
   }),
   UserIsAuthenticated
 );

@@ -1,3 +1,4 @@
+/* -------------- REDUX STORE SETUP -------------- */
 import { createStore } from 'redux';
 import appReducer from './reducers';
 
