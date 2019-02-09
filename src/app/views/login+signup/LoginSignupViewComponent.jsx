@@ -1,11 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-
-import LogoButtonHeader from '../../common/LogoButtonHeader/LogoButtonHeaderComponent';
-import LoginSignupFormsComponent from './components/LoginSignupFormsComponent';
-import WavesComponent from './components/WavesComponent';
-
+import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
+import LoginSignupFormsComponent from "./components/LoginSignupFormsComponent";
+import WavesComponent from "./components/WavesComponent";
 
 const ViewContainer = styled.div`
   height: 90vh;
@@ -16,16 +14,24 @@ const ViewContainer = styled.div`
   justify-content: space-between;
 `;
 
-
-const LoginSignupViewComponent = ({ logInUser, signUpUser }) => (
+const LoginSignupViewComponent = ({
+  logInUser,
+  signUpUser,
+  validationSchemas,
+  errorTable
+}) => (
   <ViewContainer>
-
-    <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
-    <LoginSignupFormsComponent logIn={logInUser} signUp={signUpUser} />
+    <LogoButtonHeader
+      onButtonClick={() => window.open("https://equithon.org", "_self")}
+    />
+    <LoginSignupFormsComponent
+      logIn={logInUser}
+      signUp={signUpUser}
+      validationSchemas={validationSchemas}
+      errorTable={errorTable}
+    />
     <WavesComponent />
-
   </ViewContainer>
 );
-
 
 export default LoginSignupViewComponent;

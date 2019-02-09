@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
 import { Button, TextInput } from "grommet";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../utils/siteTools";
 
 const Container = posed.div({
@@ -75,7 +75,7 @@ const FormContents = styled(Form)`
     width: 55vw;
 
     & div.sectionEnd {
-      margin-bottom: 3vw;
+      margin-bottom: 2vw;
     }
   `}
 
@@ -89,7 +89,7 @@ const FormContents = styled(Form)`
 `;
 
 const FormInput = styled(TextInput)`
-  margin-bottom: 0.5em;
+  margin-top: 0.5em;
 `;
 
 const FormSwitcher = styled.div`
@@ -117,6 +117,25 @@ const FormSwitcher = styled.div`
   `}
 `;
 
+const FormErrorMessage = styled.div`
+  opacity: ${props => (props.show ? 1 : 0)};
+  transition: opacity 450ms ease-in-out;
+
+  color: ${props => props.theme.colors.error};
+  margin-bottom: 1em;
+  height: 1em;
+  font-weight: 600;
+  font-size: 1vw;
+
+  ${mediaSize.tablet`
+    font-size: 2vw;
+  `}
+
+  ${mediaSize.phone`
+    font-size: 3vw;
+  `}
+`;
+
 const FormToggle = styled.span`
   text-decoration: underline;
   cursor: pointer;
@@ -126,7 +145,12 @@ const FormToggle = styled.span`
   }
 `;
 
-const LoginSignupFormsComponent = ({ signUp, logIn }) => {
+const LoginSignupFormsComponent = ({
+  signUp,
+  logIn,
+  validationSchemas,
+  errorTable
+}) => {
   const [showLogin, toggleLogin] = useState(true);
 
   return (
@@ -138,53 +162,65 @@ const LoginSignupFormsComponent = ({ signUp, logIn }) => {
         </FormHeading>
         <Formik
           initialValues={{ loginEmail: "", loginPassword: "" }}
+          validationSchema={validationSchemas.login}
+          validateOnChange={false}
           onSubmit={(values, actions) => {
             logIn(values)
               .then(() => {
                 actions.setSubmitting(false);
               })
               .catch(err => {
-                console.log(err);
+                const errMsg =
+                  err.code in errorTable
+                    ? errorTable[err.code]
+                    : errorTable.DEFAULT;
                 actions.setSubmitting(false);
+                actions.setStatus(errMsg);
               });
           }}
-          render={({ isSubmitting }) => (
-            <FormContents>
-              <Field type="email" name="loginEmail">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Email"
-                    type="email"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="loginEmail" component="div" />
+          render={({ errors, status, isSubmitting }) => {
+            const hasErrors = Object.entries(errors).length !== 0;
+            const hasStatus = status !== undefined;
 
-              <Field type="password" name="loginPassword">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Password"
-                    type="password"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="loginPassword" component="div" />
-              <div className="sectionEnd" />
+            return (
+              <FormContents>
+                <Field type="email" name="loginEmail">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Email"
+                      type="email"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
 
-              <Button
-                className="loginButton"
-                label="Log In"
-                fill
-                primary
-                type="submit"
-                disabled={isSubmitting}
-              />
-            </FormContents>
-          )}
+                <Field type="password" name="loginPassword">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Password"
+                      type="password"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
+
+                <FormErrorMessage show={hasErrors || hasStatus}>
+                  {hasStatus ? status : errors[Object.keys(errors)[0]]}
+                </FormErrorMessage>
+
+                <Button
+                  className="loginButton"
+                  label="Log In"
+                  fill
+                  primary
+                  type="submit"
+                  disabled={isSubmitting}
+                />
+              </FormContents>
+            );
+          }}
         />
 
         <FormSwitcher>
@@ -205,78 +241,89 @@ const LoginSignupFormsComponent = ({ signUp, logIn }) => {
             signupPassword: "",
             confirmPassword: ""
           }}
+          validationSchema={validationSchemas.signup}
+          validateOnChange={false}
           onSubmit={(values, actions) => {
             signUp(values)
               .then(() => {
                 actions.setSubmitting(false);
               })
               .catch(err => {
-                console.log(err);
+                const errMsg =
+                  err.code in errorTable
+                    ? errorTable[err.code]
+                    : errorTable.DEFAULT;
                 actions.setSubmitting(false);
+                actions.setStatus(errMsg);
               });
           }}
-          render={({ isSubmitting }) => (
-            <FormContents>
-              <Field type="text" name="signupName">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Full Name"
-                    type="name"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="signupName" component="div" />
+          render={({ errors, status, isSubmitting }) => {
+            const hasErrors =
+              status !== "" || Object.entries(errors).length !== 0;
+            const hasStatus = status !== undefined;
 
-              <Field type="email" name="signupEmail">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Email"
-                    type="email"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="signupEmail" component="div" />
-              <div className="sectionEnd" />
+            return (
+              <FormContents>
+                <Field type="text" name="signupName">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Full Name"
+                      type="name"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
 
-              <Field type="password" name="signupPassword">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Password"
-                    type="password"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="signupPassword" component="div" />
+                <Field type="email" name="signupEmail">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Email"
+                      type="email"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
+                <div className="sectionEnd" />
 
-              <Field type="password" name="confirmPassword">
-                {({ field, form }) => (
-                  <FormInput
-                    placeholder="Confirm Password"
-                    type="password"
-                    {...field}
-                    formikForm={form}
-                  />
-                )}
-              </Field>
-              <ErrorMessage name="confirmPassword" component="div" />
-              <div className="sectionEnd" />
+                <Field type="password" name="signupPassword">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Password"
+                      type="password"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
 
-              <Button
-                className="signupButton"
-                label="Sign Up"
-                fill
-                primary
-                type="submit"
-                disabled={isSubmitting}
-              />
-            </FormContents>
-          )}
+                <Field type="password" name="confirmPassword">
+                  {({ field, form }) => (
+                    <FormInput
+                      placeholder="Confirm Password"
+                      type="password"
+                      {...field}
+                      formikForm={form}
+                    />
+                  )}
+                </Field>
+
+                <FormErrorMessage show={hasStatus || hasErrors}>
+                  {hasStatus ? status : errors[Object.keys(errors)[0]]}
+                </FormErrorMessage>
+
+                <Button
+                  className="signupButton"
+                  label="Sign Up"
+                  fill
+                  primary
+                  type="submit"
+                  disabled={isSubmitting}
+                />
+              </FormContents>
+            );
+          }}
         />
 
         <FormSwitcher>
