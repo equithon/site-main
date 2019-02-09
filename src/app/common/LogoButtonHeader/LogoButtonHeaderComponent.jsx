@@ -1,59 +1,27 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import { Box, Heading } from "grommet";
 
-import Button from '../Button/Button';
-
-import ColorLogo from '../../../static/img/logo/logo_tiny_color.png';
-import { mediaSize } from '../../../utils/siteTools';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 8vh;
-`;
+import ColorLogo from "../../../static/img/logo/logo_tiny_color.png";
 
 const Logo = styled.img`
-  vertical-align: top;
-  max-height: 100%;
+  max-height: 7vh;
+  max-width: 7vh;
 `;
 
-const LogoText = styled.span`
+const LogoHeading = styled(Heading)`
   margin-left: 1vw;
-
-  color: ${props => props.theme.colors.darkerPurple};
-
-  font-size: ${props => props.theme.sizes.subHeader.desktop};
-  font-weight: 600;
-  line-height: 8vh;
-
-  ${mediaSize.tablet`
-    font-size: ${props => props.theme.sizes.subHeader.tablet};
-  `}
-
-  ${mediaSize.phone`
-    font-size: ${props => props.theme.sizes.subHeader.phone};
-  `}
+  color: ${props =>
+    props.size === "large" ? props.theme.colors.darkerPurple : "white"};
 `;
 
-
-const RightButton = styled(Button)`
-  margin: auto 0;
-  width: 7em;
-  height: 2.5em;
-  
-  background-color: ${props => props.theme.colors.darkerPurple};
-`;
-
-const LogoButtonHeaderComponent = ({ onButtonClick }) => (
-  <Container>
-    <div>
-      <Logo src={ColorLogo} />
-      <LogoText>Equithon</LogoText>
-    </div>
-
-    <RightButton className="rightButton" onClick={onButtonClick} rounded hover text="Home" />
-  </Container>
+const LogoButtonHeaderComponent = () => (
+  <Box direction="row" align="center">
+    <Logo src={ColorLogo} />
+    <LogoHeading level="3" size="large" responsive={false}>
+      Equithon
+    </LogoHeading>
+  </Box>
 );
 
 export default LogoButtonHeaderComponent;

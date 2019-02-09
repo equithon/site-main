@@ -1,17 +1,15 @@
-import * as React from 'react';
-import { BrowserRouter as AppRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { ThemeProvider } from 'styled-components';
+import * as React from "react";
+import { Grommet as ThemeProvider } from "grommet";
+import { BrowserRouter as AppRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
-import appStore from '../ducks/store';
-import reactReduxFirebase from '../utils/setupFirebase';
-import * as siteStyles from '../utils/siteStyles';
-import { GlobalStyles } from '../utils/siteTools';
+import appStore from "../ducks/store";
+import reactReduxFirebase from "../utils/setupFirebase";
+import * as siteStyles from "../utils/siteStyles";
+import { GlobalStyles } from "../utils/siteTools";
 
-import AppNav from './common/AppNav/AppNav';
-
-
+import AppNav from "./common/AppNav/AppNav";
 
 const App = () => (
   <Provider store={appStore}>

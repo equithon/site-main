@@ -1,7 +1,7 @@
 export const colors = {
   offBlack: "#535353",
   offGrey: "#aaaaaa",
-  offWhite: "#EFEFEF",
+  offWhite: "#f7f7f7",
   warning: "#F4A867",
   error: "#F07285",
 
@@ -14,9 +14,53 @@ export const colors = {
   lighterBlue: "#A9C2F8"
 };
 
+export const global = {
+  control: {
+    border: {
+      width: "2px",
+      radius: "6px"
+    },
+    extend: {
+      fontWeight: 600
+    }
+  },
+  focus: {
+    border: {
+      color: "rgba(141, 83, 219, 0.7)"
+    }
+  }
+};
+
 export const font = {
   size: "18px",
   height: "20px"
+};
+
+export const button = {
+  color: colors.offWhite,
+  padding: {
+    vertical: "7px"
+  },
+  primary: {
+    color: colors.darkerPurple
+  },
+  border: {
+    radius: "6px",
+    color: colors.darkerPurple
+  },
+  extend: {
+    fontWeight: 600
+  }
+};
+
+const theme = {
+  global: {
+    font: {
+      family: "SF Pro Display",
+      size: "10px",
+      height: "20px"
+    }
+  }
 };
 
 export const sizes = {
@@ -36,3 +80,5 @@ export const sizes = {
     phone: "1em"
   }
 };
+
+export default theme;
