@@ -17,13 +17,18 @@ export const colors = {
 
 export const sizes = {
   header: {
-    desktop: '2em',
-    tablet: '5em',
-    phone: '6em'
+    desktop: '3vw',
+    tablet: '6vw',
+    phone: '8vw'
   },
   subHeader: {
-    desktop: '1.5em',
-    tablet: '3em',
-    phone: '4.5em'
+    desktop: '2vw',
+    tablet: '5vw',
+    phone: '6vw'
+  },
+  normalText: {
+    desktop: '1.2em',
+    tablet: '3vw',
+    phone: '1em'
   }
 }

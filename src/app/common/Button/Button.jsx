@@ -1,20 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { mediaSize } from '../../../utils/siteTools';
+
 // A generic button component that is meant to be styled by the user.
 
 const Container = styled.button`
   margin:  auto;
-  height: 3.5vw;
-  width: 25vw;
-  padding: 3px;
-
-  color: white;
-  font-size: 1.2em;
-
   border: none;
-  cursor: pointer;
   border-radius: ${props => props.rounded ? '50px' : '10px'};
+  cursor: pointer;
+  box-sizing: border-box;
 
   will-change: transform;
   transition: transform 300ms ease-in-out;
@@ -22,6 +18,17 @@ const Container = styled.button`
   &:hover {
     transform: ${props => props.hover ? 'translateY(-2px)' : 'translateY(0)'};
   }
+
+  color: white;
+  font-size: ${props => props.theme.sizes.normalText.desktop};
+
+  ${mediaSize.tablet`
+    font-size: ${props => props.theme.sizes.normalText.tablet};
+  `}
+
+  ${mediaSize.phone`
+    font-size: ${props => props.theme.sizes.normalText.phone};
+  `}
 `;
 
 

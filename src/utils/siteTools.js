@@ -34,6 +34,8 @@ export const mediaSize = Object.keys(displaySizes).reduce((acc, label) => {
 
       font-family: 'SF Pro Display', serif;
       color: #46484a;
+
+      box-sizing: border-box;
     }
 
     @font-face {

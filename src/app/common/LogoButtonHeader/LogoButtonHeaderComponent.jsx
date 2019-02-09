@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from '../Form/FormComponents';
+import Button from '../Button/Button';
 
 import ColorLogo from '../../../static/img/logo/logo_tiny_color.png';
+import { mediaSize } from '../../../utils/siteTools';
 
 const Container = styled.div`
   display: flex;
@@ -25,18 +26,23 @@ const LogoText = styled.span`
   font-size: ${props => props.theme.sizes.subHeader.desktop};
   font-weight: 600;
   line-height: 8vh;
+
+  ${mediaSize.tablet`
+    font-size: ${props => props.theme.sizes.subHeader.tablet};
+  `}
+
+  ${mediaSize.phone`
+    font-size: ${props => props.theme.sizes.subHeader.phone};
+  `}
 `;
 
 
 const RightButton = styled(Button)`
   margin: auto 0;
-  height: 4em;
-  width: 10em;
-
-  border: none;
+  width: 7em;
+  height: 2.5em;
+  
   background-color: ${props => props.theme.colors.darkerPurple};
-
-  color: white;
 `;
 
 const LogoButtonHeaderComponent = ({ onButtonClick }) => (
@@ -46,9 +52,7 @@ const LogoButtonHeaderComponent = ({ onButtonClick }) => (
       <LogoText>Equithon</LogoText>
     </div>
 
-    <RightButton className="rightButton" onClick={onButtonClick} rounded>
-      Home
-    </RightButton>
+    <RightButton className="rightButton" onClick={onButtonClick} rounded hover text="Home" />
   </Container>
 );
 

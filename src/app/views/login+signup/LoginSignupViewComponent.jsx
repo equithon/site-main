@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
+
 import LogoButtonHeader from '../../common/LogoButtonHeader/LogoButtonHeaderComponent';
-import LoginFormComponent from './components/LoginFormComponent';
-import SignUpFormComponent from './components/SignUpFormComponent';
+import LoginSignupFormsComponent from './components/LoginSignupFormsComponent';
 import WavesComponent from './components/WavesComponent';
 
 
@@ -16,34 +16,16 @@ const ViewContainer = styled.div`
   justify-content: space-between;
 `;
 
-const LoginSignUpContainer = styled.div`
-  position: relative;
-  z-index: 1;
-  margin: auto;
-  width: 30vw;
-`;
 
+const LoginSignupViewComponent = ({ logInUser, signUpUser }) => (
+  <ViewContainer>
 
-const LoginSignupViewComponent = ({ logInUser, signUpUser }) => {
+    <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
+    <LoginSignupFormsComponent logIn={logInUser} signUp={signUpUser} />
+    <WavesComponent />
 
-  const [showLogin, toggleLogin] = useState(true);
-
-  return (
-    <ViewContainer>
-
-      <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
-
-      <LoginSignUpContainer>
-        <LoginFormComponent logIn={logInUser} show={showLogin} toggleView={() => toggleLogin(false)}/>
-        <SignUpFormComponent signUp={signUpUser} show={!showLogin} toggleView={() => toggleLogin(true)}/>
-      </LoginSignUpContainer>
-      {/*
-      */}
-
-      <WavesComponent />
-    </ViewContainer>
-  );
-};
+  </ViewContainer>
+);
 
 
 export default LoginSignupViewComponent;

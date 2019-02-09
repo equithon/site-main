@@ -1,13 +1,11 @@
-
 import React from 'react';
 import styled from 'styled-components';
+
+import { mediaSize } from '../../../utils/siteTools';
 
 // A generic button component that is meant to be styled by the user.
 
 const Container = styled.div`
-
-  width: calc(25vw - 10px);
-  height: 3vw;
   margin: 0 auto 1vw auto;
   padding: 3px;
   position: relative;
@@ -15,6 +13,8 @@ const Container = styled.div`
   z-index: 1;
   border-radius: 8px;
   overflow: hidden;
+  box-sizing: border-box;
+
 
   & .border {
     position: absolute;
@@ -35,8 +35,8 @@ const InputBox = styled.input`
   outline: none;
   border: none;
 
-  font-size: 1.2em;
 
+  font-size: ${props => props.theme.sizes.normalText.desktop};
   z-index: 2;
   border-radius: 6px;
   padding: 2%;
@@ -53,6 +53,14 @@ const InputBox = styled.input`
   &:focus {
     color: ${props => props.theme.colors.secondary};
   }
+
+  ${mediaSize.tablet`
+    font-size: ${props => props.theme.sizes.normalText.tablet};
+  `}
+
+  ${mediaSize.phone`
+    font-size: ${props => props.theme.sizes.normalText.phone};
+  `}
 `;
 
 
