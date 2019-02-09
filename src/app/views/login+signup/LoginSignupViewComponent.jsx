@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import LogoButtonHeader from '../../common/LogoButtonHeader/LogoButtonHeaderComponent';
@@ -16,18 +16,34 @@ const ViewContainer = styled.div`
   justify-content: space-between;
 `;
 
+const LoginSignUpContainer = styled.div`
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  width: 30vw;
+`;
 
-const LoginSignupViewComponent = ({ logInUser, signUpUser }) => (
-  <ViewContainer>
 
-    <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
+const LoginSignupViewComponent = ({ logInUser, signUpUser }) => {
 
-    <LoginFormComponent logIn={logInUser} />
-    {/* <SignUpFormComponent signUp={signUpUser} />
-    */}
+  const [showLogin, toggleLogin] = useState(true);
 
-    <WavesComponent />
-  </ViewContainer>
-);
+  return (
+    <ViewContainer>
+
+      <LogoButtonHeader onButtonClick={() => window.open('https://equithon.org', '_self')} />
+
+      <LoginSignUpContainer>
+        <LoginFormComponent logIn={logInUser} show={showLogin} toggleView={() => toggleLogin(false)}/>
+        <SignUpFormComponent signUp={signUpUser} show={!showLogin} toggleView={() => toggleLogin(true)}/>
+      </LoginSignUpContainer>
+      {/*
+      */}
+
+      <WavesComponent />
+    </ViewContainer>
+  );
+};
+
 
 export default LoginSignupViewComponent;

@@ -58,9 +58,16 @@ const InputBox = styled.input`
 
 
 
-const Input = ({ className, placeholder, outlineColor, inputType }) => (
+const Input = ({ className, placeholder, outlineColor, type, name, formikForm }) => (
   <Container className={className} outlineColor={outlineColor}>
-    <InputBox placeholder={placeholder} type={inputType} />
+    <InputBox
+      placeholder={placeholder}
+      type={type}
+      name={name}
+      onChange={formikForm ? formikForm.handleChange : null}
+      onBlur={formikForm ? formikForm.handleBlur : null}
+      value={formikForm ? formikForm.values.name : null}
+    />
     <div className="border" />
   </Container>
 );

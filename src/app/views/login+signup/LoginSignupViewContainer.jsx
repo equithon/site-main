@@ -10,8 +10,8 @@ import LoginSignupViewComponent from './LoginSignupViewComponent';
 const enhance = compose(
   withFirebase,
   withHandlers({
-    logInUser: props => ({ email, password }) => props.firebase.login({ email, password }),
-    signUpUser: props => ({email, password, name}) => props.firebase.createUser({ email, password }, { name, role: 'hacker' })
+    logInUser: props => ({ loginEmail, loginPassword }) => props.firebase.login({ email: loginEmail, password: loginPassword }),
+    signUpUser: props => ({signupName, signupEmail, signupPassword}) => props.firebase.createUser({ email: signupEmail, password: signupPassword }, { name: signupName, role: 'hacker' })
   }),
   UserIsNotAuthenticated
 );

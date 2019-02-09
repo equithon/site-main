@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const Container = styled.button`
   margin:  auto;
-  height: 3.2vw;
+  height: 3.5vw;
   width: 25vw;
   padding: 3px;
 
@@ -26,8 +26,8 @@ const Container = styled.button`
 
 
 
-const Button = ({ className, onButtonClick, text, rounded, hover }) => (
-  <Container onClick={onButtonClick} rounded={rounded} hover={hover} className={className}>
+const Button = ({ className, onButtonClick, text, rounded, hover, type }) => (
+  <Container type={type} onClick={onButtonClick} rounded={rounded} hover={hover} className={className}>
     {text}
   </Container>
 );
