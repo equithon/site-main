@@ -30,3 +30,5 @@ const { percyAddon, serializeStories } = createPercyAddon();
 setAddon(percyAddon);
 
 configure(loadStories, module);
+
+serializeStories(getStorybook);

@@ -1,6 +1,6 @@
 workflow "New workflow" {
   on = "pull_request"
-  resolves = ["Test"]
+  resolves = ["Visual Regression Tests"]
 }
 
 action "Build" {
