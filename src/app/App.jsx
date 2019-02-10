@@ -6,7 +6,7 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 import appStore from "../ducks/store";
 import reactReduxFirebase from "../utils/setupFirebase";
-import * as siteStyles from "../utils/siteStyles";
+import siteStyles from "../utils/siteStyles";
 import { GlobalStyles } from "../utils/siteTools";
 
 import AppNav from "./common/AppNav/AppNav";
