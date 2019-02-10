@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly with no props 1`] = `
+<styled.div>
+  <Styled(Component)
+    login={true}
+    pose="shown"
+  >
+    <styled.div>
+      <Heading
+        level="1"
+        margin="xsmall"
+        responsive={true}
+        size="medium"
+      >
+        It's good to see you.
+      </Heading>
+      <Heading
+        className="normal"
+        level="1"
+        margin="xsmall"
+        responsive={true}
+        size="medium"
+      >
+        Log in to continue.
+      </Heading>
+    </styled.div>
+    <Formik
+      enableReinitialize={false}
+      initialValues={
+        Object {
+          "loginEmail": "",
+          "loginPassword": "",
+        }
+      }
+      isInitialValid={false}
+      onSubmit={[Function]}
+      render={[Function]}
+      validateOnBlur={true}
+      validateOnChange={false}
+    />
+    <styled.div>
+      DON'T HAVE AN ACCOUNT?
+       
+      <styled.span
+        onClick={[Function]}
+      >
+        SIGN UP
+      </styled.span>
+    </styled.div>
+  </Styled(Component)>
+  <Styled(Component)
+    pose="hidden"
+  >
+    <styled.div>
+      <Heading
+        level="1"
+        margin="xsmall"
+        responsive={true}
+        size="medium"
+      >
+        Glad to have you on board.
+      </Heading>
+      <Heading
+        className="normal"
+        level="1"
+        margin="xsmall"
+        responsive={true}
+        size="medium"
+      >
+        Sign up to get started.
+      </Heading>
+    </styled.div>
+    <Formik
+      enableReinitialize={false}
+      initialValues={
+        Object {
+          "confirmPassword": "",
+          "signupEmail": "",
+          "signupName": "",
+          "signupPassword": "",
+        }
+      }
+      isInitialValid={false}
+      onSubmit={[Function]}
+      render={[Function]}
+      validateOnBlur={true}
+      validateOnChange={false}
+    />
+    <styled.div>
+      HAVE AN ACCOUNT?
+       
+      <styled.span
+        onClick={[Function]}
+      >
+        LOG IN
+      </styled.span>
+    </styled.div>
+  </Styled(Component)>
+</styled.div>
+`;
