@@ -3,6 +3,7 @@ import styled from "styled-components";
 import posed from "react-pose";
 import { Button, TextInput, Heading } from "grommet";
 import { Formik, Form, Field } from "formik";
+
 import { mediaSize } from "../../../../utils/siteTools";
 import LoadingSpinner from "../../../../static/img/loaders/default.svg";
 
@@ -110,7 +111,7 @@ const FormButton = styled(Button)`
   &:disabled {
     background: ${props =>
       `${
-        props.theme.colors.darkerPurple
+        props.theme.colors.primary
       } center / contain no-repeat url(${LoadingSpinner})`};
     opacity: 0.75;
   }

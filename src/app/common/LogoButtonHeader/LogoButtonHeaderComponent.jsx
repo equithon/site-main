@@ -14,7 +14,7 @@ const Logo = styled.img`
 const LogoHeading = styled(Heading)`
   margin-left: 1vw;
   color: ${props =>
-    props.size === "large" ? props.theme.colors.darkerPurple : "white"};
+    props.size === "large" ? props.theme.colors.primary : "white"};
 
   cursor: pointer;
 `;
