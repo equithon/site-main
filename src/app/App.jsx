@@ -1,23 +1,29 @@
-import * as React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import * as React from "react";
+import { Grommet as ThemeProvider } from "grommet";
+import { BrowserRouter as AppRouter, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
-// COMPONENTS
-import DashboardContainer from './dashboard/DashboardContainer';
-import LoginContainer from './login+signup/LoginContainer';
+import appStore from "../ducks/store";
+import reactReduxFirebase from "../utils/setupFirebase";
+import siteStyles from "../utils/siteStyles";
+import { GlobalStyles } from "../utils/siteTools";
 
+import AppNav from "./common/AppNav/AppNav";
 
-// DATA
-import * as ROUTES from '../utils/siteRoutes';
-
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Route exact path={ROUTES.HOME} component={DashboardContainer} />
-        <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginContainer} />
-      </div>
-    </Router>
-  );
-}
+const App = () => (
+  <Provider store={appStore}>
+    <ReactReduxFirebaseProvider {...reactReduxFirebase}>
+      <ThemeProvider theme={siteStyles}>
+        <>
+          <GlobalStyles />
+          <AppRouter>
+            <Route component={AppNav} />
+          </AppRouter>
+        </>
+      </ThemeProvider>
+    </ReactReduxFirebaseProvider>
+  </Provider>
+);
 
 export default App;

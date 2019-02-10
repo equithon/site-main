@@ -16,3 +16,4 @@
 - https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial/
 - https://levelup.gitconnected.com/structure-your-react-redux-project-for-scalability-and-maintainability-618ad82e32b7
 - https://medium.freecodecamp.org/scaling-your-redux-app-with-ducks-6115955638be
+- https://github.com/jamiebuilds/react-loadable
