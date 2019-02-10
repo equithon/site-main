@@ -1,12 +1,11 @@
 // CREDITS: https://codepen.io/plavookac/pen/QMwObb
-import React from 'react';
-import styled, { keyframes } from 'styled-components';
-import { mediaSize } from '../../../../utils/siteTools';
+import React from "react";
+import styled, { keyframes } from "styled-components";
+import { mediaSize } from "../../../../utils/siteTools";
 
-import TopWave from '../../../../static/img/shapes/wave_top.png';
-import MiddleWave from '../../../../static/img/shapes/wave_mid.png';
-import BottomWave from '../../../../static/img/shapes/wave_bot.png';
-
+import TopWave from "../../../../static/img/shapes/wave_top.png";
+import MiddleWave from "../../../../static/img/shapes/wave_mid.png";
+import BottomWave from "../../../../static/img/shapes/wave_bot.png";
 
 const flow = keyframes`
   0% {
@@ -20,7 +19,6 @@ const flow = keyframes`
   }
 `;
 
-
 const Container = styled.div`
   overflow: hidden;
   position: absolute;
@@ -31,7 +29,6 @@ const Container = styled.div`
   top: 0;
   margin: auto;
 `;
-
 
 const WaveWrapper = styled.div`
   position: absolute;
@@ -54,7 +51,6 @@ const WaveWrapper = styled.div`
     z-index: 5;
   }
 `;
-
 
 const Wave = styled.div`
   position: absolute;
@@ -87,7 +83,6 @@ const Wave = styled.div`
     animation: ${flow} 18s linear infinite;
   }
 
-
   ${mediaSize.phone`
     &.topWave {
       background-size: 50% 60px;
@@ -106,10 +101,8 @@ const Wave = styled.div`
   `}
 `;
 
-
 const WavesComponent = () => (
   <Container>
-
     <WaveWrapper className="topWave">
       <Wave className="topWave" />
     </WaveWrapper>
@@ -119,7 +112,6 @@ const WavesComponent = () => (
     <WaveWrapper className="botWave">
       <Wave className="botWave" />
     </WaveWrapper>
-    
   </Container>
 );
 

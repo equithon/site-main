@@ -8,6 +8,7 @@ import WavesComponent from "./components/WavesComponent";
 const ViewContainer = styled.div`
   height: 90vh;
   padding: 5vh 10vw;
+  overflow-x: hidden;
 
   display: flex;
   flex-direction: column;

@@ -5,7 +5,7 @@ export const colors = {
   warning: "#F4A867",
   error: "#F07285",
 
-  darkerPurple: "#8d53db",
+  darkerPurple: "#a16beb",
   primary: "#ad81e8",
   lighterPurple: "#E2D4F5",
 

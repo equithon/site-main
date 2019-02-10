@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
-import { Button, TextInput } from "grommet";
+import { Button, TextInput, Heading } from "grommet";
 import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../utils/siteTools";
 
@@ -23,7 +23,7 @@ const Container = posed.div({
 const ComponentContainer = styled.div`
   display: grid;
   margin: auto;
-  width: 35vw;
+  width: 50vw;
 
   ${mediaSize.tablet`
     width: 80vw;
@@ -37,26 +37,37 @@ const ComponentContainer = styled.div`
 const FormContainer = styled(Container)`
   grid-column: 1;
   grid-row: 1;
+
+  ${mediaSize.phone`
+    align-self: center;
+  `}
 `;
 
-const FormHeading = styled.h1`
-  font-size: ${props => props.theme.sizes.header.desktop};
-  font-weight: 400;
-  line-height: normal;
+const FormHeading = styled.div`
   text-align: center;
-
   margin-bottom: 1em;
+  width: 100%;
+
+  & > h1 {
+    font-weight: 500;
+    max-width: 100%;
+
+    ${mediaSize.tablet`
+      font-size: 5vw;
+      line-height: normal;
+    `}
+
+    ${mediaSize.phone`
+      font-size: 8vw;
+      line-height: normal;
+    `}
+  }
 
   & > .normal {
     color: ${props => props.theme.colors.offGrey};
   }
 
-  ${mediaSize.tablet`
-    font-size: ${props => props.theme.sizes.header.tablet};
-  `}
-
   ${mediaSize.phone`
-    font-size: ${props => props.theme.sizes.header.phone};
     text-align: left;
     margin-bottom: 0.5em;
   `}
@@ -68,15 +79,11 @@ const FormContents = styled(Form)`
   margin: auto;
 
   & div.sectionEnd {
-    margin-bottom: 2vw;
+    margin-bottom: 1em;
   }
 
   ${mediaSize.tablet`
     width: 55vw;
-
-    & div.sectionEnd {
-      margin-bottom: 2vw;
-    }
   `}
 
   ${mediaSize.phone`
@@ -90,31 +97,6 @@ const FormContents = styled(Form)`
 
 const FormInput = styled(TextInput)`
   margin-top: 0.5em;
-`;
-
-const FormSwitcher = styled.div`
-  margin: auto;
-  width: 25vw;
-  padding-top: 1em;
-
-  font-weight: 600;
-  font-size: 1.2vw;
-  text-align: center;
-
-  color: ${props => props.theme.colors.offGrey};
-  & > span {
-    color: ${props => props.theme.colors.offBlack};
-  }
-
-  ${mediaSize.tablet`
-    width: 50vw;
-    font-size: 2.5vw;
-  `}
-
-  ${mediaSize.phone`
-    width: 100%;
-    font-size: 3.5vw;
-  `}
 `;
 
 const FormErrorMessage = styled.div`
@@ -133,6 +115,31 @@ const FormErrorMessage = styled.div`
 
   ${mediaSize.phone`
     font-size: 3vw;
+  `}
+`;
+
+const FormSwitcher = styled.div`
+  margin: auto;
+  width: 25vw;
+  padding-top: 1em;
+
+  font-weight: 600;
+  font-size: 1vw;
+  text-align: center;
+
+  color: ${props => props.theme.colors.offGrey};
+  & > span {
+    color: ${props => props.theme.colors.offBlack};
+  }
+
+  ${mediaSize.tablet`
+    width: 50vw;
+    font-size: 2vw;
+  `}
+
+  ${mediaSize.phone`
+    width: 100%;
+    font-size: 3.5vw;
   `}
 `;
 
@@ -157,8 +164,12 @@ const LoginSignupFormsComponent = ({
     <ComponentContainer>
       <FormContainer pose={showLogin ? "shown" : "hidden"} login>
         <FormHeading>
-          <div>It&apos;s good to see you.</div>
-          <div className="normal">Log in to continue.</div>
+          <Heading level="1" size="medium" margin="xsmall">
+            It&apos;s good to see you.
+          </Heading>
+          <Heading className="normal" level="1" size="medium" margin="xsmall">
+            Log in to continue.
+          </Heading>
         </FormHeading>
         <Formik
           initialValues={{ loginEmail: "", loginPassword: "" }}
@@ -231,8 +242,12 @@ const LoginSignupFormsComponent = ({
 
       <FormContainer pose={!showLogin ? "shown" : "hidden"}>
         <FormHeading>
-          <div>Glad to have you on board.</div>
-          <div className="normal">Sign up to get started.</div>
+          <Heading level="1" size="medium" margin="xsmall">
+            Glad to have you on board.
+          </Heading>
+          <Heading className="normal" level="1" size="medium" margin="xsmall">
+            Sign up to get started.
+          </Heading>
         </FormHeading>
         <Formik
           initialValues={{
