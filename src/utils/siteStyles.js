@@ -1,4 +1,4 @@
-const colors = {
+export const colors = {
   offBlack: "#535353",
   offGrey: "#aaaaaa",
   offWhite: "#f7f7f7",
@@ -18,6 +18,11 @@ const styles = {
   colors,
 
   global: {
+    colors: {
+      black: "#46484a",
+      brand: "#a16beb",
+      focus: "rgba(141, 83, 219, 0.7)"
+    },
     control: {
       border: {
         width: "2px",
@@ -27,10 +32,8 @@ const styles = {
         fontWeight: 600
       }
     },
-    focus: {
-      border: {
-        color: "rgba(141, 83, 219, 0.7)"
-      }
+    font: {
+      family: "SF Pro Display"
     }
   },
 
