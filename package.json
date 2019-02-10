@@ -31,6 +31,7 @@
   },
   "homepage": "https://github.com/equithon/site-personal#readme",
   "dependencies": {
+    "ajv": "^6.8.1",
     "firebase": "^5.8.2",
     "formik": "^1.4.3",
     "grommet": "^2.4.0",
