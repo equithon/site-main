@@ -1,14 +1,13 @@
-import { css, createGlobalStyle } from 'styled-components';
+import { css, createGlobalStyle } from "styled-components";
 
-
-import SFProDisplayBlackOTF from '../static/fonts/SF-Pro-Display-Black.otf';
-import SFProDisplayBoldOTF from '../static/fonts/SF-Pro-Display-Bold.otf';
-import SFProDisplayHeavyOTF from '../static/fonts/SF-Pro-Display-Heavy.otf';
-import SFProDisplayLightOTF from '../static/fonts/SF-Pro-Display-Light.otf';
-import SFProDisplayMediumOTF from '../static/fonts/SF-Pro-Display-Medium.otf';
-import SFProDisplayRegularOTF from '../static/fonts/SF-Pro-Display-Regular.otf';
-import SFProDisplaySemiboldOTF from '../static/fonts/SF-Pro-Display-Semibold.otf';
-import SFProDisplayThinOTF from '../static/fonts/SF-Pro-Display-Thin.otf';
+import SFProDisplayBlackOTF from "../static/fonts/SF-Pro-Display-Black.otf";
+import SFProDisplayBoldOTF from "../static/fonts/SF-Pro-Display-Bold.otf";
+import SFProDisplayHeavyOTF from "../static/fonts/SF-Pro-Display-Heavy.otf";
+import SFProDisplayLightOTF from "../static/fonts/SF-Pro-Display-Light.otf";
+import SFProDisplayMediumOTF from "../static/fonts/SF-Pro-Display-Medium.otf";
+import SFProDisplayRegularOTF from "../static/fonts/SF-Pro-Display-Regular.otf";
+import SFProDisplaySemiboldOTF from "../static/fonts/SF-Pro-Display-Semibold.otf";
+import SFProDisplayThinOTF from "../static/fonts/SF-Pro-Display-Thin.otf";
 
 export const displaySizes = {
   desktop: 2160,
@@ -26,14 +25,10 @@ export const mediaSize = Object.keys(displaySizes).reduce((acc, label) => {
   return acc;
 }, {});
 
-
-  export const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
     html, body {
       margin: 0;
       padding: 0;
-
-      font-family: 'SF Pro Display', serif;
-      color: #46484a;
 
       box-sizing: border-box;
     }
