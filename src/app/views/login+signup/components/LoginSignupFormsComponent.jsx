@@ -4,6 +4,7 @@ import posed from "react-pose";
 import { Button, TextInput, Heading } from "grommet";
 import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../utils/siteTools";
+import LoadingSpinner from "../../../../static/img/loaders/default.svg";
 
 const Container = posed.div({
   hidden: {
@@ -49,6 +50,7 @@ const FormHeading = styled.div`
   width: 100%;
 
   & > h1 {
+    color: ${props => props.theme.colors.offBlack};
     font-weight: 500;
     max-width: 100%;
 
@@ -99,7 +101,20 @@ const FormInput = styled(TextInput)`
   margin-top: 0.5em;
 `;
 
-const FormButton = styled(Button)``;
+const FormButton = styled(Button)`
+  &:empty:after {
+    content: "&nbsp;";
+    visibility: hidden;
+  }
+
+  &:disabled {
+    background: ${props =>
+      `${
+        props.theme.colors.darkerPurple
+      } center / contain no-repeat url(${LoadingSpinner})`};
+    opacity: 0.75;
+  }
+`;
 
 const FormErrorMessage = styled.div`
   opacity: ${props => (props.show ? 1 : 0)};
@@ -146,6 +161,7 @@ const FormSwitcher = styled.div`
 `;
 
 const FormToggle = styled.span`
+  color: ${props => props.theme.colors.offBlack};
   text-decoration: underline;
   cursor: pointer;
 
@@ -229,7 +245,7 @@ const LoginSignupFormsComponent = ({
 
                 <FormButton
                   className="loginButton"
-                  label="Log In"
+                  label={isSubmitting ? "" : "Log In"}
                   fill
                   primary
                   type="submit"
@@ -263,7 +279,6 @@ const LoginSignupFormsComponent = ({
             confirmPassword: ""
           }}
           validationSchema={validationSchemas.signup}
-          validateOnChange={false}
           onSubmit={(values, actions) => {
             signUp(values)
               .then(() => {
@@ -339,7 +354,7 @@ const LoginSignupFormsComponent = ({
 
                 <FormButton
                   className="signupButton"
-                  label="Sign Up"
+                  label={isSubmitting ? "" : "Sign Up"}
                   fill
                   primary
                   type="submit"

@@ -40,7 +40,7 @@ const signupValidationSchema = Yup.object().shape({
     .min(8, "Make sure your password is at least 8 characters.")
     .required("Make sure to provide a password."),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("signupPassword"), null], "Make sure the passwords matche.")
+    .oneOf([Yup.ref("signupPassword"), null], "Make sure the passwords match.")
     .required("Make sure to confirm your password.")
 });
 

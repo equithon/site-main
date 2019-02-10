@@ -1,5 +1,5 @@
 export const colors = {
-  offBlack: "#535353",
+  offBlack: "#474747",
   offGrey: "#aaaaaa",
   offWhite: "#f7f7f7",
   warning: "#F4A867",
@@ -19,7 +19,7 @@ const styles = {
 
   global: {
     colors: {
-      black: "#46484a",
+      black: "#474747",
       brand: "#a16beb",
       focus: "rgba(141, 83, 219, 0.7)"
     },
