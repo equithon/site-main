@@ -99,6 +99,8 @@ const FormInput = styled(TextInput)`
   margin-top: 0.5em;
 `;
 
+const FormButton = styled(Button)``;
+
 const FormErrorMessage = styled.div`
   opacity: ${props => (props.show ? 1 : 0)};
   transition: opacity 450ms ease-in-out;
@@ -174,7 +176,6 @@ const LoginSignupFormsComponent = ({
         <Formik
           initialValues={{ loginEmail: "", loginPassword: "" }}
           validationSchema={validationSchemas.login}
-          validateOnChange={false}
           onSubmit={(values, actions) => {
             logIn(values)
               .then(() => {
@@ -189,9 +190,14 @@ const LoginSignupFormsComponent = ({
                 actions.setStatus(errMsg);
               });
           }}
-          render={({ errors, status, isSubmitting }) => {
-            const hasErrors = Object.entries(errors).length !== 0;
+          render={({ touched, errors, status, isSubmitting }) => {
+            // hasErrors makes sure there are errors present, and that the error is on a field that has been touched
+            const hasErrors =
+              Object.entries(errors).length !== 0 &&
+              touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
+            let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
+            errorMsg = hasStatus ? status : errorMsg;
 
             return (
               <FormContents>
@@ -218,10 +224,10 @@ const LoginSignupFormsComponent = ({
                 </Field>
 
                 <FormErrorMessage show={hasErrors || hasStatus}>
-                  {hasStatus ? status : errors[Object.keys(errors)[0]]}
+                  {errorMsg}
                 </FormErrorMessage>
 
-                <Button
+                <FormButton
                   className="loginButton"
                   label="Log In"
                   fill
@@ -272,10 +278,13 @@ const LoginSignupFormsComponent = ({
                 actions.setStatus(errMsg);
               });
           }}
-          render={({ errors, status, isSubmitting }) => {
+          render={({ touched, errors, status, isSubmitting }) => {
             const hasErrors =
-              status !== "" || Object.entries(errors).length !== 0;
+              Object.entries(errors).length !== 0 &&
+              touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
+            let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
+            errorMsg = hasStatus ? status : errorMsg;
 
             return (
               <FormContents>
@@ -325,10 +334,10 @@ const LoginSignupFormsComponent = ({
                 </Field>
 
                 <FormErrorMessage show={hasStatus || hasErrors}>
-                  {hasStatus ? status : errors[Object.keys(errors)[0]]}
+                  {errorMsg}
                 </FormErrorMessage>
 
-                <Button
+                <FormButton
                   className="signupButton"
                   label="Sign Up"
                   fill

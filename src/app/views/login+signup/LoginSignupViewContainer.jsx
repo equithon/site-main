@@ -25,7 +25,7 @@ const loginValidationSchema = Yup.object().shape({
   loginEmail: Yup.string()
     .email("Make sure your email is typed correctly.")
     .required("Make sure to provide an email."),
-  loginPassword: Yup.string().required("Make sure your password is correct.")
+  loginPassword: Yup.string().required("Make sure to provide a password.")
 });
 
 const signupValidationSchema = Yup.object().shape({
