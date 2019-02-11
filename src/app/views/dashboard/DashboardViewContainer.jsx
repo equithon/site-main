@@ -98,13 +98,13 @@ const enhance = compose(
     curUserProfile: state.firebase.profile, // profile passed as props.profile
     greetingInfo: state.dashboard
       ? state.dashboard.greetingInfo
-      : { greeting: "Hi there", subgreeting: "Glad you're here." },
+      : { greeting: "bwrwbweb", subgreeting: "webwebwebwbe" },
     toastInfo: state.dashboard
       ? state.dashboard.toastInfo
       : {
           iconName: "lightbulb",
           backgroundColor: "primary",
-          contents: "Make sure to submit your application!"
+          contents: "Make surkuhihe to submit your application!"
         }
   })),
   withFirebase,

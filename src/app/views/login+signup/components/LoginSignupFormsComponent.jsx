@@ -174,6 +174,8 @@ const FormToggle = styled.span`
 const LoginSignupFormsComponent = ({
   signUp,
   logIn,
+  getDashboardInfo,
+  dispatchUpdateDashboardInfo,
   validationSchemas,
   errorTable
 }) => {
@@ -197,6 +199,7 @@ const LoginSignupFormsComponent = ({
             logIn(values)
               .then(() => {
                 actions.setSubmitting(false);
+                dispatchUpdateDashboardInfo(getDashboardInfo(false));
               })
               .catch(err => {
                 const errMsg =
@@ -284,6 +287,7 @@ const LoginSignupFormsComponent = ({
             signUp(values)
               .then(() => {
                 actions.setSubmitting(false);
+                dispatchUpdateDashboardInfo(getDashboardInfo(true));
               })
               .catch(err => {
                 const errMsg =
