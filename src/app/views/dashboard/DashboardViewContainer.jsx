@@ -7,14 +7,14 @@ import * as ROUTES from "../../../utils/siteRoutes";
 import DashboardViewComponent from "./DashboardViewComponent";
 
 import MapTileBG from "../../../static/img/dashboard/tiles/map.png";
+import CalendarTileBG from "../../../static/img/dashboard/tiles/schedule.png";
 
 const dashboardTiles = {
   schedule: {
     label: "Event Schedule",
     linkTo: ROUTES.SCHEDULE,
     gridArea: "leftTop",
-    backgroundImg: MapTileBG,
-    color: "offBlack"
+    backgroundImg: CalendarTileBG
   },
   map: {
     label: "Event Map",
@@ -61,35 +61,35 @@ const userDashboards = {
     { value: 30, ...dashboardTiles.map },
     { value: 30, ...dashboardTiles.schedule },
     { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile },
+    { value: 15, ...dashboardTiles.profile }
   ],
   ORGANIZER: [
     { value: 60, ...dashboardTiles.app_review },
     { value: 30, ...dashboardTiles.map },
     { value: 30, ...dashboardTiles.schedule },
     { value: 20, ...dashboardTiles.attendee_list_organizer },
-    { value: 15, ...dashboardTiles.profile },
+    { value: 15, ...dashboardTiles.profile }
   ],
   VOLUNTEER: [
     { value: 60, ...dashboardTiles.attendee_list_volunteer },
     { value: 30, ...dashboardTiles.map },
     { value: 30, ...dashboardTiles.schedule },
     { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile },
+    { value: 15, ...dashboardTiles.profile }
   ],
   JUDGE: [
     { value: 60, ...dashboardTiles.attendee_list_volunteer },
     { value: 30, ...dashboardTiles.map },
     { value: 30, ...dashboardTiles.schedule },
     { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile },
+    { value: 15, ...dashboardTiles.profile }
   ],
   GENERAL: [
     { value: 60, ...dashboardTiles.attendee_list_volunteer },
     { value: 30, ...dashboardTiles.map },
     { value: 30, ...dashboardTiles.schedule },
     { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile },
+    { value: 15, ...dashboardTiles.profile }
   ]
 };
 

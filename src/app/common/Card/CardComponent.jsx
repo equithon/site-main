@@ -8,16 +8,18 @@ const Container = styled(Box)`
   width: ${props => props.width};
   height: ${props => props.height};
 
-  // only display cursor or darken on hover if non-static (interactive)
+  // only display cursor or expand on hover if non-static (interactive)
   cursor: ${props => (props.interactive ? "pointer" : "auto")};
-  transition: filter 200ms ease-in-out;
+
+  transition: transform 150ms ease-in-out;
+  transform: scale(1.01);
   &:hover {
-    filter: ${props =>
-      props.interactive ? "brightness(95%)" : "brightness(100%)"};
+    transform: ${props => (props.interactive ? "scale(1.05)" : "scale(1.01)")};
   }
 `;
 
 const CardComponent = ({
+  className,
   width,
   height,
   gridArea,
@@ -27,6 +29,7 @@ const CardComponent = ({
   children
 }) => (
   <Container
+    className={className}
     width={width || "medium"}
     height={height}
     gridArea={gridArea}

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
+import { mediaSize } from "../../../../utils/siteTools";
 
 import Card from "../../../common/Card/CardComponent";
 
 const Container = styled.div`
   border-radius: ${props => props.theme.app.border.radius};
   padding: 1em;
+  box-sizing: border-box;
 
   // can specify color in theme, another color, or default is white
   color: ${props =>
@@ -17,6 +19,14 @@ const Container = styled.div`
 
   font-weight: 600;
   font-size: 1.5em;
+
+  ${mediaSize.tablet`
+    font-size: 2em;
+  `};
+
+  ${mediaSize.phone`
+    font-size: 1.25em;
+  `};
 `;
 
 const NavTileComponent = ({ info }) => {

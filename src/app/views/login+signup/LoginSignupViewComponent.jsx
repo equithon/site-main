@@ -23,7 +23,7 @@ const LoginSignupViewComponent = ({
 }) => (
   <ViewContainer>
     <LogoButtonHeader
-      onButtonClick={() => window.open("https://equithon.org", "_self")}
+      logoOnClick={() => window.open("https://equithon.org", "_self")}
     />
     <LoginSignupFormsComponent
       logIn={logInUser}

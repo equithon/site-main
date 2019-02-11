@@ -1,5 +1,26 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faLightbulb,
+  faExclamation,
+  faTimes,
+  faCheck,
+  faDoorClosed,
+  faDoorOpen,
+  faQuestion
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faLightbulb,
+  faExclamation,
+  faTimes,
+  faCheck,
+  faDoorClosed,
+  faDoorOpen,
+  faQuestion
+);
+
 export const colors = {
-  offBlack: "#474747",
+  offBlack: "#676767",
   offGrey: "#aaaaaa",
   offWhite: "#f7f7f7",
   warning: "#F4A867",
