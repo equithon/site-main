@@ -4,8 +4,6 @@ import ReactTooltip from "react-tooltip";
 import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-// import { Link } from "react-router-dom";
-// import * as ROUTES from "../../../utils/siteRoutes";
 import { mediaSize } from "../../../utils/siteTools";
 import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
 import ToastCard from "../../common/ToastCard/ToastCardComponent";
@@ -62,8 +60,6 @@ const DashboardContainer = styled.div`
 
 const GreetingContainer = styled.div`
   grid-area: greeting;
-
-  //background-color: rgb(191, 191, 191);
 
   & span {
     color: ${props => props.theme.colors.offGrey};
@@ -165,9 +161,12 @@ const ActionTooltip = styled(ReactTooltip)`
   margin: 0;
 `;
 
+/* ---------------------- DASHBOARD COMPONENT ------------------------------- */
 const DashboardViewComponent = ({
   logOutUser,
   curUserProfile,
+  greetingInfo,
+  toastInfo,
   userDashboards
 }) => (
   <Container>
@@ -184,22 +183,24 @@ const DashboardViewComponent = ({
     <DashboardContainer>
       <GreetingContainer>
         <Text size="xxlarge" responsive={false}>
-          Good morning,
+          {greetingInfo.greeting},
         </Text>
         <Heading level="1" size="large" margin="xsmall">
-          {curUserProfile && curUserProfile.isLoaded ? curUserProfile.name : ""}
+          {curUserProfile && curUserProfile.isLoaded
+            ? curUserProfile.name.split(" ")[0]
+            : ""}
           .
         </Heading>
-        <Text size="xxlarge">There are 24 days until Equithon!</Text>
+        <Text size="xxlarge">{greetingInfo.subgreeting}</Text>
       </GreetingContainer>
 
       <ToastContainer>
         <ToastCard
-          iconName="lightbulb"
-          backgroundColor="primary"
+          iconName={toastInfo.iconName}
+          backgroundColor={toastInfo.backgroundColor}
           className="dashboardToast"
         >
-          There are 254 unreviewed applications currently.
+          {toastInfo.contents}
         </ToastCard>
       </ToastContainer>
 
@@ -211,24 +212,6 @@ const DashboardViewComponent = ({
           ))}
       </TilesContainer>
     </DashboardContainer>
-
-    {/*
-      <TileContainer>
-      <Distribution
-        values={userDashboards[curUserProfile.role]}
-      >
-        {value => (
-      <NavTile info={value} />
-        )}
-      </Distribution>
-      </TileContainer>
-
-
-      <button type="button" onClick={() => logOutUser()}>
-      Log Out
-      </button>
-
-    */}
   </Container>
 );
 

@@ -42,13 +42,10 @@ const NavTileComponent = ({ info }) => {
       fill={false}
       backgroundColor={info.backgroundColor}
       backgroundImg={info.backgroundImg}
+      onClickHandler={() => setClicked(true)}
       interactive
     >
-      <Container
-        color={info.color}
-        backgroundColor={info.backgroundColor}
-        onClick={() => setClicked(true)}
-      >
+      <Container color={info.color} backgroundColor={info.backgroundColor}>
         {info.label}
       </Container>
     </Card>

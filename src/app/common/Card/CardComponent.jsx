@@ -26,6 +26,7 @@ const CardComponent = ({
   interactive,
   backgroundColor,
   backgroundImg,
+  onClickHandler,
   children
 }) => (
   <Container
@@ -35,6 +36,7 @@ const CardComponent = ({
     gridArea={gridArea}
     background={backgroundColor || `url(${backgroundImg})`}
     interactive={interactive}
+    onClick={interactive ? () => onClickHandler() : null}
   >
     {children}
   </Container>

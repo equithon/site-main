@@ -57,45 +57,55 @@ const dashboardTiles = {
 
 const userDashboards = {
   HACKER: [
-    { value: 50, ...dashboardTiles.application },
-    { value: 30, ...dashboardTiles.map },
-    { value: 30, ...dashboardTiles.schedule },
-    { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile }
+    dashboardTiles.application,
+    dashboardTiles.map,
+    dashboardTiles.schedule,
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.profile
   ],
   ORGANIZER: [
-    { value: 60, ...dashboardTiles.app_review },
-    { value: 30, ...dashboardTiles.map },
-    { value: 30, ...dashboardTiles.schedule },
-    { value: 20, ...dashboardTiles.attendee_list_organizer },
-    { value: 15, ...dashboardTiles.profile }
+    dashboardTiles.app_review,
+    dashboardTiles.map,
+    dashboardTiles.schedule,
+    dashboardTiles.attendee_list_organizer,
+    dashboardTiles.profile
   ],
   VOLUNTEER: [
-    { value: 60, ...dashboardTiles.attendee_list_volunteer },
-    { value: 30, ...dashboardTiles.map },
-    { value: 30, ...dashboardTiles.schedule },
-    { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile }
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.map,
+    dashboardTiles.schedule,
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.profile
   ],
   JUDGE: [
-    { value: 60, ...dashboardTiles.attendee_list_volunteer },
-    { value: 30, ...dashboardTiles.map },
-    { value: 30, ...dashboardTiles.schedule },
-    { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile }
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.map,
+    dashboardTiles.schedule,
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.profile
   ],
   GENERAL: [
-    { value: 60, ...dashboardTiles.attendee_list_volunteer },
-    { value: 30, ...dashboardTiles.map },
-    { value: 30, ...dashboardTiles.schedule },
-    { value: 20, ...dashboardTiles.attendee_list_volunteer },
-    { value: 15, ...dashboardTiles.profile }
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.map,
+    dashboardTiles.schedule,
+    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.profile
   ]
 };
 
 const enhance = compose(
   connect(state => ({
-    curUserProfile: state.firebase.profile // profile passed as props.profile
+    curUserProfile: state.firebase.profile, // profile passed as props.profile
+    greetingInfo: state.dashboard
+      ? state.dashboard.greetingInfo
+      : { greeting: "Hi there", subgreeting: "Glad you're here." },
+    toastInfo: state.dashboard
+      ? state.dashboard.toastInfo
+      : {
+          iconName: "lightbulb",
+          backgroundColor: "primary",
+          contents: "Make sure to submit your application!"
+        }
   })),
   withFirebase,
   withHandlers({
