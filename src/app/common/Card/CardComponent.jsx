@@ -20,6 +20,7 @@ const Container = styled(Box)`
 const CardComponent = ({
   width,
   height,
+  gridArea,
   interactive,
   backgroundColor,
   backgroundImg,
@@ -28,6 +29,7 @@ const CardComponent = ({
   <Container
     width={width || "medium"}
     height={height}
+    gridArea={gridArea}
     background={backgroundColor || `url(${backgroundImg})`}
     interactive={interactive}
   >
