@@ -18,7 +18,7 @@ const Container = styled.div`
   display: flex;
   background-color: grey;
   width: 60vw;
-  height: 30vw;
+  height: 60vh;
   border-radius: ${props => props.theme.app.border.radius};
   padding: 5vw;
   box-sizing: border-box;
@@ -54,8 +54,34 @@ const InfoContainer = styled.div`
   justify-content: space-between;
 `;
 
-const Info = styled.div`
+const InfoField = styled.div`
   grid-area: ${props => props.gridarea};
+
+  & .infoFieldLabel {
+    color: ${props => props.theme.colors.offGrey};
+    font-size: 0.8em;
+    font-weight: 600;
+  }
+
+  & .infoFieldValue {
+    border: none;
+    outline: none;
+    background: none;
+    box-shadow: none;
+
+    color: ${props => props.theme.colors.offWhite};
+    font-size: 2em;
+    font-weight: 500;
+  }
+`;
+
+const ChangePasswordLabel = styled.div`
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: none;
+  }
 `;
 
 const LoadingContainer = styled.div`
@@ -108,10 +134,12 @@ const ProfileModalComponent = ({
                 ? "My Profile"
                 : `${profileInfo.name.split(" ")[0]}'s Profile'`}
             </LabelContainer>
+
             <InfoContainer>
-              <Info gridarea="name">
-                <div>Name</div>
+              <InfoField gridarea="name">
+                <div className="infoFieldLabel">NAME</div>
                 <input
+                  className="infoFieldValue"
                   value={profileInfo.name}
                   onChange={e => {
                     e.persist();
@@ -121,18 +149,30 @@ const ProfileModalComponent = ({
                     }));
                   }}
                 />
-              </Info>
-              <Info gridarea="email">
-                <div>Email</div>
-                <input defaultValue={profileInfo.email} />
-                {/* TODO: add email change */}
-              </Info>
-              <Info gridarea="password">
-                <div>Change Password</div>
-              </Info>
-              <Info gridarea="extra">
-                <div>Attending as a...</div>
+              </InfoField>
+
+              <InfoField gridarea="email">
+                <div className="infoFieldLabel">EMAIL</div>
                 <input
+                  className="infoFieldValue"
+                  defaultValue={profileInfo.email}
+                />
+                {/* TODO: add email change */}
+              </InfoField>
+
+              <InfoField gridarea="password">
+                <ChangePasswordLabel
+                  className="infoFieldLabel"
+                  onClick={() => console.log("TODO: allow change password")}
+                >
+                  CHANGE PASSWORD
+                </ChangePasswordLabel>
+              </InfoField>
+
+              <InfoField gridarea="extra">
+                <div className="infoFieldLabel">ATTENDING AS A...</div>
+                <input
+                  className="infoFieldValue"
                   value={profileInfo.role}
                   readOnly={!isAdmin}
                   onChange={e => {
@@ -144,7 +184,7 @@ const ProfileModalComponent = ({
                   }}
                 />
                 {/* TODO: add role change */}
-              </Info>
+              </InfoField>
             </InfoContainer>
           </ProfileContainer>
         ) : (
