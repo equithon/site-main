@@ -2,6 +2,7 @@
   "name": "equithon-personal",
   "version": "0.1.0",
   "description": "Home base for Equithon 2019 volunteers.",
+  "homepage": "https://equithon-personal-2019-staging.firebaseapp.com/",
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
@@ -29,7 +30,6 @@
   "bugs": {
     "url": "https://github.com/equithon/site-personal/issues"
   },
-  "homepage": "https://github.com/equithon/site-personal#readme",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
     "@fortawesome/free-solid-svg-icons": "^5.7.1",

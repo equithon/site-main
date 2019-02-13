@@ -25,3 +25,14 @@ action "Visual Regression Tests" {
   needs = ["Snapshot & Unit Tests"]
   runs = "npm run snapshot"
 }
+
+
+
+action "Deploy to STAGING" {
+  uses = "w9jds/firebase-action@master"
+  args = "deploy --only hosting:staging"
+  env = {
+    PROJECT_ID = "equithon-platform-2019-staging"
+  }
+  secrets = ["FIREBASE_TOKEN"]
+}

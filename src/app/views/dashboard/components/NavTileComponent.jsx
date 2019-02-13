@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { mediaSize } from "../../../../utils/siteTools";
 
 import Card from "../../../common/Card/CardComponent";
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
   border-radius: ${props => props.theme.app.border.radius};
   padding: 1em;
   box-sizing: border-box;
@@ -29,26 +31,32 @@ const Container = styled.div`
   `};
 `;
 
+const NavTileLink = styled(Link)`
+  grid-area: ${props => props.gridarea};
+  text-decoration: none;
+`;
+
 const NavTileComponent = ({ info }) => {
   const [tileClicked, setClicked] = useState(false);
 
-  if (tileClicked) return <Redirect push to={info.linkTo} />;
+  if (tileClicked) setClicked(false);
 
   return (
-    <Card
-      gridArea={info.gridArea}
-      width="100%"
-      height="100%"
-      fill={false}
-      backgroundColor={info.backgroundColor}
-      backgroundImg={info.backgroundImg}
-      onClickHandler={() => setClicked(true)}
-      interactive
-    >
-      <Container color={info.color} backgroundColor={info.backgroundColor}>
-        {info.label}
-      </Container>
-    </Card>
+    <NavTileLink gridarea={info.gridArea} to={info.linkTo}>
+      <Card
+        width="100%"
+        height="100%"
+        fill={false}
+        backgroundColor={info.backgroundColor}
+        backgroundImg={info.backgroundImg}
+        onClickHandler={() => setClicked(true)}
+        interactive
+      >
+        <Container color={info.color} backgroundColor={info.backgroundColor}>
+          {info.label}
+        </Container>
+      </Card>
+    </NavTileLink>
   );
 };
 

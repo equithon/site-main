@@ -1,4 +1,5 @@
 import * as React from "react";
+import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // VIEW CONTAINERS
@@ -16,6 +17,16 @@ import ProfileModalContainer from "../../modals/profile/ProfileModalContainer";
 import EventModalContainer from "../../modals/event/EventModalContainer";
 
 import * as ROUTES from "../../../utils/siteRoutes";
+
+const ModalContainer = styled.div`
+  display: ${props => (props.show ? "inline" : "none")};
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(88, 88, 88, 0.49);
+`;
 
 const AppNav = ({ location }) => {
   const isModal = location.state && location.state.modal;
@@ -55,7 +66,7 @@ const AppNav = ({ location }) => {
       </Switch>
 
       {/* MODAL DISPLAY */}
-      <div className="modalContainer">
+      <ModalContainer show={isModal}>
         <Switch>
           <Route
             exact
@@ -64,7 +75,7 @@ const AppNav = ({ location }) => {
           />
           <Route exact path={ROUTES.EVENT} component={EventModalContainer} />
         </Switch>
-      </div>
+      </ModalContainer>
     </div>
   );
 };
