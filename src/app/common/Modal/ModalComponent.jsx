@@ -11,8 +11,6 @@ const Container = styled(Box)`
   margin: auto;
   border-radius: ${props => props.theme.app.border.radius};
   color: ${props => props.theme.colors.offWhite};
-  width: 50vw;
-  height: 30vw;
 `;
 
 const CloseButton = styled.button`
@@ -21,7 +19,16 @@ const CloseButton = styled.button`
   right: -1vw;
   width: 2vw;
   height: 2vw;
+  border: none;
   border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: transform 150ms ease-in-out;
+  transform: scale(1.01);
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const ModalComponent = ({

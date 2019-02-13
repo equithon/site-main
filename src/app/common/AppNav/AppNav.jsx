@@ -3,18 +3,16 @@ import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // VIEW CONTAINERS
-import DashboardViewContainer from "../../views/dashboard/DashboardViewContainer";
-import LoginSignupViewContainer from "../../views/login+signup/LoginSignupViewContainer";
-import ApplicationViewContainer from "../../views/application/ApplicationViewContainer";
-import AppReviewViewContainer from "../../views/appreview/AppReviewViewContainer";
-import AttendeesViewContainer from "../../views/attendees/AttendeesViewContainer";
-import MapViewContainer from "../../views/map/MapViewContainer";
-import ScheduleViewContainer from "../../views/schedule/ScheduleViewContainer";
-import Error404Container from "../../views/404/Error404Container";
-
-// MODAL CONTAINERS
-import ProfileModalContainer from "../../modals/profile/ProfileModalContainer";
-import EventModalContainer from "../../modals/event/EventModalContainer";
+import DashboardView from "../../views/dashboard/DashboardViewContainer";
+import LoginSignupView from "../../views/login+signup/LoginSignupViewContainer";
+import ApplicationView from "../../views/application/ApplicationViewContainer";
+import AppReviewView from "../../views/appreview/AppReviewViewContainer";
+import AttendeesView from "../../views/attendees/AttendeesViewContainer";
+import MapView from "../../views/map/MapViewContainer";
+import ScheduleView from "../../views/schedule/ScheduleViewContainer";
+import Error404View from "../../views/404/Error404Container";
+import MyProfileView from "../../views/myprofile/MyProfileViewContainer";
+import EventView from "../../views/event/EventViewContainer";
 
 import * as ROUTES from "../../../utils/siteRoutes";
 
@@ -39,30 +37,18 @@ const AppNav = ({ location }) => {
     <div>
       {/* MAIN VIEW ROUTE SWITCHER */}
       <Switch location={curLocation}>
-        <Route
-          exact
-          path={ROUTES.SIGNUP_LOGIN}
-          component={LoginSignupViewContainer}
-        />
-        <Route
-          exact
-          path={ROUTES.APPLICATION}
-          component={ApplicationViewContainer}
-        />
-        <Route
-          exact
-          path={ROUTES.APP_REVIEW}
-          component={AppReviewViewContainer}
-        />
+        <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginSignupView} />
+        <Route exact path={ROUTES.APPLICATION} component={ApplicationView} />
+        <Route exact path={ROUTES.APP_REVIEW} component={AppReviewView} />
         <Route
           exact
           path={ROUTES.ATTENDEE_LIST_VOLUNTEER.pathname}
-          component={AttendeesViewContainer}
+          component={AttendeesView}
         />
-        <Route exact path={ROUTES.MAP} component={MapViewContainer} />
-        <Route exact path={ROUTES.SCHEDULE} component={ScheduleViewContainer} />
-        <Route exact path={ROUTES.HOME} component={DashboardViewContainer} />
-        <Route exact path={ROUTES.PAGENOTFOUND} component={Error404Container} />
+        <Route exact path={ROUTES.MAP} component={MapView} />
+        <Route exact path={ROUTES.SCHEDULE} component={ScheduleView} />
+        <Route exact path={ROUTES.HOME} component={DashboardView} />
+        <Route exact path={ROUTES.PAGENOTFOUND} component={Error404View} />
         <Redirect to="/404" />
       </Switch>
 
@@ -72,9 +58,9 @@ const AppNav = ({ location }) => {
           <Route
             exact
             path={ROUTES.PROFILE.pathname}
-            component={ProfileModalContainer}
+            component={MyProfileView}
           />
-          <Route exact path={ROUTES.EVENT} component={EventModalContainer} />
+          <Route exact path={ROUTES.EVENT} component={EventView} />
         </Switch>
       </ModalContainer>
     </div>

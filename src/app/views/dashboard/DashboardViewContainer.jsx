@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { withFirebase } from "react-redux-firebase";
 import { compose, withHandlers, withProps } from "recompose";
 
 import { UserIsAuthenticated } from "../../../utils/siteAuth";
@@ -108,7 +107,6 @@ const enhance = compose(
           contents: "Make surkuhihe to submit your application!"
         }
   })),
-  withFirebase,
   withHandlers({
     logOutUser: props => () => props.firebase.logout()
   }),
