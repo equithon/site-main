@@ -4,7 +4,12 @@ import { Box, Heading } from "grommet";
 
 import ColorLogo from "../../../static/img/logo/logo_tiny_color.png";
 
+const LogoContainer = styled.div`
+  display: flex;
+`;
+
 const Logo = styled.img`
+  margin: auto;
   max-height: 7vh;
   max-width: 7vh;
 
@@ -13,24 +18,30 @@ const Logo = styled.img`
 
 const LogoHeading = styled(Heading)`
   margin-left: 1vw;
+  display: inline-block;
   color: ${props =>
-    props.size === "large" ? props.theme.colors.darkerPurple : "white"};
+    props.size === "large" ? props.theme.colors.primary : "white"};
 
   cursor: pointer;
 `;
 
-const LogoButtonHeaderComponent = () => (
+const HeaderExtraContents = styled.div``;
+
+const LogoButtonHeaderComponent = ({ logoOnClick, children }) => (
   <Box
     direction="row"
     align="center"
-    fill={false}
-    width="small"
-    onClick={() => window.open("https://equithon.org", "_self")}
+    width="100%"
+    justify="between"
+    onClick={logoOnClick}
   >
-    <Logo src={ColorLogo} />
-    <LogoHeading level="3" size="large" responsive={false}>
-      Equithon
-    </LogoHeading>
+    <LogoContainer>
+      <Logo src={ColorLogo} />
+      <LogoHeading level="3" size="large" responsive={false}>
+        Equithon
+      </LogoHeading>
+    </LogoContainer>
+    <HeaderExtraContents>{children}</HeaderExtraContents>
   </Box>
 );
 

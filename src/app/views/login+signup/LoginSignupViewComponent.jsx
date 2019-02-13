@@ -16,18 +16,24 @@ const ViewContainer = styled.div`
 `;
 
 const LoginSignupViewComponent = ({
+  profile,
   logInUser,
   signUpUser,
+  getDashboardInfo,
+  dispatchUpdateDashboardInfo,
   validationSchemas,
   errorTable
 }) => (
   <ViewContainer>
     <LogoButtonHeader
-      onButtonClick={() => window.open("https://equithon.org", "_self")}
+      logoOnClick={() => window.open("https://equithon.org", "_self")}
     />
     <LoginSignupFormsComponent
       logIn={logInUser}
       signUp={signUpUser}
+      profile={profile}
+      getDashboardInfo={getDashboardInfo}
+      dispatchUpdateDashboardInfo={dispatchUpdateDashboardInfo}
       validationSchemas={validationSchemas}
       errorTable={errorTable}
     />

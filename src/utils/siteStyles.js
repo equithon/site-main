@@ -1,12 +1,33 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faLightbulb,
+  faExclamation,
+  faTimes,
+  faCheck,
+  faDoorClosed,
+  faDoorOpen,
+  faQuestion
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faLightbulb,
+  faExclamation,
+  faTimes,
+  faCheck,
+  faDoorClosed,
+  faDoorOpen,
+  faQuestion
+);
+
 export const colors = {
-  offBlack: "#535353",
+  offBlack: "#676767",
   offGrey: "#aaaaaa",
   offWhite: "#f7f7f7",
   warning: "#F4A867",
   error: "#F07285",
 
-  darkerPurple: "#a16beb",
-  primary: "#ad81e8",
+  darkerPurple: "#904feb",
+  primary: "#a16beb",
   lighterPurple: "#E2D4F5",
 
   darkerBlue: "#4270DE",
@@ -14,32 +35,45 @@ export const colors = {
   lighterBlue: "#A9C2F8"
 };
 
-const styles = {
+export const app = {
+  font: {
+    family: "SF Pro Display",
+    size: "18px",
+    height: "20px"
+  },
+  border: {
+    width: "2px",
+    radius: "6px"
+  }
+};
+
+const grommetStyles = {
   colors,
+  app,
 
   global: {
     colors: {
-      black: "#46484a",
-      brand: "#a16beb",
+      black: colors.offBlack,
+      brand: colors.primary,
       focus: "rgba(141, 83, 219, 0.7)"
     },
     control: {
       border: {
-        width: "2px",
-        radius: "6px"
+        width: app.border.width,
+        radius: app.border.radius
       },
       extend: {
         fontWeight: 600
       }
     },
     font: {
-      family: "SF Pro Display"
+      family: app.font.family
     }
   },
 
   font: {
-    size: "18px",
-    height: "20px"
+    size: app.font.size,
+    height: app.font.height
   },
 
   button: {
@@ -48,11 +82,11 @@ const styles = {
       vertical: "7px"
     },
     primary: {
-      color: colors.darkerPurple
+      color: colors.primary
     },
     border: {
-      radius: "6px",
-      color: colors.darkerPurple
+      radius: app.border.radius,
+      color: colors.primary
     },
     extend: {
       fontWeight: 600
@@ -60,4 +94,4 @@ const styles = {
   }
 };
 
-export default styles;
+export default grommetStyles;
