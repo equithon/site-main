@@ -19,7 +19,7 @@ import EventModalContainer from "../../modals/event/EventModalContainer";
 import * as ROUTES from "../../../utils/siteRoutes";
 
 const ModalContainer = styled.div`
-  display: ${props => (props.show ? "inline" : "none")};
+  display: ${props => (props.show ? "flex" : "none")};
   position: fixed;
   top: 0;
   right: 0;
@@ -29,6 +29,7 @@ const ModalContainer = styled.div`
 `;
 
 const AppNav = ({ location }) => {
+  console.log("eegwg", location);
   const isModal = location.state && location.state.modal;
   const curLocation = isModal
     ? { pathname: location.state.onTopOf, search: "", hash: "" }
