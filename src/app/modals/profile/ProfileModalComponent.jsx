@@ -1,14 +1,18 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import Modal from "../../common/Modal/ModalComponent";
+import { HOME as ROUTE_DASHBOARD } from "../../../utils/siteRoutes";
 
-// this is where we would normally do the redux stuffz
+const closeProfileModal = history => {
+  history.replace(ROUTE_DASHBOARD);
+};
 
 const ProfileModalComponent = ({ backgroundColor, history }) => (
   <Modal
     fill={false}
     backgroundColor={backgroundColor}
-    handleClickOutside={() => history.goBack()}
+    handleClickOutside={() => history.replace()}
+    onClickClose={() => closeProfileModal(history)}
   >
     this is my profile modal
   </Modal>

@@ -28,7 +28,7 @@ const ModalComponent = ({
   className,
   gridArea,
   backgroundColor,
-  history,
+  onClickClose,
   children
 }) => (
   <Container
@@ -36,7 +36,7 @@ const ModalComponent = ({
     gridArea={gridArea}
     background={backgroundColor}
   >
-    <CloseButton onClick={() => history.goBack()}>
+    <CloseButton onClick={() => onClickClose()}>
       <FontAwesomeIcon icon="times" size="1x" color="grey" />
     </CloseButton>
     {children}

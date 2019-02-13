@@ -5,17 +5,12 @@ import createHistory from "history/createBrowserHistory";
 const locationHelper = locationHelperBuilder({});
 const browserHistory = createHistory();
 
+// redirects to login if they are not logged in
 export const UserIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsAuthenticated",
   allowRedirectBack: true,
-  redirectPath: (state, ownProps) => {
-    console.log(
-      state,
-      ownProps,
-      locationHelper.getRedirectQueryParam(ownProps)
-    );
-    return locationHelper.getRedirectQueryParam(ownProps) || "/account";
-  },
+  redirectPath: (state, ownProps) =>
+    locationHelper.getRedirectQueryParam(ownProps) || "/account",
   authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
     !auth.isLoaded || isInitializing === true,
   authenticatedSelector: ({ firebase: { auth } }) =>
@@ -26,13 +21,12 @@ export const UserIsAuthenticated = connectedRouterRedirect({
   }
 });
 
+// redirects from login/signup to dashboard if user is logged in
 export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsNotAuthenticated",
   allowRedirectBack: false,
-  redirectPath: (state, ownProps) => {
-    console.log(locationHelper.getRedirectQueryParam(ownProps) || "/");
-    return locationHelper.getRedirectQueryParam(ownProps) || "/";
-  },
+  redirectPath: (state, ownProps) =>
+    locationHelper.getRedirectQueryParam(ownProps) || "/",
   authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
     !auth.isLoaded || isInitializing === true,
   authenticatedSelector: ({ firebase: { auth } }) =>
