@@ -8,6 +8,7 @@ import DashboardViewComponent from "./DashboardViewComponent";
 
 import MapTileBG from "../../../static/img/dashboard/tiles/map.png";
 import CalendarTileBG from "../../../static/img/dashboard/tiles/schedule.png";
+import ApplicationTileBG from "../../../static/img/dashboard/tiles/application.png";
 
 const dashboardTiles = {
   schedule: {
@@ -27,7 +28,7 @@ const dashboardTiles = {
     label: "My Application",
     linkTo: ROUTES.APPLICATION,
     gridArea: "centerTop",
-    backgroundColor: "#6cbe72"
+    backgroundImg: ApplicationTileBG
   },
   app_review: {
     label: "Application Review",
