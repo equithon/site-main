@@ -8,8 +8,14 @@ const browserHistory = createHistory();
 export const UserIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsAuthenticated",
   allowRedirectBack: true,
-  redirectPath: (state, ownProps) =>
-    locationHelper.getRedirectQueryParam(ownProps) || "/account",
+  redirectPath: (state, ownProps) => {
+    console.log(
+      state,
+      ownProps,
+      locationHelper.getRedirectQueryParam(ownProps)
+    );
+    return locationHelper.getRedirectQueryParam(ownProps) || "/account";
+  },
   authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
     !auth.isLoaded || isInitializing === true,
   authenticatedSelector: ({ firebase: { auth } }) =>
@@ -23,8 +29,10 @@ export const UserIsAuthenticated = connectedRouterRedirect({
 export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsNotAuthenticated",
   allowRedirectBack: false,
-  redirectPath: (state, ownProps) =>
-    locationHelper.getRedirectQueryParam(ownProps) || "/",
+  redirectPath: (state, ownProps) => {
+    console.log(locationHelper.getRedirectQueryParam(ownProps) || "/");
+    return locationHelper.getRedirectQueryParam(ownProps) || "/";
+  },
   authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
     !auth.isLoaded || isInitializing === true,
   authenticatedSelector: ({ firebase: { auth } }) =>

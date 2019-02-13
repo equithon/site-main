@@ -29,11 +29,11 @@ const ModalContainer = styled.div`
 `;
 
 const AppNav = ({ location }) => {
-  console.log("eegwg", location);
-  const isModal = location.state && location.state.modal;
-  const curLocation = isModal
-    ? { pathname: location.state.onTopOf, search: "", hash: "" }
-    : location;
+  const route = ROUTES.FINDER[location.pathname];
+  const curLocation =
+    route.state && route.state.modal
+      ? { pathname: route.state.onTopOf, search: "", hash: "" }
+      : location;
 
   return (
     <div>
@@ -56,7 +56,7 @@ const AppNav = ({ location }) => {
         />
         <Route
           exact
-          path={ROUTES.ATTENDEE_LIST}
+          path={ROUTES.ATTENDEE_LIST_VOLUNTEER.pathname}
           component={AttendeesViewContainer}
         />
         <Route exact path={ROUTES.MAP} component={MapViewContainer} />
@@ -67,11 +67,11 @@ const AppNav = ({ location }) => {
       </Switch>
 
       {/* MODAL DISPLAY */}
-      <ModalContainer show={isModal}>
+      <ModalContainer show={route.state && route.state.modal}>
         <Switch>
           <Route
             exact
-            path={ROUTES.PROFILE}
+            path={ROUTES.PROFILE.pathname}
             component={ProfileModalContainer}
           />
           <Route exact path={ROUTES.EVENT} component={EventModalContainer} />

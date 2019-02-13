@@ -18,3 +18,17 @@ export const PROFILE = {
 };
 export const EVENT = "/schedule/:eventId";
 export const PAGENOTFOUND = "/404";
+
+export const FINDER = {
+  "/": HOME,
+  "/account": SIGNUP_LOGIN,
+  "/application": APPLICATION,
+  "/appreview": APP_REVIEW,
+  "/checkin": ATTENDEE_LIST_VOLUNTEER,
+  "/attendees": ATTENDEE_LIST_ORGANIZER,
+  "/map": MAP,
+  "/schedule": SCHEDULE,
+  "/profile": PROFILE,
+  "/404": PAGENOTFOUND
+  // TODO: FINISH FILLING THIS IN
+};
