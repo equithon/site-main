@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
 import onClickOutside from "react-onclickoutside";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { mediaSize } from "../../../utils/siteTools";
 
 const Container = styled(Box)`
   position: relative;
@@ -29,6 +30,20 @@ const CloseButton = styled.button`
   &:hover {
     transform: scale(1.2);
   }
+
+  ${mediaSize.tablet`
+    top: -1.5vw;
+    right: -1.5vw;
+    width: 4vw;
+    height: 4vw;
+  `};
+
+  ${mediaSize.phone`
+    top: -2vw;
+    right: -2vw;
+    width: 6vw;
+    height: 6vw;
+  `};
 `;
 
 const ModalComponent = ({

@@ -16,12 +16,23 @@ const updateFirebaseProfile = (firebase, profileInfo) => {
 
 const Container = styled.div`
   display: flex;
-  background-color: grey;
   width: 60vw;
-  height: 60vh;
+  height: 35vw;
   border-radius: ${props => props.theme.app.border.radius};
   padding: 5vw;
   box-sizing: border-box;
+
+  ${mediaSize.tablet`
+    padding: 6vw 5vw;
+    width: 55vw;
+    height: 60vw;
+  `};
+
+  ${mediaSize.phone`
+    padding: 10vw;
+    width: 80vw;
+    height: 100vw;
+  `};
 `;
 
 const ProfileContainer = styled.div`
@@ -33,6 +44,12 @@ const ProfileContainer = styled.div`
   grid-template-areas: "label info";
 
   ${mediaSize.tablet`
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 4fr;
+    grid-template-areas:
+      "label"
+      "info";
   `};
 
   ${mediaSize.phone`
@@ -44,6 +61,14 @@ const LabelContainer = styled.div`
   align-self: start;
   font-size: 3vw;
   font-weight: 600;
+
+  ${mediaSize.tablet`
+    font-size: 5vw;
+  `};
+
+  ${mediaSize.phone`
+    font-size: 8vw;
+  `};
 `;
 
 const InfoContainer = styled.div`
@@ -58,7 +83,7 @@ const InfoField = styled.div`
   grid-area: ${props => props.gridarea};
 
   & .infoFieldLabel {
-    color: ${props => props.theme.colors.offGrey};
+    color: #d6d6d6;
     font-size: 0.8em;
     font-weight: 600;
   }
@@ -72,10 +97,16 @@ const InfoField = styled.div`
     color: ${props => props.theme.colors.offWhite};
     font-size: 2em;
     font-weight: 500;
+
+    ${mediaSize.phone`
+      font-size: 1.5em;
+    `};
   }
 `;
 
 const ChangePasswordLabel = styled.div`
+  display: inline-block;
+  margin-bottom: 4vw;
   text-decoration: underline;
   cursor: pointer;
 
@@ -98,7 +129,6 @@ const ProfileModalComponent = ({
   prevLoc,
   isCurUser
 }) => {
-  console.log(userProfile);
   const [profileLoaded, setProfileLoaded] = useState(
     userProfile && userProfile.isLoaded && userProfile.name
   );
@@ -107,9 +137,7 @@ const ProfileModalComponent = ({
 
   useEffect(() => {
     const nowLoaded = userProfile && userProfile.isLoaded && userProfile.name;
-    console.log(profileLoaded, nowLoaded, userProfile);
     if (!profileLoaded && nowLoaded) {
-      console.log("updating");
       updateProfileInfo(userProfile);
       setProfileLoaded(true);
     } else if (profileLoaded) {
@@ -117,12 +145,10 @@ const ProfileModalComponent = ({
     }
   });
 
-  console.log("profile name", profileInfo.role === "ORGANIZER");
-
   return (
     <Modal
       fill={false}
-      backgroundColor="rgb(195, 107, 163)"
+      backgroundColor="#11985a"
       handleClickOutside={() => closeProfileModal(history, prevLoc)}
       onClickClose={() => closeProfileModal(history, prevLoc)}
     >
