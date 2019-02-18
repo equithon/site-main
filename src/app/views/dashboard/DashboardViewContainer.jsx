@@ -1,5 +1,4 @@
 import { connect } from "react-redux";
-import { withFirebase } from "react-redux-firebase";
 import { compose, withHandlers, withProps } from "recompose";
 
 import { UserIsAuthenticated } from "../../../utils/siteAuth";
@@ -38,19 +37,19 @@ const dashboardTiles = {
   },
   attendee_list_volunteer: {
     label: "Check In Tool",
-    linkTo: { pathname: ROUTES.ATTENDEE_LIST, state: { as: "VOLUNTEER" } },
+    linkTo: ROUTES.ATTENDEE_LIST_VOLUNTEER,
     gridArea: "rightTop",
     backgroundColor: "#66ADEF"
   },
   attendee_list_organizer: {
     label: "Attendee List",
-    linkTo: { pathname: ROUTES.ATTENDEE_LIST, state: { as: "ORGANIZER" } },
+    linkTo: ROUTES.ATTENDEE_LIST_ORGANIZER,
     gridArea: "rightTop",
     backgroundColor: "#bb7cc1"
   },
   profile: {
     label: "My Profile",
-    linkTo: { pathname: ROUTES.PROFILE, state: { modal: true, onTopOf: "/" } },
+    linkTo: ROUTES.PROFILE,
     gridArea: "rightBot",
     backgroundColor: "#1ec77a"
   }
@@ -108,7 +107,6 @@ const enhance = compose(
           contents: "Make surkuhihe to submit your application!"
         }
   })),
-  withFirebase,
   withHandlers({
     logOutUser: props => () => props.firebase.logout()
   }),

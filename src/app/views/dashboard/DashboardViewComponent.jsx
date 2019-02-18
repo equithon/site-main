@@ -187,9 +187,8 @@ const DashboardViewComponent = ({
         </Text>
         <Heading level="1" size="large" margin="xsmall">
           {curUserProfile && curUserProfile.isLoaded
-            ? curUserProfile.name.split(" ")[0]
+            ? `${curUserProfile.name.split(" ")[0]}.`
             : ""}
-          .
         </Heading>
         <Text size="xxlarge">{greetingInfo.subgreeting}</Text>
       </GreetingContainer>
