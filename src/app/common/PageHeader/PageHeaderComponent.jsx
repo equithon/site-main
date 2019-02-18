@@ -29,13 +29,13 @@ const Title = styled.span`
 
 const ExtraContents = styled.div``;
 
-const LogoButtonHeaderComponent = ({
+const PageHeader = ({
   title = "Equithon",
-  logoClickHandler,
+  onClickHandler,
   children
 }) => (
   <Container>
-    <MainContents onClick={logoClickHandler}>
+    <MainContents onClick={onClickHandler}>
       <Logo src={ColorLogo} />
       <Title>{title}</Title>
     </MainContents>
@@ -44,4 +44,4 @@ const LogoButtonHeaderComponent = ({
   </Container>
 );
 
-export default LogoButtonHeaderComponent;
+export default PageHeader;

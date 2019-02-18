@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "grommet";
+import onClickOutside from "react-onclickoutside";
 import { withRouter } from "react-router-dom";
 import { compose } from "recompose";
-import onClickOutside from "react-onclickoutside";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-const Container = styled(Box)`
+const Container = styled.div`
   position: relative;
   margin: auto;
   border-radius: ${props => props.theme.app.border.radius};
@@ -46,19 +45,17 @@ const CloseButton = styled.button`
   `};
 `;
 
-const ModalComponent = ({
+const Modal = ({
   className,
-  gridArea,
   backgroundColor,
-  onClickClose,
+  onCloseClickHandler,
   children
 }) => (
   <Container
     className={className}
-    gridArea={gridArea}
-    background={backgroundColor}
+    backgroundColor={backgroundColor}
   >
-    <CloseButton onClick={() => onClickClose()}>
+    <CloseButton onClick={() => onCloseClickHandler()}>
       <FontAwesomeIcon icon="times" size="1x" color="grey" />
     </CloseButton>
     {children}
@@ -70,4 +67,4 @@ const enhance = compose(
   withRouter
 );
 
-export default enhance(ModalComponent);
+export default enhance(Modal);

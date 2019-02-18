@@ -150,7 +150,7 @@ const ProfileModalComponent = ({
       fill={false}
       backgroundColor="#11985a"
       handleClickOutside={() => closeProfileModal(history, prevLoc)}
-      onClickClose={() => closeProfileModal(history, prevLoc)}
+      onCloseClickHandler={() => closeProfileModal(history, prevLoc)}
     >
       <Container>
         {profileLoaded ? (

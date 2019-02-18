@@ -29,14 +29,14 @@ const Button = ({
   disabled,
   backgroundColor,
   type = "button",
-  buttonClickHandler = () => console.log(`clicked ${label} button`)
+  onClickHandler = () => console.log(`clicked ${label} button`)
 }) => (
   <Container
     className={className}
     type={type}
     disabled={disabled}
     backgroundColor={backgroundColor}
-    onClick={disabled ? null : () => buttonClickHandler()}
+    onClick={disabled ? null : () => onClickHandler()}
   >
     {label}
   </Container>

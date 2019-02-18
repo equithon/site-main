@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
-import { Button, TextInput, Heading } from "grommet";
 import { Formik, Form, Field } from "formik";
-
 import { mediaSize } from "../../../../utils/siteTools";
+
 import LoadingSpinner from "../../../../static/img/loaders/default.svg";
 
-const Container = posed.div({
+const SlidingContainer = posed.div({
   hidden: {
     x: props => (props.login ? "-100vw" : "100vw"),
     y: props => (props.login ? "0" : "-4vw"),
@@ -36,7 +35,7 @@ const ComponentContainer = styled.div`
   `}
 `;
 
-const FormContainer = styled(Container)`
+const FormContainer = styled(SlidingContainer)`
   grid-column: 1;
   grid-row: 1;
 
@@ -185,12 +184,12 @@ const LoginSignupFormsComponent = ({
     <ComponentContainer>
       <FormContainer pose={showLogin ? "shown" : "hidden"} login>
         <FormHeading>
-          <Heading level="1" size="medium" margin="xsmall">
+          <span>
             It&apos;s good to see you.
-          </Heading>
-          <Heading className="normal" level="1" size="medium" margin="xsmall">
+          </span>
+          <span>
             Log in to continue.
-          </Heading>
+          </span>
         </FormHeading>
         <Formik
           initialValues={{ loginEmail: "", loginPassword: "" }}
