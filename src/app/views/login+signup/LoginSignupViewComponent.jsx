@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
+import LogoButtonHeader from "../../common/PageHeader/PageHeaderComponent";
 import LoginSignupFormsComponent from "./components/LoginSignupFormsComponent";
 import WavesComponent from "./components/WavesComponent";
 
@@ -26,7 +26,7 @@ const LoginSignupViewComponent = ({
 }) => (
   <ViewContainer>
     <LogoButtonHeader
-      logoOnClick={() => window.open("https://equithon.org", "_self")}
+      logoClickHandler={() => window.open("https://equithon.org", "_self")}
     />
     <LoginSignupFormsComponent
       logIn={logInUser}

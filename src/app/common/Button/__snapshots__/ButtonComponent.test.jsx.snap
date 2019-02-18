@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+.c0 {
+  cursor: pointer;
+  padding: 1em 2em;
+  border-radius: 50px;
+  color: white;
+  background-color: #696969;
+  -webkit-transition: background-color 250ms ease-in-out;
+  transition: background-color 250ms ease-in-out;
+}
+
+.c0:focus {
+  outline: none;
+}
+
+.c0:hover {
+  background-color: #4B4B4B;
+}
+
+<Button
+  label="Default"
+>
+  <styled.button
+    onClick={[Function]}
+    type="button"
+  >
+    <StyledComponent
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "c0",
+            "rules": Array [
+              "
+  cursor: pointer;
+  padding: 1em 2em;
+  border-radius: ",
+              [Function],
+              ";
+
+  color: white;
+  background-color: ",
+              [Function],
+              ";
+
+  &:focus {
+    outline: none;
+  }
+
+  transition: background-color 250ms ease-in-out;
+  &:hover {
+    background-color: ",
+              [Function],
+              ";
+  }
+",
+            ],
+          },
+          "displayName": "styled.button",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "button",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      onClick={[Function]}
+      type="button"
+    >
+      <button
+        className="c0"
+        onClick={[Function]}
+        type="button"
+      >
+        Default
+      </button>
+    </StyledComponent>
+  </styled.button>
+</Button>
+`;

@@ -5,7 +5,7 @@ import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { mediaSize } from "../../../utils/siteTools";
-import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
+import LogoButtonHeader from "../../common/PageHeader/PageHeaderComponent";
 import ToastCard from "../../common/ToastCard/ToastCardComponent";
 
 import NavTile from "./components/NavTileComponent";

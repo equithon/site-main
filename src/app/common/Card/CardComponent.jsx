@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "grommet";
 
-const Container = styled(Box)`
+const Container = styled.DIV`
   border-radius: ${props => props.theme.app.border.radius};
   color: ${props => props.theme.colors.offWhite};
   width: ${props => props.width};

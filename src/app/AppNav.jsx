@@ -3,20 +3,20 @@ import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // VIEW CONTAINERS
-import DashboardViewContainer from "../../views/dashboard/DashboardViewContainer";
-import LoginSignupViewContainer from "../../views/login+signup/LoginSignupViewContainer";
-import ApplicationViewContainer from "../../views/application/ApplicationViewContainer";
-import AppReviewViewContainer from "../../views/appreview/AppReviewViewContainer";
-import AttendeesViewContainer from "../../views/attendees/AttendeesViewContainer";
-import MapViewContainer from "../../views/map/MapViewContainer";
-import ScheduleViewContainer from "../../views/schedule/ScheduleViewContainer";
-import Error404Container from "../../views/404/Error404Container";
+import DashboardViewContainer from "./views/dashboard/DashboardViewContainer";
+import LoginSignupViewContainer from "./views/login+signup/LoginSignupViewContainer";
+import ApplicationViewContainer from "./views/application/ApplicationViewContainer";
+import AppReviewViewContainer from "./views/appreview/AppReviewViewContainer";
+import AttendeesViewContainer from "./views/attendees/AttendeesViewContainer";
+import MapViewContainer from "./views/map/MapViewContainer";
+import ScheduleViewContainer from "./views/schedule/ScheduleViewContainer";
+import Error404Container from "./views/404/Error404Container";
 
 // MODAL CONTAINERS
-import ProfileModalContainer from "../../modals/profile/ProfileModalContainer";
-import EventModalContainer from "../../modals/event/EventModalContainer";
+import ProfileModalContainer from "./modals/profile/ProfileModalContainer";
+import EventModalContainer from "./modals/event/EventModalContainer";
 
-import * as ROUTES from "../../../utils/siteRoutes";
+import * as ROUTES from "../utils/siteRoutes";
 
 const ModalContainer = styled.div`
   display: ${props => (props.show ? "inline" : "none")};
