@@ -94,7 +94,7 @@ const InfoField = styled.div`
     background: none;
     box-shadow: none;
 
-    color: ${props => props.theme.colors.offWhite};
+    color: white;
     font-size: 2em;
     font-weight: 500;
 

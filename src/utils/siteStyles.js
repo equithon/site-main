@@ -8,12 +8,48 @@ import SFProDisplayRegularOTF from "../static/fonts/SF-Pro-Display-Regular.otf";
 import SFProDisplaySemiboldOTF from "../static/fonts/SF-Pro-Display-Semibold.otf";
 import SFProDisplayThinOTF from "../static/fonts/SF-Pro-Display-Thin.otf";
 
+export const colors = {
+  black: "#454545",
+  lightBlack: "#5c5c5c",
+  grey: "#aaaaaa",
+
+  primary: "#a16beb",
+  secondary: "#50a2f1",
+
+  warning: "#F4A867",
+  error: "#F07285",
+  green: "#6cc46a"
+};
+
+export const app = {
+  font: {
+    family: "SF Pro Display",
+    weight: "600",
+    size: "18px",
+    height: "20px"
+  },
+  border: {
+    width: "2px",
+    radius: "6px"
+  }
+};
+
+const siteTheme = {
+  colors,
+  app
+};
+
+export default siteTheme;
+
 export const GlobalStyles = createGlobalStyle`
   html, body, * {
     margin: 0;
     padding: 0;
 
     box-sizing: border-box;
+
+    font-family: ${app.font.family}
+    font-weight: ${app.font.weight}
   }
 
   @font-face {
@@ -72,35 +108,3 @@ export const GlobalStyles = createGlobalStyle`
     src: url(${SFProDisplayThinOTF}) format("opentype");
   }
 `;
-
-export const colors = {
-  black: "#2e2e2e",
-  lightBlack: "#444444",
-  grey: "#aaaaaa",
-
-  primary: "#a16beb",
-  secondary: "#50a2f1",
-
-  warning: "#F4A867",
-  error: "#F07285",
-  green: "#6cc46a"
-};
-
-export const app = {
-  font: {
-    family: "SF Pro Display",
-    size: "18px",
-    height: "20px"
-  },
-  border: {
-    width: "2px",
-    radius: "6px"
-  }
-};
-
-const siteTheme = {
-  colors,
-  app
-};
-
-export default siteTheme;

@@ -10,7 +10,7 @@ const Container = styled.div`
   position: relative;
   margin: auto;
   border-radius: ${props => props.theme.app.border.radius};
-  color: ${props => props.theme.colors.offWhite};
+  color: white;
 `;
 
 const CloseButton = styled.button`
@@ -51,10 +51,7 @@ const Modal = ({
   onCloseClickHandler,
   children
 }) => (
-  <Container
-    className={className}
-    backgroundColor={backgroundColor}
-  >
+  <Container className={className} backgroundColor={backgroundColor}>
     <CloseButton onClick={() => onCloseClickHandler()}>
       <FontAwesomeIcon icon="times" size="1x" color="grey" />
     </CloseButton>

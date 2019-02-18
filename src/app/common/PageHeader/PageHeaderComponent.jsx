@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import ColorLogo from "../../../static/img/logo/logo_tiny_color.png";
+import Heading from "../Heading/HeadingComponent";
 
 const Container = styled.div`
+  height: 6vh;
   position: relative;
 
   display: flex;
@@ -23,21 +25,19 @@ const Logo = styled.img`
   margin: auto;
 `;
 
-const Title = styled.span`
-  margin-left: 1vw;
+const Title = styled(Heading)`
+  margin: auto 0 auto 1vw;
 `;
 
 const ExtraContents = styled.div``;
 
-const PageHeader = ({
-  title = "Equithon",
-  onClickHandler,
-  children
-}) => (
+const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
   <Container>
     <MainContents onClick={onClickHandler}>
       <Logo src={ColorLogo} />
-      <Title>{title}</Title>
+      <Title size="med" color="primary">
+        {title}
+      </Title>
     </MainContents>
 
     <ExtraContents>{children}</ExtraContents>

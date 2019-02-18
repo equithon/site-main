@@ -3,19 +3,19 @@ import styled from "styled-components";
 
 const Container = styled.button`
   cursor: pointer;
-  padding: 1em 2em;
-  border-radius: ${props => props.theme.defaults.borderRadiusRound};
+  padding: 0.8em 2em;
+  border-radius: ${props => props.theme.app.border.radius};
 
+  font-size: 100%;
   color: white;
   background-color: ${props =>
+    props.theme.colors[props.backgroundColor] ||
     props.backgroundColor ||
-    (props.disabled ? props.theme.colors.grey : props.theme.colors.lightBlack)};
+    props.theme.colors.black};
 
-  transition: background-color 250ms ease-in-out;
+  transition: brightness 250ms ease-in-out;
   &:hover {
-    background-color: ${props =>
-      props.backgroundColor ||
-      (props.disabled ? props.theme.colors.grey : props.theme.colors.black)};
+    filter: brightness(120%);
   }
 
   &:focus {
@@ -36,7 +36,7 @@ const Button = ({
     type={type}
     disabled={disabled}
     backgroundColor={backgroundColor}
-    onClick={disabled ? null : () => onClickHandler()}
+    onClick={disabled ? null : onClickHandler}
   >
     {label}
   </Container>
