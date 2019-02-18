@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../Modal/ModalComponent";
+import Modal from "../../common/Modal/ModalComponent";
 import { mediaSize } from "../../../utils/siteTools";
 import LoadingSpinner from "../../../static/img/loaders/default.svg";
 

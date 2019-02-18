@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 import React from "react";
-import { shallowWithTheme } from ",,/../../../setupTests";
 
 import PageHeader from "./PageHeaderComponent";
 

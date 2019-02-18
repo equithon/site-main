@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
 import { Formik, Form, Field } from "formik";
-import { mediaSize } from "../../../../utils/siteTools";
+import { mediaSize } from "../../../../../utils/siteTools";
 
-import LoadingSpinner from "../../../../static/img/loaders/default.svg";
-import TextInput from "../../../common/TextInput/TextInputComponent";
-import Button from "../../../common/Button/ButtonComponent";
-import Heading from "../../../common/Heading/HeadingComponent";
+import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
+import TextInput from "../../../../common/TextInput/TextInputComponent";
+import Button from "../../../../common/Button/ButtonComponent";
+import Heading from "../../../../common/Heading/HeadingComponent";
 
 const ComponentContainer = styled.div`
   display: grid;

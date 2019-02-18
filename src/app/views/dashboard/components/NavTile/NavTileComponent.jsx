@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { mediaSize } from "../../../../utils/siteTools";
+import { mediaSize } from "../../../../../utils/siteTools";
 
-import Card from "../../../common/Card/CardComponent";
+import Card from "../../../../common/Card/CardComponent";
 
 const Container = styled.div`
   width: 100%;

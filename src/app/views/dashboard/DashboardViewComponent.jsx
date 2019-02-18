@@ -5,10 +5,9 @@ import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-import LogoButtonHeader from "../../common/PageHeader/PageHeaderComponent";
 import ToastCard from "../../common/ToastCard/ToastCardComponent";
-
-import NavTile from "./components/NavTileComponent";
+import PageHeader from "./components/PageHeader/PageHeaderComponent";
+import NavTile from "./components/NavTile/NavTileComponent";
 
 const Container = styled.div`
   width: 85vw;
@@ -170,14 +169,12 @@ const DashboardViewComponent = ({
   userDashboards
 }) => (
   <Container>
-    <LogoButtonHeader>
-      <div>
-        <ActionButton onClick={logOutUser} data-tip="Log Out">
-          <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
-        </ActionButton>
-        <ActionTooltip place="bottom" effect="float" />
-      </div>
-    </LogoButtonHeader>
+    <PageHeader>
+      <ActionButton onClick={logOutUser} data-tip="Log Out">
+        <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
+      </ActionButton>
+      <ActionTooltip place="bottom" effect="float" />
+    </PageHeader>
 
     <DashboardContainer>
       <GreetingContainer>
