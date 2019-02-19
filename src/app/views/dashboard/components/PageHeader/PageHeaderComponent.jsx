@@ -14,7 +14,6 @@ const Container = styled.div`
 `;
 
 const MainContents = styled.div`
-  height: 100%;
   display: flex;
 
   cursor: ${props => (props.clickable ? "pointer" : "auto")};
@@ -29,7 +28,9 @@ const Title = styled(Heading)`
   margin: auto 0 auto 1vw;
 `;
 
-const ExtraContents = styled.div``;
+const ExtraContents = styled.div`
+  margin: auto 0;
+`;
 
 const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
   <Container>
@@ -38,7 +39,7 @@ const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
       clickable={onClickHandler !== undefined}
     >
       <Logo src={ColorLogo} />
-      <Title size="regular" color="primary">
+      <Title size="normal" color="primary">
         {title}
       </Title>
     </MainContents>

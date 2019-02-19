@@ -8,6 +8,10 @@ import { mediaSize } from "../../../utils/siteTools";
 
 import Card from "../Card/CardComponent";
 
+const Modal = styled(Card)`
+  margin: auto;
+`;
+
 const CloseButton = styled.button`
   position: absolute;
   top: -1vw;
@@ -54,7 +58,7 @@ export default enhance(({
   onClickCloseHandler,
   children
 }) => (
-  <Card
+  <Modal
     className={className}
     backgroundColor={backgroundColor}
     backgroundImg={backgroundImg}
@@ -64,5 +68,5 @@ export default enhance(({
     </CloseButton>
 
     {children}
-  </Card>
+  </Modal>
 ));

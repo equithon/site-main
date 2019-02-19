@@ -9,22 +9,18 @@ const ToastCard = styled(Card)`
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: 1fr 4fr;
-  grid-column-gap: 1em;
   grid-template-areas: "icon contents";
+  grid-column-gap: 1em;
+  padding: 1.5em 1em;
   justify-content: space-between;
-
-  ${mediaSize.tablet`
-    font-size: 0.8em;
-  `};
-
-  ${mediaSize.phone`
-  `};
 `;
 
 const Icon = styled.div`
+  margin: auto;
 `;
 
 const Contents = styled.div`
+  margin: auto;
 `;
 
 export default ({

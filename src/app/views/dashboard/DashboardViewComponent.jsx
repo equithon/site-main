@@ -4,8 +4,9 @@ import ReactTooltip from "react-tooltip";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-import ToastCard from "../../shared/Card/ToastCard/ToastCardComponent";
 import Heading from "../../shared/Heading/HeadingComponent";
+import Text from "../../shared/Text/TextComponent";
+import ToastCard from "../../shared/Card/ToastCard/ToastCardComponent";
 import PageHeader from "./components/PageHeader/PageHeaderComponent";
 import NavTile from "./components/NavTile/NavTileComponent";
 
@@ -66,30 +67,12 @@ const GreetingContainer = styled.div`
     font-weight: 600;
   }
 
-  & h1 {
-    color: ${props => props.theme.colors.lightBlack};
-  }
-
   ${mediaSize.tablet`
     white-space: nowrap;
-    & h1 {
-      font-size: 4em;
-      line-height: normal;
-    }
   `};
 
   ${mediaSize.phone`
     white-space: normal;
-
-    & span {
-      font-size: 1.5em;
-      line-height: normal;
-    }
-
-    & h1 {
-      font-size: 3em;
-      line-height: normal;
-    }
   `};
 `;
 
@@ -179,15 +162,17 @@ const DashboardViewComponent = ({
 
     <DashboardContainer>
       <GreetingContainer>
-        <div>
+        <Heading size="small" weight="normal" color="grey">
           {greetingInfo.greeting},
-        </div>
+        </Heading>
         <Heading size="4em">
           {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
             ? `${curUserProfile.name.split(" ")[0]}.`
             : ""}
         </Heading>
-        <div>{greetingInfo.subgreeting}</div>
+        <Heading size="small" weight="normal" color="grey">
+          {greetingInfo.subgreeting}
+        </Heading>
       </GreetingContainer>
 
       <ToastContainer>

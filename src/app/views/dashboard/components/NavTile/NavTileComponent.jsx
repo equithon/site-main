@@ -3,32 +3,16 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mediaSize } from "../../../../../utils/siteTools";
 
+import Heading from "../../../../shared/Heading/HeadingComponent";
 import Card from "../../../../shared/Card/CardComponent";
 
-const Container = styled.div`
+const NavTile = styled(Card)`
   width: 100%;
   height: 100%;
+  padding: 1.5em;
   border-radius: ${props => props.theme.app.border.radius};
-  padding: 1em;
-  box-sizing: border-box;
 
-  // can specify color in theme, another color, or default is white
-  color: ${props =>
-    props.color in props.theme.colors
-      ? props.theme.colors[props.color]
-      : props.color || "white"};
   background-color: ${props => props.backgroundColor};
-
-  font-weight: 600;
-  font-size: 1.5em;
-
-  ${mediaSize.tablet`
-    font-size: 2em;
-  `};
-
-  ${mediaSize.phone`
-    font-size: 1.25em;
-  `};
 `;
 
 const NavTileLink = styled(Link)`
@@ -36,31 +20,24 @@ const NavTileLink = styled(Link)`
   text-decoration: none;
 `;
 
-const NavTileComponent = ({ info }) => {
+export default ({ info: { label, color, backgroundColor, backgroundImg, linkTo, gridArea, } }) => {
   const [tileClicked, setClicked] = useState(false);
 
   if (tileClicked) setClicked(false);
 
   return (
     <NavTileLink
-      gridarea={info.gridArea}
-      replace={info.linkTo.state && info.linkTo.state.modal}
-      to={info.linkTo}
+      gridarea={gridArea}
+      replace={linkTo.state && linkTo.state.modal}
+      to={linkTo}
     >
-      <Card
-        width="100%"
-        height="100%"
-        fill={false}
-        backgroundColor={info.backgroundColor}
-        backgroundImg={info.backgroundImg}
+      <NavTile
+        backgroundColor={backgroundColor}
+        backgroundImg={backgroundImg}
         onClickHandler={() => setClicked(true)}
       >
-        <Container color={info.color} backgroundColor={info.backgroundColor}>
-          {info.label}
-        </Container>
-      </Card>
+        <Heading size="small" color={color || "white"} weight="normal">{label}</Heading>
+      </NavTile>
     </NavTileLink>
   );
 };
-
-export default NavTileComponent;

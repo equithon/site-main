@@ -23,16 +23,25 @@ export const colors = {
 
 export const sizes = {
   heading: {
-    big: "2em",
-    regular: "1.5em",
-    small: "1.2em"
+    big: "2.5em",
+    normal: "2em",
+    small: "1.5em"
+  },
+  bodyText: {
+    big: "1.2em",
+    normal: "1em",
+    small: "0.8em"
   }
 }
 
 export const app = {
   font: {
     family: "SF Pro Display",
-    weight: "500",
+    weight: {
+      bold: "600",
+      normal: "500",
+      light: "400",
+    },
   },
   border: {
     width: "2px",
@@ -59,7 +68,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 
     font-family: ${app.font.family}
-    font-weight: ${app.font.weight}
+    font-weight: ${app.font.weight.normal}
   }
 
   @font-face {

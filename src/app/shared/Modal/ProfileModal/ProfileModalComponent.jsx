@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../ModalComponent";
 import { mediaSize } from "../../../../utils/siteTools";
 import LoadingSpinner from "../../../../static/img/loaders/default.svg";
+
+import Modal from "../ModalComponent";
+import Heading from "../../Heading/HeadingComponent";
+
 
 const closeProfileModal = (history, prevLoc) => {
   history.replace(prevLoc);
@@ -14,28 +17,27 @@ const updateFirebaseProfile = (firebase, profileInfo) => {
   // firebase.updateProfile({ name: profileInfo.name });
 };
 
-const Container = styled.div`
-  display: flex;
+const ProfileModal = styled(Modal)`
   width: 60vw;
   height: 35vw;
-  border-radius: ${props => props.theme.app.border.radius};
   padding: 5vw;
-  box-sizing: border-box;
+
+  border-radius: ${props => props.theme.app.border.radius};
 
   ${mediaSize.tablet`
-    padding: 6vw 5vw;
     width: 55vw;
     height: 60vw;
+    padding: 6vw 5vw;
   `};
 
   ${mediaSize.phone`
-    padding: 10vw;
     width: 80vw;
     height: 100vw;
+    padding: 10vw;
   `};
 `;
 
-const ProfileContainer = styled.div`
+const Profile = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
@@ -56,22 +58,9 @@ const ProfileContainer = styled.div`
   `};
 `;
 
-const LabelContainer = styled.div`
-  grid-area: label;
-  align-self: start;
-  font-size: 3vw;
-  font-weight: 600;
 
-  ${mediaSize.tablet`
-    font-size: 5vw;
-  `};
 
-  ${mediaSize.phone`
-    font-size: 8vw;
-  `};
-`;
-
-const InfoContainer = styled.div`
+const Info = styled.div`
   grid-area: info;
 
   display: flex;
@@ -115,14 +104,14 @@ const ChangePasswordLabel = styled.div`
   }
 `;
 
-const LoadingContainer = styled.div`
+const Loading = styled.div`
   width: 50%;
   height: 50%;
   margin: auto;
   background: center / contain no-repeat url(${LoadingSpinner});
 `;
 
-const ProfileModalComponent = ({
+export default ({
   firebase,
   userProfile,
   history,
@@ -146,79 +135,74 @@ const ProfileModalComponent = ({
   });
 
   return (
-    <Modal
-      fill={false}
+    <ProfileModal
       backgroundColor="#11985a"
       handleClickOutside={() => closeProfileModal(history, prevLoc)}
       onClickCloseHandler={() => closeProfileModal(history, prevLoc)}
     >
-      <Container>
-        {profileLoaded ? (
-          <ProfileContainer>
-            <LabelContainer>
-              {isCurUser
-                ? "My Profile"
-                : `${profileInfo.name.split(" ")[0]}'s Profile'`}
-            </LabelContainer>
+      {profileLoaded ? (
+        <Profile>
+          <Heading size="big" color="white">
+            {isCurUser
+              ? "My Profile"
+              : `${profileInfo.name.split(" ")[0]}'s Profile'`}
+          </Heading>
 
-            <InfoContainer>
-              <InfoField gridarea="name">
-                <div className="infoFieldLabel">NAME</div>
-                <input
-                  className="infoFieldValue"
-                  value={profileInfo.name}
-                  onChange={e => {
-                    e.persist();
-                    updateProfileInfo(prevInfo => ({
+          <Info>
+            <InfoField gridarea="name">
+              <div className="infoFieldLabel">NAME</div>
+              <input
+                className="infoFieldValue"
+                value={profileInfo.name}
+                onChange={e => {
+                  e.persist();
+                  updateProfileInfo(prevInfo => ({
                       ...prevInfo,
                       name: e.target.value
-                    }));
-                  }}
-                />
-              </InfoField>
+                  }));
+                }}
+              />
+            </InfoField>
 
-              <InfoField gridarea="email">
-                <div className="infoFieldLabel">EMAIL</div>
-                <input
-                  className="infoFieldValue"
-                  defaultValue={profileInfo.email}
-                />
-                {/* TODO: add email change */}
-              </InfoField>
+            <InfoField gridarea="email">
+              <div className="infoFieldLabel">EMAIL</div>
+              <input
+                className="infoFieldValue"
+                defaultValue={profileInfo.email}
+              />
+              {/* TODO: add email change */}
+            </InfoField>
 
-              <InfoField gridarea="password">
-                <ChangePasswordLabel
-                  className="infoFieldLabel"
-                  onClick={() => console.log("TODO: allow change password")}
-                >
-                  CHANGE PASSWORD
-                </ChangePasswordLabel>
-              </InfoField>
+            <InfoField gridarea="password">
+              <ChangePasswordLabel
+                className="infoFieldLabel"
+                onClick={() => console.log("TODO: allow change password")}
+              >
+                CHANGE PASSWORD
+              </ChangePasswordLabel>
+            </InfoField>
 
-              <InfoField gridarea="extra">
-                <div className="infoFieldLabel">ATTENDING AS A...</div>
-                <input
-                  className="infoFieldValue"
-                  value={profileInfo.role}
-                  readOnly={!isAdmin}
-                  onChange={e => {
-                    e.persist();
-                    updateProfileInfo(prevInfo => ({
+            <InfoField gridarea="extra">
+              <div className="infoFieldLabel">ATTENDING AS A...</div>
+              <input
+                className="infoFieldValue"
+                value={profileInfo.role && profileInfo.role.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase())}
+                readOnly
+                onChange={e => {
+                  e.persist();
+                  updateProfileInfo(prevInfo => ({
                       ...prevInfo,
                       role: e.target.value
-                    }));
-                  }}
-                />
-                {/* TODO: add role change */}
-              </InfoField>
-            </InfoContainer>
-          </ProfileContainer>
-        ) : (
-          <LoadingContainer />
-        )}
-      </Container>
-    </Modal>
+                  }));
+                }}
+              />
+              {/* TODO: add role change */}
+            </InfoField>
+          </Info>
+        </Profile>
+      ) : (
+        <Loading />
+      )}
+    </ProfileModal>
   );
 };
-
-export default ProfileModalComponent;
