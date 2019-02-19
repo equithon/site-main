@@ -5,7 +5,7 @@ import createHistory from "history/createBrowserHistory";
 const locationHelper = locationHelperBuilder({});
 const browserHistory = createHistory();
 
-// redirects to login if they are not logged in
+// redirects to login (route: `/account`) if they are not logged in
 export const UserIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsAuthenticated",
   allowRedirectBack: true,
@@ -21,7 +21,8 @@ export const UserIsAuthenticated = connectedRouterRedirect({
   }
 });
 
-// redirects from login/signup to dashboard if user is logged in
+// redirects from login/signup to dashboard (route: `/`) or previous
+// page if user is logged in
 export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsNotAuthenticated",
   allowRedirectBack: false,

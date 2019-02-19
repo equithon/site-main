@@ -22,7 +22,7 @@ const dashboardTiles = {
     linkTo: ROUTES.MAP,
     gridArea: "leftBot",
     backgroundImg: MapTileBG,
-    color: "offBlack"
+    color: "black"
   },
   application: {
     label: "My Application",
