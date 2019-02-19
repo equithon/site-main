@@ -1,11 +1,11 @@
 // CREDITS: https://codepen.io/plavookac/pen/QMwObb
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import { mediaSize } from "../../../../utils/siteTools";
+import { mediaSize } from "../../../../../utils/siteTools";
 
-import TopWave from "../../../../static/img/shapes/wave_top.png";
-import MiddleWave from "../../../../static/img/shapes/wave_mid.png";
-import BottomWave from "../../../../static/img/shapes/wave_bot.png";
+import TopWave from "../../../../../static/img/shapes/wave_top.png";
+import MiddleWave from "../../../../../static/img/shapes/wave_mid.png";
+import BottomWave from "../../../../../static/img/shapes/wave_bot.png";
 
 const flow = keyframes`
   0% {

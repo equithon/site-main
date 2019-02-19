@@ -1,43 +1,30 @@
-import { library } from "@fortawesome/fontawesome-svg-core";
-import {
-  faLightbulb,
-  faExclamation,
-  faTimes,
-  faCheck,
-  faDoorClosed,
-  faDoorOpen,
-  faQuestion
-} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-  faLightbulb,
-  faExclamation,
-  faTimes,
-  faCheck,
-  faDoorClosed,
-  faDoorOpen,
-  faQuestion
-);
+import { createGlobalStyle } from "styled-components";
+import SFProDisplayBlackOTF from "../static/fonts/SF-Pro-Display-Black.otf";
+import SFProDisplayBoldOTF from "../static/fonts/SF-Pro-Display-Bold.otf";
+import SFProDisplayHeavyOTF from "../static/fonts/SF-Pro-Display-Heavy.otf";
+import SFProDisplayLightOTF from "../static/fonts/SF-Pro-Display-Light.otf";
+import SFProDisplayMediumOTF from "../static/fonts/SF-Pro-Display-Medium.otf";
+import SFProDisplayRegularOTF from "../static/fonts/SF-Pro-Display-Regular.otf";
+import SFProDisplaySemiboldOTF from "../static/fonts/SF-Pro-Display-Semibold.otf";
+import SFProDisplayThinOTF from "../static/fonts/SF-Pro-Display-Thin.otf";
 
 export const colors = {
-  offBlack: "#676767",
-  offGrey: "#aaaaaa",
-  offWhite: "#f7f7f7",
+  black: "#454545",
+  lightBlack: "#5c5c5c",
+  grey: "#aaaaaa",
+
+  primary: "#a16beb",
+  secondary: "#50a2f1",
+
   warning: "#F4A867",
   error: "#F07285",
-
-  darkerPurple: "#904feb",
-  primary: "#a16beb",
-  lighterPurple: "#E2D4F5",
-
-  darkerBlue: "#4270DE",
-  secondary: "#50a2f1",
-  lighterBlue: "#A9C2F8"
+  green: "#6cc46a"
 };
 
 export const app = {
   font: {
     family: "SF Pro Display",
+    weight: "600",
     size: "18px",
     height: "20px"
   },
@@ -47,51 +34,77 @@ export const app = {
   }
 };
 
-const grommetStyles = {
+const siteTheme = {
   colors,
-  app,
-
-  global: {
-    colors: {
-      black: colors.offBlack,
-      brand: colors.primary,
-      focus: "rgba(141, 83, 219, 0.7)"
-    },
-    control: {
-      border: {
-        width: app.border.width,
-        radius: app.border.radius
-      },
-      extend: {
-        fontWeight: 600
-      }
-    },
-    font: {
-      family: app.font.family
-    }
-  },
-
-  font: {
-    size: app.font.size,
-    height: app.font.height
-  },
-
-  button: {
-    color: colors.offWhite,
-    padding: {
-      vertical: "7px"
-    },
-    primary: {
-      color: colors.primary
-    },
-    border: {
-      radius: app.border.radius,
-      color: colors.primary
-    },
-    extend: {
-      fontWeight: 600
-    }
-  }
+  app
 };
 
-export default grommetStyles;
+export default siteTheme;
+
+export const GlobalStyles = createGlobalStyle`
+  html, body, * {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: ${app.font.family}
+    font-weight: ${app.font.weight}
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 900;
+    src: url(${SFProDisplayBlackOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 800;
+    src: url(${SFProDisplayHeavyOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 700;
+    src: url(${SFProDisplayBoldOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 600;
+    src: url(${SFProDisplaySemiboldOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 500;
+    src: url(${SFProDisplayMediumOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 400;
+    src: url(${SFProDisplayRegularOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 300;
+    src: url(${SFProDisplayLightOTF}) format("opentype");
+  }
+
+  @font-face {
+    font-family: "SF Pro Display";
+    font-style: normal;
+    font-weight: 100;
+    src: url(${SFProDisplayThinOTF}) format("opentype");
+  }
+`;

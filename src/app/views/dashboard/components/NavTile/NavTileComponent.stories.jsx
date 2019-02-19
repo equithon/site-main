@@ -1,7 +1,8 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+
 import NavTile from "./NavTileComponent";
-import SampleImg from "../../../../static/img/dashboard/tiles/map.png";
+import SampleImg from "../../../../../static/img/dashboard/tiles/map.png";
 
 storiesOf("Card", module)
   .add("NavTile (Plain)", () => (

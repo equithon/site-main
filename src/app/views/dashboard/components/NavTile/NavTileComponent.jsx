@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { mediaSize } from "../../../../utils/siteTools";
+import { mediaSize } from "../../../../../utils/siteTools";
 
-import Card from "../../../common/Card/CardComponent";
+import Card from "../../../../common/Card/CardComponent";
 
 const Container = styled.div`
   width: 100%;
@@ -42,7 +42,11 @@ const NavTileComponent = ({ info }) => {
   if (tileClicked) setClicked(false);
 
   return (
-    <NavTileLink gridarea={info.gridArea} to={info.linkTo}>
+    <NavTileLink
+      gridarea={info.gridArea}
+      replace={info.linkTo.state && info.linkTo.state.modal}
+      to={info.linkTo}
+    >
       <Card
         width="100%"
         height="100%"

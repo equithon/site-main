@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
-import LoginSignupFormsComponent from "./components/LoginSignupFormsComponent";
-import WavesComponent from "./components/WavesComponent";
+import PageHeader from "../dashboard/components/PageHeader/PageHeaderComponent";
+import LoginSignupFormsComponent from "./components/LoginSignupForm/LoginSignupFormsComponent";
+import WavesComponent from "./components/Waves/WavesComponent";
 
 const ViewContainer = styled.div`
   height: 90vh;
@@ -25,8 +25,8 @@ const LoginSignupViewComponent = ({
   errorTable
 }) => (
   <ViewContainer>
-    <LogoButtonHeader
-      logoOnClick={() => window.open("https://equithon.org", "_self")}
+    <PageHeader
+      logoClickHandler={() => window.open("https://equithon.org", "_self")}
     />
     <LoginSignupFormsComponent
       logIn={logInUser}

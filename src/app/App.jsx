@@ -6,15 +6,14 @@ import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 
 import appStore from "../ducks/store";
 import reactReduxFirebase from "../utils/setupFirebase";
-import siteStyles from "../utils/siteStyles";
-import { GlobalStyles } from "../utils/siteTools";
+import siteTheme, { GlobalStyles } from "../utils/siteStyles";
 
-import AppNav from "./common/AppNav/AppNav";
+import AppNav from "./AppNav";
 
 const App = () => (
   <Provider store={appStore}>
     <ReactReduxFirebaseProvider {...reactReduxFirebase}>
-      <ThemeProvider theme={siteStyles}>
+      <ThemeProvider theme={siteTheme}>
         <>
           <GlobalStyles />
           <AppRouter>

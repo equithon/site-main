@@ -1,26 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
-import { Button, TextInput, Heading } from "grommet";
 import { Formik, Form, Field } from "formik";
+import { mediaSize } from "../../../../../utils/siteTools";
 
-import { mediaSize } from "../../../../utils/siteTools";
-import LoadingSpinner from "../../../../static/img/loaders/default.svg";
-
-const Container = posed.div({
-  hidden: {
-    x: props => (props.login ? "-100vw" : "100vw"),
-    y: props => (props.login ? "0" : "-4vw"),
-    opacity: 0,
-    transition: { ease: "easeInOut", duration: 500 }
-  },
-  shown: {
-    x: 0,
-    y: props => (props.login ? "0" : "-4vw"),
-    opacity: 1,
-    transition: { ease: "easeInOut", duration: 500 }
-  }
-});
+import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
+import TextInput from "../../../../common/TextInput/TextInputComponent";
+import Button from "../../../../common/Button/ButtonComponent";
+import Heading from "../../../../common/Heading/HeadingComponent";
 
 const ComponentContainer = styled.div`
   display: grid;
@@ -36,7 +23,21 @@ const ComponentContainer = styled.div`
   `}
 `;
 
-const FormContainer = styled(Container)`
+const SlidingContainerConfig = {
+  hidden: {
+    x: props => (props.login ? "-100vw" : "100vw"),
+    opacity: 0,
+    transition: { ease: "easeInOut", duration: 500 }
+  },
+  shown: {
+    x: 0,
+    opacity: 1,
+    transition: { ease: "easeInOut", duration: 500 }
+  }
+};
+
+const FormContainer = styled(posed.div(SlidingContainerConfig))`
+  align-self: center;
   grid-column: 1;
   grid-row: 1;
 
@@ -46,29 +47,10 @@ const FormContainer = styled(Container)`
 `;
 
 const FormHeading = styled.div`
-  text-align: center;
   margin-bottom: 1em;
   width: 100%;
 
-  & > h1 {
-    color: ${props => props.theme.colors.offBlack};
-    font-weight: 500;
-    max-width: 100%;
-
-    ${mediaSize.tablet`
-      font-size: 5vw;
-      line-height: normal;
-    `}
-
-    ${mediaSize.phone`
-      font-size: 8vw;
-      line-height: normal;
-    `}
-  }
-
-  & > .normal {
-    color: ${props => props.theme.colors.offGrey};
-  }
+  text-align: center;
 
   ${mediaSize.phone`
     text-align: left;
@@ -99,10 +81,12 @@ const FormContents = styled(Form)`
 `;
 
 const FormInput = styled(TextInput)`
-  margin-top: 0.5em;
+  margin-top: 1em;
 `;
 
 const FormButton = styled(Button)`
+  width: 100%;
+
   &:empty:after {
     content: "&nbsp;";
     visibility: hidden;
@@ -145,9 +129,9 @@ const FormSwitcher = styled.div`
   font-size: 1vw;
   text-align: center;
 
-  color: ${props => props.theme.colors.offGrey};
+  color: ${props => props.theme.colors.grey};
   & > span {
-    color: ${props => props.theme.colors.offBlack};
+    color: ${props => props.theme.colors.lightBlack};
   }
 
   ${mediaSize.tablet`
@@ -162,7 +146,7 @@ const FormSwitcher = styled.div`
 `;
 
 const FormToggle = styled.span`
-  color: ${props => props.theme.colors.offBlack};
+  color: ${props => props.theme.colors.lightBlack};
   text-decoration: underline;
   cursor: pointer;
 
@@ -185,10 +169,10 @@ const LoginSignupFormsComponent = ({
     <ComponentContainer>
       <FormContainer pose={showLogin ? "shown" : "hidden"} login>
         <FormHeading>
-          <Heading level="1" size="medium" margin="xsmall">
+          <Heading size="big" color="grey">
             It&apos;s good to see you.
           </Heading>
-          <Heading className="normal" level="1" size="medium" margin="xsmall">
+          <Heading size="big" color="black">
             Log in to continue.
           </Heading>
         </FormHeading>
@@ -224,10 +208,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="email" name="loginEmail">
                   {({ field, form }) => (
                     <FormInput
-                      placeholder="Email"
                       type="email"
-                      {...field}
-                      formikForm={form}
+                      placeholder="Email"
+                      outlineColor="primary"
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -235,10 +219,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="password" name="loginPassword">
                   {({ field, form }) => (
                     <FormInput
-                      placeholder="Password"
                       type="password"
-                      {...field}
-                      formikForm={form}
+                      placeholder="Password"
+                      outlineColor="primary"
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -250,6 +234,7 @@ const LoginSignupFormsComponent = ({
                 <FormButton
                   className="loginButton"
                   label={isSubmitting ? "" : "Log In"}
+                  backgroundColor="primary"
                   fill
                   primary
                   type="submit"
@@ -268,10 +253,10 @@ const LoginSignupFormsComponent = ({
 
       <FormContainer pose={!showLogin ? "shown" : "hidden"}>
         <FormHeading>
-          <Heading level="1" size="medium" margin="xsmall">
+          <Heading size="big" color="grey">
             Glad to have you on board.
           </Heading>
-          <Heading className="normal" level="1" size="medium" margin="xsmall">
+          <Heading size="big" color="black">
             Sign up to get started.
           </Heading>
         </FormHeading>
@@ -312,6 +297,7 @@ const LoginSignupFormsComponent = ({
                   {({ field, form }) => (
                     <FormInput
                       placeholder="Full Name"
+                      outlineColor="primary"
                       type="name"
                       {...field}
                       formikForm={form}
@@ -323,6 +309,7 @@ const LoginSignupFormsComponent = ({
                   {({ field, form }) => (
                     <FormInput
                       placeholder="Email"
+                      outlineColor="primary"
                       type="email"
                       {...field}
                       formikForm={form}
@@ -335,6 +322,7 @@ const LoginSignupFormsComponent = ({
                   {({ field, form }) => (
                     <FormInput
                       placeholder="Password"
+                      outlineColor="primary"
                       type="password"
                       {...field}
                       formikForm={form}
@@ -346,6 +334,7 @@ const LoginSignupFormsComponent = ({
                   {({ field, form }) => (
                     <FormInput
                       placeholder="Confirm Password"
+                      outlineColor="primary"
                       type="password"
                       {...field}
                       formikForm={form}
@@ -360,7 +349,7 @@ const LoginSignupFormsComponent = ({
                 <FormButton
                   className="signupButton"
                   label={isSubmitting ? "" : "Sign Up"}
-                  fill
+                  backgroundColor="primary"
                   primary
                   type="submit"
                   disabled={isSubmitting}

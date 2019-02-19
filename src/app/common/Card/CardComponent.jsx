@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Box } from "grommet";
 
-const Container = styled(Box)`
-  border-radius: ${props => props.theme.app.border.radius};
-  color: ${props => props.theme.colors.offWhite};
+
+const Container = styled.div`
   width: ${props => props.width};
   height: ${props => props.height};
+  border-radius: ${props => props.theme.app.border.radius};
+
+  color: white;
 
   // only display cursor or expand on hover if non-static (interactive)
   cursor: ${props => (props.interactive ? "pointer" : "auto")};
@@ -18,11 +19,10 @@ const Container = styled(Box)`
   }
 `;
 
-const CardComponent = ({
+const Card = ({
   className,
   width,
   height,
-  gridArea,
   interactive,
   backgroundColor,
   backgroundImg,
@@ -31,10 +31,10 @@ const CardComponent = ({
 }) => (
   <Container
     className={className}
-    width={width || "medium"}
+    width={width}
     height={height}
-    gridArea={gridArea}
-    background={backgroundColor || `url(${backgroundImg})`}
+    backgroundColor={backgroundColor}
+    backgroundImg={`url(${backgroundImg})`}
     interactive={interactive}
     onClick={interactive ? () => onClickHandler() : null}
   >
@@ -42,4 +42,4 @@ const CardComponent = ({
   </Container>
 );
 
-export default CardComponent;
+export default Card;

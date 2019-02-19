@@ -8,10 +8,12 @@ import siteTheme from "./utils/siteStyles";
 
 configure({ adapter: new Adapter() });
 
-export const mountWithTheme = (tree, theme = siteTheme) => {
+const mountWithTheme = (tree, theme = siteTheme) => {
   ThemeConsumer._currentValue = merge(theme, defaultProps);
   return mount(tree);
 };
 
-export const shallowWithTheme = (tree, theme = siteTheme) =>
-  shallow(tree, { theme });
+const shallowWithTheme = (tree, theme = siteTheme) => shallow(tree, { theme });
+
+global.mountWithTheme = mountWithTheme;
+global.shallowWithTheme = shallowWithTheme;

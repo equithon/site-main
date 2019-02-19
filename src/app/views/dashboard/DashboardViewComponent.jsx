@@ -3,12 +3,11 @@ import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
 import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { mediaSize } from "../../../utils/siteTools";
-import LogoButtonHeader from "../../common/LogoButtonHeader/LogoButtonHeaderComponent";
-import ToastCard from "../../common/ToastCard/ToastCardComponent";
 
-import NavTile from "./components/NavTileComponent";
+import ToastCard from "../../common/ToastCard/ToastCardComponent";
+import PageHeader from "./components/PageHeader/PageHeaderComponent";
+import NavTile from "./components/NavTile/NavTileComponent";
 
 const Container = styled.div`
   width: 85vw;
@@ -62,12 +61,12 @@ const GreetingContainer = styled.div`
   grid-area: greeting;
 
   & span {
-    color: ${props => props.theme.colors.offGrey};
+    color: ${props => props.theme.colors.grey};
     font-weight: 600;
   }
 
   & h1 {
-    color: ${props => props.theme.colors.offBlack};
+    color: ${props => props.theme.colors.lightBlack};
   }
 
   ${mediaSize.tablet`
@@ -156,7 +155,7 @@ const ActionButton = styled.div`
 const ActionTooltip = styled(ReactTooltip)`
   font-family: "SF Pro Display" !important;
   font-weight: 600 !important;
-  background-color: ${props => props.theme.colors.offGrey} !important;
+  background-color: ${props => props.theme.colors.grey} !important;
   padding: 0 0.5em;
   margin: 0;
 `;
@@ -170,15 +169,12 @@ const DashboardViewComponent = ({
   userDashboards
 }) => (
   <Container>
-    <LogoButtonHeader>
-      <div>
-        {/* <ActionButton onClick={() => {}} data-tip="Help"><FontAwesomeIcon icon="question" size="1x" color="grey" /></ActionButton> */}
-        <ActionButton onClick={logOutUser} data-tip="Log Out">
-          <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
-        </ActionButton>
-        <ActionTooltip place="bottom" effect="float" />
-      </div>
-    </LogoButtonHeader>
+    <PageHeader>
+      <ActionButton onClick={logOutUser} data-tip="Log Out">
+        <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
+      </ActionButton>
+      <ActionTooltip place="bottom" effect="float" />
+    </PageHeader>
 
     <DashboardContainer>
       <GreetingContainer>
@@ -186,10 +182,9 @@ const DashboardViewComponent = ({
           {greetingInfo.greeting},
         </Text>
         <Heading level="1" size="large" margin="xsmall">
-          {curUserProfile && curUserProfile.isLoaded
-            ? curUserProfile.name.split(" ")[0]
+          {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
+            ? `${curUserProfile.name.split(" ")[0]}.`
             : ""}
-          .
         </Heading>
         <Text size="xxlarge">{greetingInfo.subgreeting}</Text>
       </GreetingContainer>
@@ -207,6 +202,7 @@ const DashboardViewComponent = ({
       <TilesContainer>
         {curUserProfile &&
           curUserProfile.isLoaded &&
+          userDashboards[curUserProfile.role] &&
           userDashboards[curUserProfile.role].map(tileInfo => (
             <NavTile key={tileInfo.label} info={tileInfo} />
           ))}
