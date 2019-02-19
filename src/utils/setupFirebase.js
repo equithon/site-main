@@ -8,8 +8,8 @@ import { firebaseConfig, rrfConfig } from './siteConfig';
 import appStore from '../ducks/store';
 
 
-const curFbConfig = (process.env.NODE_ENV === 'production') ? firebaseConfig.prod : firebaseConfig.dev;
-firebase.initializeApp(curFbConfig);
+const curFirebaseConfig = (process.env.NODE_ENV === 'production') ? firebaseConfig.prod : firebaseConfig.dev;
+firebase.initializeApp(curFirebaseConfig);
 
 const reactReduxFirebase = {
   firebase,

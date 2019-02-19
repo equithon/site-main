@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { mediaSize } from "../../../../../utils/siteTools";
 
-import Card from "../../../../common/Card/CardComponent";
+import Card from "../../../../shared/Card/CardComponent";
 
 const Container = styled.div`
   width: 100%;
@@ -54,7 +54,6 @@ const NavTileComponent = ({ info }) => {
         backgroundColor={info.backgroundColor}
         backgroundImg={info.backgroundImg}
         onClickHandler={() => setClicked(true)}
-        interactive
       >
         <Container color={info.color} backgroundColor={info.backgroundColor}>
           {info.label}

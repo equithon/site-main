@@ -5,9 +5,9 @@ import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../../utils/siteTools";
 
 import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
-import TextInput from "../../../../common/TextInput/TextInputComponent";
-import Button from "../../../../common/Button/ButtonComponent";
-import Heading from "../../../../common/Heading/HeadingComponent";
+import TextInput from "../../../../shared/TextInput/TextInputComponent";
+import Button from "../../../../shared/Button/ButtonComponent";
+import Heading from "../../../../shared/Heading/HeadingComponent";
 
 const ComponentContainer = styled.div`
   display: grid;
@@ -181,24 +181,24 @@ const LoginSignupFormsComponent = ({
           validationSchema={validationSchemas.login}
           onSubmit={(values, actions) => {
             logIn(values)
-              .then(() => {
-                actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(false));
-              })
-              .catch(err => {
+            .then(() => {
+              actions.setSubmitting(false);
+              dispatchUpdateDashboardInfo(getDashboardInfo(false));
+            })
+            .catch(err => {
                 const errMsg =
-                  err.code in errorTable
-                    ? errorTable[err.code]
-                    : errorTable.DEFAULT;
-                actions.setSubmitting(false);
-                actions.setStatus(errMsg);
-              });
+              err.code in errorTable
+                ? errorTable[err.code]
+                : errorTable.DEFAULT;
+              actions.setSubmitting(false);
+              actions.setStatus(errMsg);
+            });
           }}
           render={({ touched, errors, status, isSubmitting }) => {
             // hasErrors makes sure there are errors present, and that the error is on a field that has been touched
             const hasErrors =
-              Object.entries(errors).length !== 0 &&
-              touched[Object.keys(errors)[0]];
+            Object.entries(errors).length !== 0 &&
+            touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
             let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
             errorMsg = hasStatus ? status : errorMsg;
@@ -235,8 +235,6 @@ const LoginSignupFormsComponent = ({
                   className="loginButton"
                   label={isSubmitting ? "" : "Log In"}
                   backgroundColor="primary"
-                  fill
-                  primary
                   type="submit"
                   disabled={isSubmitting}
                 />

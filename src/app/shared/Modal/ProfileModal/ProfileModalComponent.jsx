@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../../common/Modal/ModalComponent";
-import { mediaSize } from "../../../utils/siteTools";
-import LoadingSpinner from "../../../static/img/loaders/default.svg";
+import Modal from "../ModalComponent";
+import { mediaSize } from "../../../../utils/siteTools";
+import LoadingSpinner from "../../../../static/img/loaders/default.svg";
 
 const closeProfileModal = (history, prevLoc) => {
   history.replace(prevLoc);
@@ -150,7 +150,7 @@ const ProfileModalComponent = ({
       fill={false}
       backgroundColor="#11985a"
       handleClickOutside={() => closeProfileModal(history, prevLoc)}
-      onCloseClickHandler={() => closeProfileModal(history, prevLoc)}
+      onClickCloseHandler={() => closeProfileModal(history, prevLoc)}
     >
       <Container>
         {profileLoaded ? (

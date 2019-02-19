@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
-import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-import ToastCard from "../../common/ToastCard/ToastCardComponent";
+import ToastCard from "../../shared/Card/ToastCard/ToastCardComponent";
+import Heading from "../../shared/Heading/HeadingComponent";
 import PageHeader from "./components/PageHeader/PageHeaderComponent";
 import NavTile from "./components/NavTile/NavTileComponent";
+
 
 const Container = styled.div`
   width: 85vw;
@@ -178,20 +179,20 @@ const DashboardViewComponent = ({
 
     <DashboardContainer>
       <GreetingContainer>
-        <Text size="xxlarge" responsive={false}>
+        <div>
           {greetingInfo.greeting},
-        </Text>
-        <Heading level="1" size="large" margin="xsmall">
+        </div>
+        <Heading size="4em">
           {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
             ? `${curUserProfile.name.split(" ")[0]}.`
             : ""}
         </Heading>
-        <Text size="xxlarge">{greetingInfo.subgreeting}</Text>
+        <div>{greetingInfo.subgreeting}</div>
       </GreetingContainer>
 
       <ToastContainer>
         <ToastCard
-          iconName={toastInfo.iconName}
+          icon={toastInfo.iconName}
           backgroundColor={toastInfo.backgroundColor}
           className="dashboardToast"
         >

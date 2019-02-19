@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import ColorLogo from "../../../../../static/img/logo/logo_tiny_color.png";
-import Heading from "../../../../common/Heading/HeadingComponent";
+import Heading from "../../../../shared/Heading/HeadingComponent";
 
 const Container = styled.div`
   height: 6vh;
@@ -17,7 +17,7 @@ const MainContents = styled.div`
   height: 100%;
   display: flex;
 
-  cursor: ${props => (props.clickable ? "pointer" : "normal")};
+  cursor: ${props => (props.clickable ? "pointer" : "auto")};
 `;
 
 const Logo = styled.img`
@@ -38,7 +38,7 @@ const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
       clickable={onClickHandler !== undefined}
     >
       <Logo src={ColorLogo} />
-      <Title size="med" color="primary">
+      <Title size="regular" color="primary">
         {title}
       </Title>
     </MainContents>

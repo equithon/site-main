@@ -21,22 +21,32 @@ export const colors = {
   green: "#6cc46a"
 };
 
+export const sizes = {
+  heading: {
+    big: "2em",
+    regular: "1.5em",
+    small: "1.2em"
+  }
+}
+
 export const app = {
   font: {
     family: "SF Pro Display",
-    weight: "600",
-    size: "18px",
-    height: "20px"
+    weight: "500",
   },
   border: {
     width: "2px",
     radius: "6px"
+  },
+  container: {
+    padding: "0.8em"
   }
 };
 
 const siteTheme = {
   colors,
-  app
+  app,
+  sizes
 };
 
 export default siteTheme;

@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import { UserIsAuthenticated } from "../../../utils/siteAuth";
 import { HOME as ROUTE_DASHBOARD } from "../../../utils/siteRoutes";
 
-import ProfileModal from "../../modals/Profile/ProfileModalComponent";
+import ProfileModal from "../../shared/Modal/ProfileModal/ProfileModalComponent";
 
 const enhance = compose(
   connect(state => ({
