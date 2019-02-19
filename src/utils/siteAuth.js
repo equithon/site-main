@@ -5,6 +5,7 @@ import createHistory from "history/createBrowserHistory";
 const locationHelper = locationHelperBuilder({});
 const browserHistory = createHistory();
 
+// redirects to login if they are not logged in
 export const UserIsAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsAuthenticated",
   allowRedirectBack: true,
@@ -15,11 +16,12 @@ export const UserIsAuthenticated = connectedRouterRedirect({
   authenticatedSelector: ({ firebase: { auth } }) =>
     auth.isLoaded && !auth.isEmpty,
   redirectAction: newLoc => dispatch => {
-    browserHistory.replace(newLoc); // or routerActions.replace
+    browserHistory.replace(newLoc);
     dispatch({ type: "UNAUTHED_REDIRECT" });
   }
 });
 
+// redirects from login/signup to dashboard if user is logged in
 export const UserIsNotAuthenticated = connectedRouterRedirect({
   wrapperDisplayName: "UserIsNotAuthenticated",
   allowRedirectBack: false,
@@ -30,7 +32,7 @@ export const UserIsNotAuthenticated = connectedRouterRedirect({
   authenticatedSelector: ({ firebase: { auth } }) =>
     auth.isLoaded && auth.isEmpty,
   redirectAction: newLoc => dispatch => {
-    browserHistory.replace(newLoc); // or routerActions.replace
+    browserHistory.replace(newLoc);
     dispatch({ type: "UNAUTHED_REDIRECT" });
   }
 });

@@ -42,7 +42,11 @@ const NavTileComponent = ({ info }) => {
   if (tileClicked) setClicked(false);
 
   return (
-    <NavTileLink gridarea={info.gridArea} to={info.linkTo}>
+    <NavTileLink
+      gridarea={info.gridArea}
+      replace={info.linkTo.state && info.linkTo.state.modal}
+      to={info.linkTo}
+    >
       <Card
         width="100%"
         height="100%"

@@ -1,8 +1,21 @@
 import React from "react";
-import { UserIsAuthenticated } from "../../../utils/siteAuth";
+import { withRouter } from "react-router-dom";
+import Modal from "../../common/Modal/ModalComponent";
+import { HOME as ROUTE_DASHBOARD } from "../../../utils/siteRoutes";
 
-// this is where we would normally do the redux stuffz
+const closeProfileModal = history => {
+  history.replace(ROUTE_DASHBOARD);
+};
 
-const ProfileModalContainer = () => <div> this is my profile modal </div>;
+const ProfileModalComponent = ({ backgroundColor, history }) => (
+  <Modal
+    fill={false}
+    backgroundColor={backgroundColor}
+    handleClickOutside={() => history.replace()}
+    onClickClose={() => closeProfileModal(history)}
+  >
+    this is my profile modal
+  </Modal>
+);
 
-export default UserIsAuthenticated(ProfileModalContainer);
+export default withRouter(ProfileModalComponent);
