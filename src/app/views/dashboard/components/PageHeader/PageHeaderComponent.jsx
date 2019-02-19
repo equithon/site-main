@@ -4,7 +4,7 @@ import styled from "styled-components";
 import ColorLogo from "../../../../../static/img/logo/logo_tiny_color.png";
 import Heading from "../../../../shared/Heading/HeadingComponent";
 
-const Container = styled.div`
+const Header = styled.header`
   height: 6vh;
   position: relative;
 
@@ -32,8 +32,8 @@ const ExtraContents = styled.div`
   margin: auto 0;
 `;
 
-const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
-  <Container>
+export default ({ title = "Equithon", onClickHandler, children }) => (
+  <Header>
     <MainContents
       onClick={onClickHandler}
       clickable={onClickHandler !== undefined}
@@ -45,7 +45,5 @@ const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
     </MainContents>
 
     <ExtraContents>{children}</ExtraContents>
-  </Container>
+  </Header>
 );
-
-export default PageHeader;

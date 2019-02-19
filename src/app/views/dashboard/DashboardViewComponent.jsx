@@ -12,19 +12,25 @@ import NavTile from "./components/NavTile/NavTileComponent";
 
 const Container = styled.div`
   width: 85vw;
-  height: 80vh;
-  margin: 10vh auto;
+  height: 82vh;
+  margin: 8vh auto 10vh auto;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
+  ${mediaSize.tablet`
+    height: 86vh;
+    margin: 7vh auto;
+  `};
+
   ${mediaSize.phone`
-    width: 75vw;
+    width: 80vw;
+    height: auto;
   `};
 `;
 
-const Dashboard = styled.div`
+const Dashboard = styled.section`
   height: 65vh;
 
   display: grid;
@@ -36,12 +42,13 @@ const Dashboard = styled.div`
     "toast tiles";
 
   ${mediaSize.tablet`
-    padding: 1em 1em;
     height: 75vh;
-    margin-top: 2vw;
+    padding: 1em 1em;
+    margin-top: 3vh;
+
     grid-template-columns: 3fr 1fr 2fr;
     grid-template-rows: 2fr 8fr;
-    grid-row-gap: 5vw;
+    grid-row-gap: 2em;
     grid-template-areas:
       "greeting greeting toast"
       "tiles tiles tiles";
@@ -49,11 +56,11 @@ const Dashboard = styled.div`
 
   ${mediaSize.phone`
     height: 85vh;
-    margin-top: 0;
     padding: 0;
+
     grid-template-columns: auto;
     grid-template-rows: 3fr 2fr auto;
-    grid-row-gap: 1em;
+    grid-row-gap: 2em;
     grid-template-areas:
       "greeting"
       "toast"
@@ -63,11 +70,6 @@ const Dashboard = styled.div`
 
 const GreetingContainer = styled.div`
   grid-area: greeting;
-
-  & span {
-    color: ${props => props.theme.colors.grey};
-    font-weight: 600;
-  }
 
   ${mediaSize.tablet`
     white-space: nowrap;
@@ -122,7 +124,7 @@ const TilesContainer = styled.div`
   `};
 `;
 
-const ActionButton = styled.div`
+const ActionButton = styled.span`
   display: inline-block;
   cursor: pointer;
   margin: 0 1vw;
@@ -139,10 +141,8 @@ const ActionButton = styled.div`
 `;
 
 const ActionTooltip = styled(ReactTooltip)`
-  font-family: "SF Pro Display" !important;
-  font-weight: 600 !important;
   background-color: ${props => props.theme.colors.grey} !important;
-  padding: 0 0.5em;
+  padding: 0.5em;
   margin: 0;
 `;
 
