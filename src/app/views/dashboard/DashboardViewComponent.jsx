@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
 import Heading from "../../shared/Heading/HeadingComponent";
-import Text from "../../shared/Text/TextComponent";
 import ToastCard from "../../shared/Card/ToastCard/ToastCardComponent";
 import PageHeader from "./components/PageHeader/PageHeaderComponent";
 import NavTile from "./components/NavTile/NavTileComponent";
@@ -13,17 +12,20 @@ import NavTile from "./components/NavTile/NavTileComponent";
 
 const Container = styled.div`
   width: 85vw;
-  height: 86vh;
-  margin: 7vh auto;
+  height: 80vh;
+  margin: 10vh auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   ${mediaSize.phone`
     width: 75vw;
   `};
 `;
 
-const DashboardContainer = styled.div`
+const Dashboard = styled.div`
   height: 65vh;
-  padding: 5vh 5px 0 5px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -160,7 +162,7 @@ const DashboardViewComponent = ({
       <ActionTooltip place="bottom" effect="float" />
     </PageHeader>
 
-    <DashboardContainer>
+    <Dashboard>
       <GreetingContainer>
         <Heading size="small" weight="normal" color="grey">
           {greetingInfo.greeting},
@@ -193,7 +195,7 @@ const DashboardViewComponent = ({
             <NavTile key={tileInfo.label} info={tileInfo} />
           ))}
       </TilesContainer>
-    </DashboardContainer>
+    </Dashboard>
   </Container>
 );
 

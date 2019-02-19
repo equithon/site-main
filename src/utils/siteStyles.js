@@ -30,7 +30,8 @@ export const sizes = {
   bodyText: {
     big: "1.2em",
     normal: "1em",
-    small: "0.8em"
+    small: "0.8em",
+    tiny: "0.5em"
   }
 }
 

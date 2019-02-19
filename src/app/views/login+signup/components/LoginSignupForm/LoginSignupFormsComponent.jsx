@@ -8,6 +8,7 @@ import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
 import TextInput from "../../../../shared/TextInput/TextInputComponent";
 import Button from "../../../../shared/Button/ButtonComponent";
 import Heading from "../../../../shared/Heading/HeadingComponent";
+import Text from "../../../../shared/Text/TextComponent";
 
 const ComponentContainer = styled.div`
   display: grid;
@@ -15,10 +16,6 @@ const ComponentContainer = styled.div`
   width: 50vw;
 
   ${mediaSize.tablet`
-    width: 80vw;
-  `}
-
-  ${mediaSize.phone`
     width: 80vw;
   `}
 `;
@@ -38,23 +35,21 @@ const SlidingContainerConfig = {
 
 const FormContainer = styled(posed.div(SlidingContainerConfig))`
   align-self: center;
-  grid-column: 1;
+  grid-column: 1; // so that both forms can occupy same space
   grid-row: 1;
-
-  ${mediaSize.phone`
-    align-self: center;
-  `}
 `;
 
-const FormHeading = styled.div`
+const FormHeadings = styled.div`
   margin-bottom: 1em;
   width: 100%;
 
   text-align: center;
 
   ${mediaSize.phone`
-    text-align: left;
     margin-bottom: 0.5em;
+
+    text-align: left;
+    & > h1 { font-size: ${props => props.theme.sizes.heading.normal} }
   `}
 `;
 
@@ -87,6 +82,7 @@ const FormInput = styled(TextInput)`
 const FormButton = styled(Button)`
   width: 100%;
 
+  // prevent button from collapsing when there's no content during loading
   &:empty:after {
     content: "&nbsp;";
     visibility: hidden;
@@ -101,23 +97,17 @@ const FormButton = styled(Button)`
   }
 `;
 
-const FormErrorMessage = styled.div`
+const ErrorText = styled(Text)`
+  margin: 5px 0 1em 0;
+
   opacity: ${props => (props.show ? 1 : 0)};
   transition: opacity 450ms ease-in-out;
 
-  color: ${props => props.theme.colors.error};
-  margin-bottom: 1em;
-  height: 1em;
-  font-weight: 600;
-  font-size: 1vw;
-
-  ${mediaSize.tablet`
-    font-size: 2vw;
-  `}
-
-  ${mediaSize.phone`
-    font-size: 3vw;
-  `}
+  // prevent from collapsing when there's no content during loading
+  &:empty:after {
+    content: "&nbsp;";
+    visibility: hidden;
+  }
 `;
 
 const FormSwitcher = styled.div`
@@ -125,28 +115,19 @@ const FormSwitcher = styled.div`
   width: 25vw;
   padding-top: 1em;
 
-  font-weight: 600;
-  font-size: 1vw;
   text-align: center;
 
-  color: ${props => props.theme.colors.grey};
-  & > span {
-    color: ${props => props.theme.colors.lightBlack};
-  }
 
   ${mediaSize.tablet`
     width: 50vw;
-    font-size: 2vw;
   `}
 
   ${mediaSize.phone`
     width: 100%;
-    font-size: 3.5vw;
   `}
 `;
 
-const FormToggle = styled.span`
-  color: ${props => props.theme.colors.lightBlack};
+const FormToggleText = styled(Text)`
   text-decoration: underline;
   cursor: pointer;
 
@@ -168,14 +149,14 @@ const LoginSignupFormsComponent = ({
   return (
     <ComponentContainer>
       <FormContainer pose={showLogin ? "shown" : "hidden"} login>
-        <FormHeading>
+        <FormHeadings>
           <Heading size="big" color="grey">
             It&apos;s good to see you.
           </Heading>
           <Heading size="big" color="black">
             Log in to continue.
           </Heading>
-        </FormHeading>
+        </FormHeadings>
         <Formik
           initialValues={{ loginEmail: "", loginPassword: "" }}
           validationSchema={validationSchemas.login}
@@ -227,9 +208,9 @@ const LoginSignupFormsComponent = ({
                   )}
                 </Field>
 
-                <FormErrorMessage show={hasErrors || hasStatus}>
+                <ErrorText show={hasErrors || hasStatus} color="error" size="small">
                   {errorMsg}
-                </FormErrorMessage>
+                </ErrorText>
 
                 <FormButton
                   className="loginButton"
@@ -244,20 +225,20 @@ const LoginSignupFormsComponent = ({
         />
 
         <FormSwitcher>
-          DON&apos;T HAVE AN ACCOUNT?{" "}
-          <FormToggle onClick={() => toggleLogin(false)}>SIGN UP</FormToggle>
+          <Text color="grey" size="small">DON&apos;T HAVE AN ACCOUNT?&nbsp;&nbsp;</Text>
+          <FormToggleText color="lightBlack" size="small" onClick={() => toggleLogin(false)}>SIGN UP</FormToggleText>
         </FormSwitcher>
       </FormContainer>
 
       <FormContainer pose={!showLogin ? "shown" : "hidden"}>
-        <FormHeading>
+        <FormHeadings>
           <Heading size="big" color="grey">
             Glad to have you on board.
           </Heading>
           <Heading size="big" color="black">
             Sign up to get started.
           </Heading>
-        </FormHeading>
+        </FormHeadings>
         <Formik
           initialValues={{
             signupName: "",
@@ -268,23 +249,23 @@ const LoginSignupFormsComponent = ({
           validationSchema={validationSchemas.signup}
           onSubmit={(values, actions) => {
             signUp(values)
-              .then(() => {
-                actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(true));
-              })
-              .catch(err => {
+            .then(() => {
+              actions.setSubmitting(false);
+              dispatchUpdateDashboardInfo(getDashboardInfo(true));
+            })
+            .catch(err => {
                 const errMsg =
-                  err.code in errorTable
-                    ? errorTable[err.code]
-                    : errorTable.DEFAULT;
-                actions.setSubmitting(false);
-                actions.setStatus(errMsg);
-              });
+              err.code in errorTable
+                ? errorTable[err.code]
+                : errorTable.DEFAULT;
+              actions.setSubmitting(false);
+              actions.setStatus(errMsg);
+            });
           }}
           render={({ touched, errors, status, isSubmitting }) => {
             const hasErrors =
-              Object.entries(errors).length !== 0 &&
-              touched[Object.keys(errors)[0]];
+            Object.entries(errors).length !== 0 &&
+            touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
             let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
             errorMsg = hasStatus ? status : errorMsg;
@@ -340,9 +321,9 @@ const LoginSignupFormsComponent = ({
                   )}
                 </Field>
 
-                <FormErrorMessage show={hasStatus || hasErrors}>
+                <ErrorText show={hasErrors || hasStatus} color="error" size="small">
                   {errorMsg}
-                </FormErrorMessage>
+                </ErrorText>
 
                 <FormButton
                   className="signupButton"
@@ -358,8 +339,8 @@ const LoginSignupFormsComponent = ({
         />
 
         <FormSwitcher>
-          HAVE AN ACCOUNT?{" "}
-          <FormToggle onClick={() => toggleLogin(true)}>LOG IN</FormToggle>
+          <Text color="grey" size="small">HAVE AN ACCOUNT?&nbsp;&nbsp;</Text>
+          <FormToggleText color="lightBlack" size="small" onClick={() => toggleLogin(true)}> LOG IN</FormToggleText>
         </FormSwitcher>
       </FormContainer>
     </ComponentContainer>
