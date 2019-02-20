@@ -21,29 +21,26 @@ const ViewContainer = styled.div`
 `;
 
 const LoginSignupViewComponent = ({
-  profile,
-  logInUser,
-  signUpUser,
-  getDashboardInfo,
-  dispatchUpdateDashboardInfo,
+  logIn,
+  signUp,
   validationSchemas,
   errorTable
-}) => (
-  <ViewContainer>
-    <PageHeader
-      logoClickHandler={() => window.open("https://equithon.org", "_self")}
-    />
-    <LoginSignupFormsComponent
-      logIn={logInUser}
-      signUp={signUpUser}
-      profile={profile}
-      getDashboardInfo={getDashboardInfo}
-      dispatchUpdateDashboardInfo={dispatchUpdateDashboardInfo}
-      validationSchemas={validationSchemas}
-      errorTable={errorTable}
-    />
-    <WavesComponent />
-  </ViewContainer>
-);
+}) => {
+
+  return (
+    <ViewContainer>
+      <PageHeader
+        logoClickHandler={() => window.open("https://equithon.org", "_self")}
+      />
+      <LoginSignupFormsComponent
+        logIn={logIn}
+        signUp={signUp}
+        validationSchemas={validationSchemas}
+        errorTable={errorTable}
+      />
+      <WavesComponent />
+    </ViewContainer>
+  );
+};
 
 export default LoginSignupViewComponent;

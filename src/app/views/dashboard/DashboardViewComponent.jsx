@@ -147,7 +147,7 @@ const ActionTooltip = styled(ReactTooltip)`
 
 /* ---------------------- DASHBOARD COMPONENT ------------------------------- */
 const DashboardViewComponent = ({
-  logOutUser,
+  logOut,
   curUserProfile,
   greetingInfo,
   toastInfo,
@@ -155,7 +155,7 @@ const DashboardViewComponent = ({
 }) => (
   <Container>
     <PageHeader>
-      <ActionButton onClick={logOutUser} data-tip="Log Out">
+      <ActionButton onClick={logOut} data-tip="Log Out">
         <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
       </ActionButton>
       <ActionTooltip place="bottom" effect="float" />

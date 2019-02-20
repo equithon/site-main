@@ -136,10 +136,8 @@ const FormToggleText = styled(Text)`
 `;
 
 const LoginSignupFormsComponent = ({
-  signUp,
   logIn,
-  getDashboardInfo,
-  dispatchUpdateDashboardInfo,
+  signUp,
   validationSchemas,
   errorTable
 }) => {
@@ -160,25 +158,24 @@ const LoginSignupFormsComponent = ({
           initialValues={{ loginEmail: "", loginPassword: "" }}
           validationSchema={validationSchemas.login}
           onSubmit={(values, actions) => {
-            logIn(values)
-              .then(() => {
-                actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(false));
-              })
-              .catch(err => {
+            logIn(values.loginEmail, values.loginPassword)
+            .then(() => {
+              actions.setSubmitting(false);
+            })
+            .catch(err => {
                 const errMsg =
-                  err.code in errorTable
-                    ? errorTable[err.code]
-                    : errorTable.DEFAULT;
-                actions.setSubmitting(false);
-                actions.setStatus(errMsg);
-              });
+              err.code in errorTable
+                ? errorTable[err.code]
+                : errorTable.DEFAULT;
+              actions.setSubmitting(false);
+              actions.setStatus(errMsg);
+            });
           }}
           render={({ touched, errors, status, isSubmitting }) => {
             // hasErrors makes sure there are errors present, and that the error is on a field that has been touched
             const hasErrors =
-              Object.entries(errors).length !== 0 &&
-              touched[Object.keys(errors)[0]];
+            Object.entries(errors).length !== 0 &&
+            touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
             let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
             errorMsg = hasStatus ? status : errorMsg;
@@ -260,10 +257,9 @@ const LoginSignupFormsComponent = ({
           validationSchema={validationSchemas.signup}
           onSubmit={(values, actions) => {
             signUp(values)
-              .then(() => {
-                actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(true));
-              })
+            .then(() => {
+              actions.setSubmitting(false);
+            })
               .catch(err => {
                 const errMsg =
                   err.code in errorTable

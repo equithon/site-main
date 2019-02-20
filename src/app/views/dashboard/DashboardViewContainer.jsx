@@ -1,8 +1,6 @@
-import { connect } from "react-redux";
-import { withFirebase } from "react-redux-firebase";
-import { compose, withHandlers, withProps } from "recompose";
-
-import { UserIsAuthenticated } from "../../../utils/siteAuth";
+import { compose, withProps } from "recompose";
+import { connectSiteContext } from "../../../utils/siteContext";
+import { accessIfAuthenticated } from "../../../utils/siteAuth";
 import * as ROUTES from "../../../utils/siteRoutes";
 import DashboardViewComponent from "./DashboardViewComponent";
 
@@ -94,28 +92,25 @@ const userDashboards = {
   ]
 };
 
+const mapContextToProps = ({ state: { firebase } }) => ({
+  logOut: firebase.signOutUser
+});
+
 const enhance = compose(
-  connect(state => ({
-    curUserProfile: state.firebase.profile, // profile passed as props.profile
-    greetingInfo: state.dashboard
-      ? state.dashboard.greetingInfo
-      : { greeting: "bwrwbweb", subgreeting: "webwebwebwbe" },
-    toastInfo: state.dashboard
-      ? state.dashboard.toastInfo
-      : {
-          iconName: "lightbulb",
-          backgroundColor: "primary",
-          contents: "Make surkuhihe to submit your application!"
-        }
-  })),
-  withFirebase,
-  withHandlers({
-    logOutUser: props => () => props.firebase.logout()
-  }),
+  accessIfAuthenticated,
+  connectSiteContext(mapContextToProps),
   withProps({
-    userDashboards
+    userDashboards,
+    greetingInfo: {
+      greeting: 'hi there',
+      subgreeting: 'hope this works'
+    },
+    toastInfo: {
+      iconName: "lightbulb",
+      backgroundColor: "primary",
+      contents: "Welcome back! Everything you need as an attendee is here."
+    }
   }),
-  UserIsAuthenticated
 );
 
 export default enhance(DashboardViewComponent);

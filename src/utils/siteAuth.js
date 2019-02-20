@@ -1,39 +1,47 @@
-import locationHelperBuilder from "redux-auth-wrapper/history4/locationHelper";
-import { connectedRouterRedirect } from "redux-auth-wrapper/history4/redirect";
-import createHistory from "history/createBrowserHistory";
+import React, { useContext } from "react";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { Redirect } from "react-router-dom";
+import { SiteContext } from "./siteContext";
 
-const locationHelper = locationHelperBuilder({});
-const browserHistory = createHistory();
 
-// redirects to login (route: `/account`) if they are not logged in
-export const UserIsAuthenticated = connectedRouterRedirect({
-  wrapperDisplayName: "UserIsAuthenticated",
-  allowRedirectBack: true,
-  redirectPath: (state, ownProps) =>
-    locationHelper.getRedirectQueryParam(ownProps) || "/account",
-  authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
-    !auth.isLoaded || isInitializing === true,
-  authenticatedSelector: ({ firebase: { auth } }) =>
-    auth.isLoaded && !auth.isEmpty,
-  redirectAction: newLoc => dispatch => {
-    browserHistory.replace(newLoc);
-    dispatch({ type: "UNAUTHED_REDIRECT" });
+const ProtectedAuth = ({ children }) => {
+  const { state: { firebase } } = useContext(SiteContext);
+  const { initialising, user } = useAuthState(firebase.auth);
+
+  if(initialising) {
+    return <div>Loading...</div>;
+  } else if(user !== null) {
+    return children;
   }
-});
 
-// redirects from login/signup to dashboard (route: `/`) or previous
-// page if user is logged in
-export const UserIsNotAuthenticated = connectedRouterRedirect({
-  wrapperDisplayName: "UserIsNotAuthenticated",
-  allowRedirectBack: false,
-  redirectPath: (state, ownProps) =>
-    locationHelper.getRedirectQueryParam(ownProps) || "/",
-  authenticatingSelector: ({ firebase: { auth, isInitializing } }) =>
-    !auth.isLoaded || isInitializing === true,
-  authenticatedSelector: ({ firebase: { auth } }) =>
-    auth.isLoaded && auth.isEmpty,
-  redirectAction: newLoc => dispatch => {
-    browserHistory.replace(newLoc);
-    dispatch({ type: "UNAUTHED_REDIRECT" });
+  return <Redirect to="/account" />;
+}
+
+export const accessIfAuthenticated = (Component) => props => {
+  return (
+    <ProtectedAuth>
+      <Component {...props} />
+    </ProtectedAuth>
+  )
+};
+
+
+export const ProtectedUnauth = ({ children }) => {
+  const { state: { firebase } } = useContext(SiteContext);
+  const { initialising, user } = useAuthState(firebase.auth);
+
+  if(initialising) {
+    return <div>Loading...</div>;
+  } else if(user === null) {
+    return children;
   }
-});
+
+  return <Redirect to="/" />;
+}
+
+
+export const accessIfNotAuthenticated = (Component) => props => (
+  <ProtectedUnauth>
+    <Component {...props} />
+  </ProtectedUnauth>
+);
