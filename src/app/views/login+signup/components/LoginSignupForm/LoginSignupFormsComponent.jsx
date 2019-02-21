@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import posed from "react-pose";
 import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../../utils/siteTools";
+import { SiteContext } from "../../../../../utils/siteContext";
 
 import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
 import TextInput from "../../../../shared/TextInput/TextInputComponent";
@@ -136,13 +137,13 @@ const FormToggleText = styled(Text)`
 `;
 
 const LoginSignupFormsComponent = ({
-  signUp,
   logIn,
-  getDashboardInfo,
-  dispatchUpdateDashboardInfo,
+  signUp,
+  getNewDashboardGreeting,
   validationSchemas,
   errorTable
 }) => {
+  const { dispatch } = useContext(SiteContext);
   const [showLogin, toggleLogin] = useState(true);
 
   return (
@@ -160,10 +161,13 @@ const LoginSignupFormsComponent = ({
           initialValues={{ loginEmail: "", loginPassword: "" }}
           validationSchema={validationSchemas.login}
           onSubmit={(values, actions) => {
-            logIn(values)
+            logIn(values.loginEmail, values.loginPassword)
               .then(() => {
                 actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(false));
+                dispatch({
+                  type: "UPDATE_DASHBOARD_GREETING",
+                  data: { value: getNewDashboardGreeting() }
+                });
               })
               .catch(err => {
                 const errMsg =
@@ -259,10 +263,13 @@ const LoginSignupFormsComponent = ({
           }}
           validationSchema={validationSchemas.signup}
           onSubmit={(values, actions) => {
-            signUp(values)
+            signUp(values.signupName, values.signupEmail, values.signupPassword)
               .then(() => {
                 actions.setSubmitting(false);
-                dispatchUpdateDashboardInfo(getDashboardInfo(true));
+                dispatch({
+                  type: "UPDATE_DASHBOARD_GREETING",
+                  data: { value: getNewDashboardGreeting() }
+                });
               })
               .catch(err => {
                 const errMsg =
@@ -286,11 +293,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="text" name="signupName">
                   {({ field, form }) => (
                     <FormInput
+                      type="name"
                       placeholder="Full Name"
                       outlineColor="primary"
-                      type="name"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -298,11 +304,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="email" name="signupEmail">
                   {({ field, form }) => (
                     <FormInput
+                      type="email"
                       placeholder="Email"
                       outlineColor="primary"
-                      type="email"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -311,11 +316,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="password" name="signupPassword">
                   {({ field, form }) => (
                     <FormInput
+                      type="password"
                       placeholder="Password"
                       outlineColor="primary"
-                      type="password"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -323,11 +327,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="password" name="confirmPassword">
                   {({ field, form }) => (
                     <FormInput
+                      type="password"
                       placeholder="Confirm Password"
                       outlineColor="primary"
-                      type="password"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>

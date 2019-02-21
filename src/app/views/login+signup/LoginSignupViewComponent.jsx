@@ -21,11 +21,9 @@ const ViewContainer = styled.div`
 `;
 
 const LoginSignupViewComponent = ({
-  profile,
-  logInUser,
-  signUpUser,
-  getDashboardInfo,
-  dispatchUpdateDashboardInfo,
+  logIn,
+  signUp,
+  getNewDashboardGreeting,
   validationSchemas,
   errorTable
 }) => (
@@ -34,11 +32,9 @@ const LoginSignupViewComponent = ({
       logoClickHandler={() => window.open("https://equithon.org", "_self")}
     />
     <LoginSignupFormsComponent
-      logIn={logInUser}
-      signUp={signUpUser}
-      profile={profile}
-      getDashboardInfo={getDashboardInfo}
-      dispatchUpdateDashboardInfo={dispatchUpdateDashboardInfo}
+      logIn={logIn}
+      signUp={signUp}
+      getNewDashboardGreeting={getNewDashboardGreeting}
       validationSchemas={validationSchemas}
       errorTable={errorTable}
     />
