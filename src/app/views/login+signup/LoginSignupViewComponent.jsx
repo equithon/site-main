@@ -23,6 +23,7 @@ const ViewContainer = styled.div`
 const LoginSignupViewComponent = ({
   logIn,
   signUp,
+  getNewDashboardGreeting,
   validationSchemas,
   errorTable
 }) => (
@@ -33,6 +34,7 @@ const LoginSignupViewComponent = ({
     <LoginSignupFormsComponent
       logIn={logIn}
       signUp={signUp}
+      getNewDashboardGreeting={getNewDashboardGreeting}
       validationSchemas={validationSchemas}
       errorTable={errorTable}
     />

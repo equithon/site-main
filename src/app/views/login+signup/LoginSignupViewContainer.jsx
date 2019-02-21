@@ -34,7 +34,7 @@ const signupValidationSchema = Yup.object().shape({
     .required("Make sure to confirm your password.")
 });
 
-const getDashboardGreeting = () => {
+const getNewDashboardGreeting = () => {
   let greeting = "Good morning";
   const hourOfDay = parseFloat(new Date().getHours());
   if (hourOfDay >= 12 && hourOfDay < 18) {
@@ -43,10 +43,7 @@ const getDashboardGreeting = () => {
     greeting = "Good evening";
   }
 
-  return greeting;
-};
-
-const getDashboardSubgreeting = () => {
+  let subGreeting = "Today's the day! Happy hacking!";
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
   const curDate = new Date();
   const eventDate = new Date(curDate.getFullYear(), 4, 3);
@@ -54,16 +51,19 @@ const getDashboardSubgreeting = () => {
     (eventDate.getTime() - curDate.getTime()) / oneDay
   );
 
-  return daysUntilEvent
-    ? `There are ${daysUntilEvent} days until Equithon!`
-    : "Today's the day! Happy hacking!";
+  if (daysUntilEvent)
+    subGreeting = `There are ${daysUntilEvent} days until Equithon!`;
+
+  return {
+    greeting,
+    subGreeting
+  };
 };
 
 const mapContextToProps = ({ state: { firebase } }) => ({
   logIn: firebase.signInUser,
   signUp: firebase.createUser
 });
-
 
 const enhance = compose(
   accessIfNotAuthenticated,
@@ -73,9 +73,9 @@ const enhance = compose(
       login: loginValidationSchema,
       signup: signupValidationSchema
     },
-    errorTable
-  }),
-
+    errorTable,
+    getNewDashboardGreeting
+  })
 );
 
 export default enhance(LoginSignupViewComponent);

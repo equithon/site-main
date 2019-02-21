@@ -92,25 +92,18 @@ const userDashboards = {
   ]
 };
 
-const mapContextToProps = ({ state: { firebase } }) => ({
-  logOut: firebase.signOutUser
+const mapContextStateToProps = ({ state: { firebase, dashboardInfo } }) => ({
+  logOut: firebase.signOutUser,
+  greetingInfo: dashboardInfo.greetingInfo,
+  toastInfo: dashboardInfo.toastInfo
 });
 
 const enhance = compose(
   accessIfAuthenticated,
-  connectSiteContext(mapContextToProps),
+  connectSiteContext(mapContextStateToProps),
   withProps({
-    userDashboards,
-    greetingInfo: {
-      greeting: 'hi there',
-      subgreeting: 'hope this works'
-    },
-    toastInfo: {
-      iconName: "lightbulb",
-      backgroundColor: "primary",
-      contents: "Welcome back! Everything you need as an attendee is here."
-    }
-  }),
+    userDashboards
+  })
 );
 
 export default enhance(DashboardViewComponent);

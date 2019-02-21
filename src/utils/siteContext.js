@@ -3,42 +3,56 @@ import Firebase from "./setupFirebase";
 
 const INITIAL_CONTEXT_STATE = {
   firebase: new Firebase(),
-
+  dashboardInfo: {
+    greetingInfo: {
+      greeting: "Hey there",
+      subgreeting: "Have a great day!"
+    },
+    toastInfo: {
+      iconName: "lightbulb",
+      backgroundColor: "primary",
+      contents: "Welcome back! Everything you need as an attendee is here."
+    }
+  }
 };
-
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'reset':
+    case "RESET":
       return INITIAL_CONTEXT_STATE;
+
+    case "UPDATE_DASHBOARD_GREETING":
+      return {
+        ...state,
+        dashboardInfo: {
+          ...state.dashboardInfo,
+          greetingInfo: action.data.value
+        }
+      };
 
     default:
       return state;
   }
 };
 
-
 export const SiteContext = createContext();
 
 export const SiteContextConsumer = SiteContext.Consumer;
 
-// maps data in site context store to props that the component will receive
+// maps state in site context store to props that the component will receive
 export const connectSiteContext = (
-  mapContextToProps = data => data
+  mapContextStateToProps = data => data
 ) => Component => props => (
   <SiteContextConsumer>
-      {data => <Component {...mapContextToProps(data)} {...props} />}
+    {data => <Component {...mapContextStateToProps(data)} {...props} />}
   </SiteContextConsumer>
 );
-
 
 const SiteContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
   const value = { state, dispatch };
 
-  return (
-    <SiteContext.Provider value={value}>{children}</SiteContext.Provider>
-  );
-}
+  return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
+};
 
 export default SiteContextProvider;
