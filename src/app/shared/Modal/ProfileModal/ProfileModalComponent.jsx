@@ -108,17 +108,28 @@ const Loading = styled.div`
   background: center / contain no-repeat url(${LoadingSpinner});
 `;
 
-export default ({ firebase, userProfile, history, prevLoc, isCurUser }) => {
+export default ({
+  firebase,
+  curUser,
+  someUser,
+  history,
+  prevLoc,
+  isCurUser
+}) => {
   const [profileLoaded, setProfileLoaded] = useState(
-    userProfile && userProfile.isLoaded && userProfile.name
+    isCurUser ? curUser !== undefined : someUser !== undefined
   );
-  const [profileInfo, updateProfileInfo] = useState(userProfile);
+  const [profileInfo, updateProfileInfo] = useState(
+    isCurUser ? curUser : someUser
+  );
   // const isAdmin = profileLoaded && profileInfo.role === "ORGANIZER";
 
   useEffect(() => {
-    const nowLoaded = userProfile && userProfile.isLoaded && userProfile.name;
+    const nowLoaded = isCurUser
+      ? curUser !== undefined
+      : someUser !== undefined;
     if (!profileLoaded && nowLoaded) {
-      updateProfileInfo(userProfile);
+      updateProfileInfo(isCurUser ? curUser : someUser);
       setProfileLoaded(true);
     } else if (profileLoaded) {
       updateFirebaseProfile(firebase, profileInfo);
