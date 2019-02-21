@@ -25,22 +25,19 @@ const LoginSignupViewComponent = ({
   signUp,
   validationSchemas,
   errorTable
-}) => {
-
-  return (
-    <ViewContainer>
-      <PageHeader
-        logoClickHandler={() => window.open("https://equithon.org", "_self")}
-      />
-      <LoginSignupFormsComponent
-        logIn={logIn}
-        signUp={signUp}
-        validationSchemas={validationSchemas}
-        errorTable={errorTable}
-      />
-      <WavesComponent />
-    </ViewContainer>
-  );
-};
+}) => (
+  <ViewContainer>
+    <PageHeader
+      logoClickHandler={() => window.open("https://equithon.org", "_self")}
+    />
+    <LoginSignupFormsComponent
+      logIn={logIn}
+      signUp={signUp}
+      validationSchemas={validationSchemas}
+      errorTable={errorTable}
+    />
+    <WavesComponent />
+  </ViewContainer>
+);
 
 export default LoginSignupViewComponent;
