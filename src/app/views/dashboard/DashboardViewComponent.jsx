@@ -148,7 +148,7 @@ const ActionTooltip = styled(ReactTooltip)`
 /* ---------------------- DASHBOARD COMPONENT ------------------------------- */
 const DashboardViewComponent = ({
   logOut,
-  curUserProfile,
+  curUser,
   greetingInfo,
   toastInfo,
   userDashboards
@@ -167,9 +167,7 @@ const DashboardViewComponent = ({
           {greetingInfo.greeting},
         </Heading>
         <Heading size="4em">
-          {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
-            ? `${curUserProfile.name.split(" ")[0]}.`
-            : ""}
+          {curUser ? `${curUser.name.split(" ")[0]}.` : ""}
         </Heading>
         <Heading size="small" weight="normal" color="grey">
           {greetingInfo.subgreeting}
@@ -187,10 +185,9 @@ const DashboardViewComponent = ({
       </ToastContainer>
 
       <TilesContainer>
-        {curUserProfile &&
-          curUserProfile.isLoaded &&
-          userDashboards[curUserProfile.role] &&
-          userDashboards[curUserProfile.role].map(tileInfo => (
+        {curUser &&
+          userDashboards[curUser.role] &&
+          userDashboards[curUser.role].map(tileInfo => (
             <NavTile key={tileInfo.label} info={tileInfo} />
           ))}
       </TilesContainer>
