@@ -256,23 +256,23 @@ const LoginSignupFormsComponent = ({
           }}
           validationSchema={validationSchemas.signup}
           onSubmit={(values, actions) => {
-            signUp(values)
+            signUp(values.signupName, values.signupEmail, values.signupPassword)
             .then(() => {
               actions.setSubmitting(false);
             })
-              .catch(err => {
+            .catch(err => {
                 const errMsg =
-                  err.code in errorTable
-                    ? errorTable[err.code]
-                    : errorTable.DEFAULT;
-                actions.setSubmitting(false);
-                actions.setStatus(errMsg);
-              });
+              err.code in errorTable
+                ? errorTable[err.code]
+                : errorTable.DEFAULT;
+              actions.setSubmitting(false);
+              actions.setStatus(errMsg);
+            });
           }}
           render={({ touched, errors, status, isSubmitting }) => {
             const hasErrors =
-              Object.entries(errors).length !== 0 &&
-              touched[Object.keys(errors)[0]];
+            Object.entries(errors).length !== 0 &&
+            touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
             let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
             errorMsg = hasStatus ? status : errorMsg;
@@ -282,11 +282,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="text" name="signupName">
                   {({ field, form }) => (
                     <FormInput
+                      type="name"
                       placeholder="Full Name"
                       outlineColor="primary"
-                      type="name"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -294,11 +293,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="email" name="signupEmail">
                   {({ field, form }) => (
                     <FormInput
+                      type="email"
                       placeholder="Email"
                       outlineColor="primary"
-                      type="email"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -307,11 +305,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="password" name="signupPassword">
                   {({ field, form }) => (
                     <FormInput
+                      type="password"
                       placeholder="Password"
                       outlineColor="primary"
-                      type="password"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>
@@ -319,11 +316,10 @@ const LoginSignupFormsComponent = ({
                 <Field type="password" name="confirmPassword">
                   {({ field, form }) => (
                     <FormInput
+                      type="password"
                       placeholder="Confirm Password"
                       outlineColor="primary"
-                      type="password"
-                      {...field}
-                      formikForm={form}
+                      formikInfo={{ field, form }}
                     />
                   )}
                 </Field>

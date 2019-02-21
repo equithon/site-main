@@ -19,8 +19,12 @@ class Firebase {
     this.firestore = firebase.firestore();
   }
 
-  createUser = (email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password);
+  createUser = (name, email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password)
+      // create corresponding doc in /users Firestore collection
+      .then(userCredential => {
+        this.firestore.collection('users').doc(userCredential.user.uid).set({ name, role: 'HACKER' })
+      });
 
   signInUser = (email, password) =>
     this.auth.signInWithEmailAndPassword(email, password);

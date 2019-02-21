@@ -3,8 +3,10 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { Redirect } from "react-router-dom";
 import { SiteContext } from "./siteContext";
+import PageLoadingView from "../app/views/loading/PageLoadingContainer";
 
-
+// This HOC grabs the additional user info in the /users collection in Firestore
+// and populates the curUser prop in the component with the info.
 export const withCurUserInfo = Component => props => {
   const { state: { firebase } } = useContext(SiteContext);
   const { initialising, user } = useAuthState(firebase.auth);
@@ -12,7 +14,7 @@ export const withCurUserInfo = Component => props => {
     firebase && firebase.firestore.doc(`users/${user && user.uid}`)
   );
 
-  if(loading || initialising) return <div>Loading...</div>;
+  if(loading || initialising) return <PageLoadingView />;
 
   if(props.redirect) return Component;
 
@@ -21,10 +23,8 @@ export const withCurUserInfo = Component => props => {
     return <Component {...props} />;
   }
 
-  console.log(value)
   try {
-    const curUser = Object.assign({}, props.user, value.data());
-    console.log(curUser);
+    const curUser = Object.assign({}, user, value.data());
     return <Component {...props} curUser={curUser} />
 
   } catch(e) {
@@ -45,15 +45,12 @@ export const accessIfAuthenticated = Component => props => {
   const userLoggedIn = !initialising && (user !== null);
 
   if(initialising) {
-    console.log('e')
-    AugmentedComponent = withCurUserInfo(<div>Loading...</div>)({});
+    AugmentedComponent = withCurUserInfo(<PageLoadingView />)({});
   }
   else if(userLoggedIn) {
-    console.log('f')
-    AugmentedComponent = withCurUserInfo(Component)({});
+    AugmentedComponent = withCurUserInfo(Component)(props);
   }
   else {
-    console.log('g')
     AugmentedComponent = withCurUserInfo(<Redirect to="/account" />)({ redirect: true });
   }
 
@@ -71,7 +68,7 @@ export const accessIfNotAuthenticated = Component => props => {
   const userLoggedOut = !initialising && (user === null);
 
   if(initialising) {
-    AugmentedComponent = <div>Loading...</div>;
+    AugmentedComponent = <PageLoadingView />;
   }
   else if(userLoggedOut) {
     AugmentedComponent = <Component {...props} />; // do nothing, they're unauthenticated
