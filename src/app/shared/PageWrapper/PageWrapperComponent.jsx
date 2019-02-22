@@ -13,12 +13,9 @@ const PageWrapper = styled.div`
   ${mediaSize.tablet`
     margin: 7vh auto;
   `};
-
-  ${mediaSize.phone`
-  `};
 `;
 
-const TopContainer = styled.div`
+const HeadingContainer = styled.div`
   position: relative;
   height: 10vh;
   left: 0;
@@ -29,11 +26,12 @@ const TopContainer = styled.div`
   justify-content: flex-start;
 
   & > * {
+    // center child elements vertically
     margin: auto 0;
   }
 `;
 
-const TopContainerSticky = styled.div`
+const BackButtonContainer = styled.div`
   position: fixed;
   height: 10vh;
   top: 10vh;
@@ -45,6 +43,7 @@ const TopContainerSticky = styled.div`
   justify-content: flex-start;
 
   & > * {
+    // center child elements vertically
     margin: auto 0;
   }
 
@@ -83,7 +82,7 @@ const BackButton = styled.div`
 `;
 
 export default ({ className, title, onClickBackHandler, children }) => {
-  const scrollY = useScrollYPosition();
+  const scrollY = useScrollYPosition(); // this hook throttles scroll updates automatically for performance
   const [prevScrollY, updatePrevScrollPos] = useState(scrollY);
   const [showBackButton, toggleShowBackButton] = useState(true);
 
@@ -97,21 +96,20 @@ export default ({ className, title, onClickBackHandler, children }) => {
 
   return (
     <PageWrapper className={className}>
-      <TopContainerSticky className={showBackButton ? "" : "hidden"}>
+      <BackButtonContainer className={showBackButton ? "" : "hidden"}>
         <BackButton onClick={onClickBackHandler}>
           <FontAwesomeIcon icon="chevron-circle-left" size="2x" />
         </BackButton>
-      </TopContainerSticky>
+      </BackButtonContainer>
 
-      <TopContainer>
+      <HeadingContainer>
         <Heading size="big" color="black">
           {title}
         </Heading>
-      </TopContainer>
+      </HeadingContainer>
 
-      {Children.only(
-        children
-      ) /* Enforce having only one child (the page itself) */}
+      {/* Enforce having only one child (the page itself) */}
+      {Children.only(children)}
     </PageWrapper>
   );
 };
