@@ -27,6 +27,24 @@ const reducer = (state, action) => {
         curAppInfo: action.data
       };
 
+    case "SUBMIT_HACKER_APP":
+      return {
+        ...state,
+        curAppInfo: "SUBMITTED"
+      };
+
+    case "UPDATE_APP_REVIEW":
+      return {
+        ...state,
+        curAppReview: action.data
+      };
+      
+    case "SUBMIT_APP_REVIEW":
+      return {
+        ...state,
+        curAppReview: "SUBMITTED"
+      };
+
     case "UPDATE_DASHBOARD_GREETING":
       return {
         ...state,

@@ -8,6 +8,8 @@ import SelectDropdown from "../../shared/SelectDropdown/SelectDropdownComponent"
 import Button from "../../shared/Button/ButtonComponent";
 import Text from "../../shared/Text/TextComponent";
 
+// The template for an application info, including options, etc.
+const appTemplate = {};
 
 const Container = styled.div`
   display: flex;

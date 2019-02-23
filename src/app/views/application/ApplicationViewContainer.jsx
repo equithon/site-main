@@ -5,9 +5,6 @@ import ApplicationViewComponent from './ApplicationViewComponent';
 import { accessIfAuthenticated } from '../../../utils/siteAuth';
 import SiteContext, { connectSiteContext } from "../../../utils/siteContext";
 
-// The template for an application info, including options, etc.
-const appTemplate = {};
-
 
 
 // Fetches a hacker's application from Firestore.
@@ -59,10 +56,14 @@ const ApplicationViewContainer = ({
 
   console.log(valueFetched);
 
-  const updateAppInState = updatedAppInfo => dispatch({ type: "UPDATE_HACKER_APPLICATION", data: updatedAppInfo })
+  const updateAppInState = updatedAppInfo => dispatch({ type: "UPDATE_HACKER_APPLICATION", data: updatedAppInfo });
+  const submitAppInState = () => {
+    dispatch({ type: "SUBMIT_HACKER_APP" });
+    submitApp();
+  }
 
   return (
-    <ApplicationViewComponent updateApp={updateAppInState} curAppInfo={curAppInfo} appTemplate={appTemplate} />
+    <ApplicationViewComponent updateApp={updateAppInState} submitApp={submitAppInState} curAppInfo={curAppInfo} />
   );
 };
 
