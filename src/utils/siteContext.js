@@ -21,6 +21,12 @@ const reducer = (state, action) => {
     case "RESET":
       return INITIAL_CONTEXT_STATE;
 
+    case "UPDATE_HACKER_APPLICATION":
+      return {
+        ...state,
+        curAppInfo: action.data
+      };
+
     case "UPDATE_DASHBOARD_GREETING":
       return {
         ...state,
@@ -35,11 +41,11 @@ const reducer = (state, action) => {
   }
 };
 
-export const SiteContext = createContext();
+const SiteContext = createContext();
 
 export const SiteContextConsumer = SiteContext.Consumer;
 
-const SiteContextProvider = ({ children }) => {
+export const SiteContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
   const value = { state, dispatch };
 
@@ -56,4 +62,4 @@ export const connectSiteContext = (
   </SiteContextConsumer>
 );
 
-export default SiteContextProvider;
+export default SiteContext;

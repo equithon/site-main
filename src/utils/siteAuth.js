@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { Redirect } from "react-router-dom";
-import { SiteContext } from "./siteContext";
+import SiteContext from "./siteContext";
 import PageLoadingView from "../app/views/loading/PageLoadingContainer";
 
 // This HOC grabs the additional user info in the /users collection in Firestore

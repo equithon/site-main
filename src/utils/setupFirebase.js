@@ -77,11 +77,6 @@ class Firebase {
   // Request a password reset email for the current user
   resetPassword = email => this.auth.sendPasswordResetEmail(email);
 
-  // Submit a hacker's application. Non reversible.
-  submitApplication = () => {
-    if(this.auth.currentUser) this.firestore.collection('applications').doc(this.auth.currentUser.uid).update({ submitted: true, submittedAt: firebase.firestore.Timestamp.fromDate(new Date()) })
-  }
-
 }
 
 

@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter as AppRouter, Route } from "react-router-dom";
 import siteTheme, { GlobalStyles } from "../utils/siteStyles";
 import { HeadContents } from "../utils/siteTools";
-import SiteContextProvider from "../utils/siteContext";
+import { SiteContextProvider } from "../utils/siteContext";
 
 import AppNav from "./AppNav";
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { mediaSize } from "../../../../utils/siteTools";
 import LoadingSpinner from "../../../../static/img/loaders/default.svg";
-import { SiteContext } from "../../../../utils/siteContext";
+import SiteContext from "../../../../utils/siteContext";
 
 import Modal from "../ModalComponent";
 import Heading from "../../Heading/HeadingComponent";

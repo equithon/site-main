@@ -9,10 +9,12 @@ import { HOME } from "../../../utils/siteRoutes";
 import Heading from "../Heading/HeadingComponent";
 
 
-const onClickBackHandlerDefault = history => {
+const navigateBack = (history, onClickBackHandler) => () => {
   const goBack = (history.location.state && history.location.state.cameFromApp);
   if(goBack) history.goBack();
   else history.replace(HOME);
+
+  if(onClickBackHandler) onClickBackHandler();
 };
 
 
@@ -114,7 +116,7 @@ export default withRouter(({
   return (
     <PageWrapper className={className}>
       <BackButtonContainer className={showBackButton ? "" : "hidden"}>
-        <BackButton onClick={onClickBackHandler || (() => onClickBackHandlerDefault(history))}>
+        <BackButton onClick={navigateBack(history, onClickBackHandler)}>
           <FontAwesomeIcon icon="chevron-circle-left" size="2x" />
         </BackButton>
       </BackButtonContainer>
