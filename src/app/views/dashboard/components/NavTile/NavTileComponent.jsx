@@ -31,6 +31,8 @@ export default ({
   gridArea,
   disabled
 }) => {
+
+  const augmentedLinkTo = (typeof linkTo === 'object') ? { ...linkTo, state: { ...linkTo.state, cameFromApp: true }} : { pathname: linkTo, state: { cameFromApp: true }};
   const [tileClicked, setClicked] = useState(false);
 
   if (tileClicked) setClicked(false);
@@ -54,8 +56,8 @@ export default ({
   ) : (
     <NavTileLink
       gridarea={gridArea}
-      replace={linkTo.state && linkTo.state.modal}
-      to={linkTo}
+      replace={augmentedLinkTo.state && augmentedLinkTo.state.modal}
+      to={augmentedLinkTo}
     >
       {Tile}
     </NavTileLink>

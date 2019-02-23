@@ -1,9 +1,18 @@
 import React from "react";
-import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
 
-const ApplicationViewComponent = () => (
+import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
+import Button from "../../shared/Button/ButtonComponent";
+
+const ApplicationViewComponent = ({
+  updateApp,
+  submitApp
+}) => (
   <PageWrapper title="My Application">
     <div>
+      <Button
+        label="Submit"
+        onClickHandler={submitApp}
+      />
       <div>wegwgweg</div>
       <div>wegwgweg</div>
       <div>wegwgweg</div>

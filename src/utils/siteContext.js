@@ -39,6 +39,14 @@ export const SiteContext = createContext();
 
 export const SiteContextConsumer = SiteContext.Consumer;
 
+const SiteContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
+  const value = { state, dispatch };
+
+  return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
+};
+
+
 // maps state in site context store to props that the component will receive
 export const connectSiteContext = (
   mapContextStateToProps = data => data
@@ -47,12 +55,5 @@ export const connectSiteContext = (
     {data => <Component {...mapContextStateToProps(data)} {...props} />}
   </SiteContextConsumer>
 );
-
-const SiteContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
-  const value = { state, dispatch };
-
-  return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
-};
 
 export default SiteContextProvider;

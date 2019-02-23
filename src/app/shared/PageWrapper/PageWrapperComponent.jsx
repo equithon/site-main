@@ -1,10 +1,21 @@
 import React, { Children, useState } from "react";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useScrollYPosition } from "react-use-scroll-position";
 import { mediaSize } from "../../../utils/siteTools";
+import { HOME } from "../../../utils/siteRoutes";
 
 import Heading from "../Heading/HeadingComponent";
+
+
+const onClickBackHandlerDefault = history => {
+  const goBack = (history.location.state && history.location.state.cameFromApp);
+  if(goBack) history.goBack();
+  else history.replace(HOME);
+};
+
+
 
 const PageWrapper = styled.div`
   width: 80vw;
@@ -17,7 +28,7 @@ const PageWrapper = styled.div`
 
 const HeadingContainer = styled.div`
   position: relative;
-  height: 10vh;
+  height: 3em;
   left: 0;
   margin-bottom: 0.5em;
 
@@ -33,7 +44,7 @@ const HeadingContainer = styled.div`
 
 const BackButtonContainer = styled.div`
   position: fixed;
-  height: 10vh;
+  height: 3em;
   top: 10vh;
   left: 5vw;
   margin-bottom: 0.5em;
@@ -68,7 +79,6 @@ const BackButtonContainer = styled.div`
 `;
 
 const BackButton = styled.div`
-  width: 5vw;
 
   color: ${props => props.theme.colors.black};
   cursor: pointer;
@@ -81,7 +91,14 @@ const BackButton = styled.div`
   }
 `;
 
-export default ({ className, title, onClickBackHandler, children }) => {
+export default withRouter(({
+  className,
+  title,
+  history,
+  onClickBackHandler,
+  children
+}) => {
+
   const scrollY = useScrollYPosition(); // this hook throttles scroll updates automatically for performance
   const [prevScrollY, updatePrevScrollPos] = useState(scrollY);
   const [showBackButton, toggleShowBackButton] = useState(true);
@@ -97,7 +114,7 @@ export default ({ className, title, onClickBackHandler, children }) => {
   return (
     <PageWrapper className={className}>
       <BackButtonContainer className={showBackButton ? "" : "hidden"}>
-        <BackButton onClick={onClickBackHandler}>
+        <BackButton onClick={onClickBackHandler || (() => onClickBackHandlerDefault(history))}>
           <FontAwesomeIcon icon="chevron-circle-left" size="2x" />
         </BackButton>
       </BackButtonContainer>
@@ -112,4 +129,4 @@ export default ({ className, title, onClickBackHandler, children }) => {
       {Children.only(children)}
     </PageWrapper>
   );
-};
+});
