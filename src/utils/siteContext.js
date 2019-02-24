@@ -1,6 +1,26 @@
 import React, { createContext, useReducer } from "react";
 import Firebase from "./setupFirebase";
 
+
+const siteToasts = {
+  welcomeBack: {
+    iconName: "lightbulb",
+    backgroundColor: "primary",
+    contents: "Welcome back! Everything you need as an attendee is here."
+  },
+  appModified: {
+    iconName: "exclamation",
+    backgroundColor: "warning",
+    contents: "Don't forget to finish your application!"
+  },
+  appSubmitted: {
+    iconName: "check",
+    backgroundColor: "green",
+    contents: "Great job on finishing your application!"
+  },
+}
+
+
 const INITIAL_CONTEXT_STATE = {
   firebase: new Firebase(),
   dashboardInfo: {
@@ -8,11 +28,7 @@ const INITIAL_CONTEXT_STATE = {
       greeting: "Hey there",
       subgreeting: "Have a great day!"
     },
-    toastInfo: {
-      iconName: "lightbulb",
-      backgroundColor: "primary",
-      contents: "Welcome back! Everything you need as an attendee is here."
-    }
+    toastInfo: siteToasts.welcomeBack
   }
 };
 
@@ -21,24 +37,12 @@ const reducer = (state, action) => {
     case "RESET":
       return INITIAL_CONTEXT_STATE;
 
-    case "UPDATE_HACKER_APPLICATION":
-      return {
-        ...state,
-        curAppInfo: action.data
-      };
-
-    case "SUBMIT_HACKER_APP":
-      return {
-        ...state,
-        curAppInfo: "SUBMITTED"
-      };
-
     case "UPDATE_APP_REVIEW":
       return {
         ...state,
         curAppReview: action.data
       };
-      
+
     case "SUBMIT_APP_REVIEW":
       return {
         ...state,
@@ -53,6 +57,15 @@ const reducer = (state, action) => {
           greetingInfo: action.data.value
         }
       };
+
+    case "UPDATE_DASHBOARD_TOAST":
+      return {
+        ...state,
+        dashboardInfo: {
+          ...state.dashboardInfo,
+          toastInfo: siteToasts[action.data.toastName] || siteToasts.welcomeBack
+        }
+      }
 
     default:
       return state;

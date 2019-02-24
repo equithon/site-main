@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { compose } from "recompose";
 import ApplicationViewComponent from './ApplicationViewComponent';
@@ -16,24 +16,24 @@ const fetchApplication = firebase =>
 
 // Updates a hacker's application with the new information they've provided.
 const updateApplication = firebase => updatedAppInfo => {
-  if(firebase.auth.currentUser) {
+
+  if(firebase.auth.currentUser && !updatedAppInfo.submitted)
     firebase.firestore.collection('applications').doc(firebase.auth.currentUser.uid)
-      .update(updatedAppInfo)
-  }
+      .set(updatedAppInfo, { merge: true });
 }
 
 // Submit a hacker's application. Non reversible.
 const submitApplication = firebase => () => {
   if(firebase.auth.currentUser)
     firebase.firestore.collection('applications').doc(firebase.auth.currentUser.uid)
-      .update({ submitted: true, submittedAt: firebase.firestore.Timestamp.fromDate(new Date()) })
+      .update({ submitted: true, submittedAt: firebase.getTimestamp(new Date()) })
 }
 
 
 const mapContextStateToProps = ({ state: { firebase } }) => ({
-  fetchApp: fetchApplication(firebase),
-  updateApp: updateApplication(firebase),
-  submitApp: submitApplication(firebase),
+  fetchAppFirestore: fetchApplication(firebase),
+  updateAppFirestore: updateApplication(firebase),
+  submitAppFirestore: submitApplication(firebase),
 });
 
 const enhance = compose(
@@ -43,27 +43,58 @@ const enhance = compose(
 
 
 const ApplicationViewContainer = ({
-  fetchApp,
-  updateApp,
-  submitApp,
+  fetchAppFirestore,
+  updateAppFirestore,
+  submitAppFirestore,
 }) => {
 
-  const { state, dispatch } = useContext(SiteContext);
-  const { error, loading, value } = useDocument(fetchApp());
+  const { dispatch } = useContext(SiteContext);
+  const { value } = useDocument(fetchAppFirestore());
+  const [ appState, updateAppState ] = useState("FETCHING");
+  const [ localAppInfo, updateLocalAppInfo ] = useState({});
+  const appRef = useRef();
+  appRef.current = localAppInfo;
 
-  const valueFetched = (error || loading || !value) ? "WAITING" : value.data();
-  const curAppInfo = state.curAppInfo || valueFetched;
 
-  console.log(valueFetched);
+  const updateAppInfo = newAppInfo => {
+    const newLocalAppInfo = {
+      ...localAppInfo,
+      ...newAppInfo,
+    };
 
-  const updateAppInState = updatedAppInfo => dispatch({ type: "UPDATE_HACKER_APPLICATION", data: updatedAppInfo });
-  const submitAppInState = () => {
-    dispatch({ type: "SUBMIT_HACKER_APP" });
-    submitApp();
+    updateLocalAppInfo(newLocalAppInfo);
+    if(!newLocalAppInfo.submitted) dispatch({ type: "UPDATE_DASHBOARD_TOAST", data: { toastName: "appModified" } });
   }
 
+  const submitAppInfo = () => {
+    submitAppFirestore(appRef.current);
+    updateAppState("SUBMITTING");
+    dispatch({ type: "UPDATE_DASHBOARD_TOAST", data: { toastName: "appSubmitted" } });
+  }
+
+  if((value && value.exists) && ((appState === "FETCHING") || (value.data().submitted && appState === "SUBMITTING"))) {
+    updateAppInfo(value.data());
+    updateAppState("FETCHED");
+    if(value.data().submitted) {
+      updateAppState("SUBMITTED");
+      dispatch({ type: "UPDATE_DASHBOARD_TOAST", data: { toastName: "appSubmitted" } });
+    }
+  }
+
+
+  // save to firestore before component unmounts or page unloads
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => updateAppFirestore(appRef.current));
+
+    return () => {
+      window.removeEventListener('beforeunload', () => updateAppFirestore(appRef.current))
+      updateAppFirestore(appRef.current);
+    }
+  }, [])
+
+
   return (
-    <ApplicationViewComponent updateApp={updateAppInState} submitApp={submitAppInState} curAppInfo={curAppInfo} />
+    <ApplicationViewComponent updateAppInfo={updateAppInfo} submitAppInfo={submitAppInfo} appState={appState} curAppInfo={localAppInfo} />
   );
 };
 

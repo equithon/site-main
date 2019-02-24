@@ -35,6 +35,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "ajv": "^6.8.1",
+    "debounce": "^1.2.0",
     "firebase": "^5.8.2",
     "formik": "^1.4.3",
     "history": "^4.7.2",
