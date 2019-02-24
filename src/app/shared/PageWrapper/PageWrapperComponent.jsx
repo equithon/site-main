@@ -32,7 +32,7 @@ const HeadingContainer = styled.div`
   position: relative;
   height: 3em;
   left: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 2em;
 
   display: flex;
   flex-direction: row;
@@ -49,7 +49,7 @@ const BackButtonContainer = styled.div`
   height: 3em;
   top: 10vh;
   left: 5vw;
-  margin-bottom: 0.5em;
+  margin-bottom: 2em;
 
   display: flex;
   flex-direction: row;

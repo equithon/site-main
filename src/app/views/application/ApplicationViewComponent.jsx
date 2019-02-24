@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { debounce } from "debounce";
+import { mediaSize } from "../../../utils/siteTools";
 
 import LoadingSpinner from "../../../static/img/loaders/default_color_secondary.svg";
 import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
@@ -146,9 +147,15 @@ const appTemplate = [
 
 
 const Container = styled.div`
+  width: 50vw;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  ${mediaSize.tablet`
+    width: 100%;
+  `}
 `;
 
 const Question = styled.div`
@@ -178,7 +185,7 @@ const Submit = styled.div`
 
 const SubmitButton = styled(Button)`
   width: 10em;
-  margin-right: 1em;
+  margin: 1em 1em 1em 0;
 
   display: inline-block;
 
@@ -195,6 +202,10 @@ const SubmitButton = styled(Button)`
       } center / contain no-repeat url(${LoadingSpinner})`};
     opacity: 0.75;
   }
+
+  ${mediaSize.phone`
+    width: 100%;
+  `}
 `;
 
 
