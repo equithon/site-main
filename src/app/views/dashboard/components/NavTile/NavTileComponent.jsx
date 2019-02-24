@@ -6,12 +6,15 @@ import Heading from "../../../../shared/Heading/HeadingComponent";
 import Card from "../../../../shared/Card/CardComponent";
 
 const NavTile = styled(Card)`
+  grid-area: ${props => props.gridarea};
+
   width: 100%;
   height: 100%;
   padding: 1.5em;
   border-radius: ${props => props.theme.app.border.radius};
 
   background-color: ${props => props.backgroundColor};
+  filter: ${props => (props.disabled ? "grayscale(90%)" : "")};
 `;
 
 const NavTileLink = styled(Link)`
@@ -20,27 +23,43 @@ const NavTileLink = styled(Link)`
 `;
 
 export default ({
-  info: { label, color, backgroundColor, backgroundImg, linkTo, gridArea }
+  label,
+  color,
+  backgroundColor,
+  backgroundImg,
+  linkTo,
+  gridArea,
+  disabled
 }) => {
+
+  const augmentedLinkTo = (typeof linkTo === 'object') ? { ...linkTo, state: { ...linkTo.state, cameFromApp: true }} : { pathname: linkTo, state: { cameFromApp: true }};
   const [tileClicked, setClicked] = useState(false);
 
   if (tileClicked) setClicked(false);
 
-  return (
+  const Tile = (
+    <NavTile
+      gridarea={gridArea}
+      backgroundColor={backgroundColor}
+      backgroundImg={backgroundImg}
+      disabled={disabled}
+      onClickHandler={disabled ? undefined : () => setClicked(true)}
+    >
+      <Heading size="small" color={color || "white"} weight="normal">
+        {label}
+      </Heading>
+    </NavTile>
+  );
+
+  return disabled ? (
+    Tile
+  ) : (
     <NavTileLink
       gridarea={gridArea}
-      replace={linkTo.state && linkTo.state.modal}
-      to={linkTo}
+      replace={augmentedLinkTo.state && augmentedLinkTo.state.modal}
+      to={augmentedLinkTo}
     >
-      <NavTile
-        backgroundColor={backgroundColor}
-        backgroundImg={backgroundImg}
-        onClickHandler={() => setClicked(true)}
-      >
-        <Heading size="small" color={color || "white"} weight="normal">
-          {label}
-        </Heading>
-      </NavTile>
+      {Tile}
     </NavTileLink>
   );
 };

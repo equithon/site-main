@@ -20,7 +20,7 @@ const MainContents = styled.div`
 `;
 
 const Logo = styled.img`
-  max-height: 100%;
+  max-height: 6vh;
   margin: auto;
 `;
 

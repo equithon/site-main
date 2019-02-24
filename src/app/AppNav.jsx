@@ -28,8 +28,8 @@ const ModalFrame = styled.div`
 
 const AppNav = ({ location }) => {
   const route = ROUTES.FINDER[location.pathname];
-  const curLocation = route &&
-    route.state && route.state.modal
+  const isModal = route && route.state && route.state.modal;
+  const curLocation = isModal
       ? { pathname: route.state.onTopOf, search: "", hash: "" }
       : location;
 
@@ -53,7 +53,7 @@ const AppNav = ({ location }) => {
       </Switch>
 
       {/* MODAL DISPLAY */}
-      <ModalFrame show={route && route.state && route.state.modal}>
+      <ModalFrame show={isModal}>
         <Switch>
           <Route
             exact

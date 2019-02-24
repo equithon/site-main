@@ -9,7 +9,10 @@ import {
   faCheck,
   faDoorClosed,
   faDoorOpen,
-  faQuestion
+  faQuestion,
+  faChevronUp,
+  faChevronDown,
+  faChevronCircleLeft
 } from "@fortawesome/free-solid-svg-icons";
 import Favicon from "../static/img/logo/logo_tiny_color.png";
 
@@ -20,7 +23,10 @@ library.add(
   faCheck,
   faDoorClosed,
   faDoorOpen,
-  faQuestion
+  faQuestion,
+  faChevronUp,
+  faChevronDown,
+  faChevronCircleLeft
 );
 
 export const displayWidthCutoffs = {

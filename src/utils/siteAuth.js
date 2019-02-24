@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { Redirect } from "react-router-dom";
-import { SiteContext } from "./siteContext";
+import SiteContext from "./siteContext";
 import PageLoadingView from "../app/views/loading/PageLoadingContainer";
 
 // This HOC grabs the additional user info in the /users collection in Firestore
@@ -33,6 +33,30 @@ export const withCurUserInfo = Component => props => {
   }
 
 }
+
+
+// This HOC only allows access to a component (usually a view/page) if the
+// user is logged in AND has an ORGANIZER role. It also passes the
+// current user's information as a curUser prop for convenience.
+export const accessIfOrganizer = Component => props => {
+  let AugmentedComponent;
+  const { state: { firebase } } = useContext(SiteContext);
+  const { initialising, user } = useAuthState(firebase.auth);
+  const userHasPermission = !initialising && (user !== null) && (user.role === "ORGANIZER");
+
+  if(initialising) {
+    AugmentedComponent = withCurUserInfo(<PageLoadingView />)({});
+  }
+  else if(userHasPermission) {
+    AugmentedComponent = withCurUserInfo(Component)(props);
+  }
+  else {
+    AugmentedComponent = withCurUserInfo(<Redirect to="/account" />)({ redirect: true });
+  }
+
+
+  return AugmentedComponent;
+};
 
 
 // This HOC only allows access to a component (usually a view/page) if the
