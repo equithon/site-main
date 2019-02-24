@@ -1,10 +1,17 @@
 import React from 'react';
-import AttendeesViewComponent from './AttendeesViewComponent';
-import { accessIfAuthenticated } from '../../../utils/siteAuth';
+import { compose } from "recompose";
+import { accessIfRole } from '../../../utils/siteAuth';
 
+import AttendeesViewComponent from './AttendeesViewComponent';
+
+
+
+const enhance = compose(
+  accessIfRole(["VOLUNTEER", "ORGANIZER"]),
+);
 
 // this is where we would normally do the redux stuffz
-const AttendeesViewContainer = () => <AttendeesViewComponent/>;
+const AttendeesViewContainer = () => <AttendeesViewComponent />;
 
 
-export default accessIfAuthenticated(AttendeesViewContainer);
+export default enhance(AttendeesViewContainer);

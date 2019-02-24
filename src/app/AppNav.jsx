@@ -3,16 +3,18 @@ import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
 
 // VIEW CONTAINERS
-import DashboardView from "./views/dashboard/DashboardViewContainer";
 import LoginSignupView from "./views/login+signup/LoginSignupViewContainer";
+import DashboardView from "./views/dashboard/DashboardViewContainer";
 import ApplicationView from "./views/application/ApplicationViewContainer";
 import AppReviewView from "./views/appreview/AppReviewViewContainer";
 import AttendeesView from "./views/attendees/AttendeesViewContainer";
 import MapView from "./views/map/MapViewContainer";
 import ScheduleView from "./views/schedule/ScheduleViewContainer";
-import PageNotFoundView from "./views/404/PageNotFoundContainer";
 import MyProfileView from "./views/myprofile/MyProfileViewContainer";
 import EventView from "./views/event/EventViewContainer";
+import HelpView from "./views/help/HelpViewContainer";
+import JudgingToolView from "./views/judging/JudgingToolViewContainer";
+import PageNotFoundView from "./views/404/PageNotFoundContainer";
 
 import * as ROUTES from "../utils/siteRoutes";
 
@@ -38,6 +40,8 @@ const AppNav = ({ location }) => {
       {/* MAIN VIEW ROUTE SWITCHER */}
       <Switch location={curLocation}>
         <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginSignupView} />
+        <Route exact path={ROUTES.HOME} component={DashboardView} />
+
         <Route exact path={ROUTES.APPLICATION} component={ApplicationView} />
         <Route exact path={ROUTES.APP_REVIEW} component={AppReviewView} />
         <Route
@@ -47,7 +51,9 @@ const AppNav = ({ location }) => {
         />
         <Route exact path={ROUTES.MAP} component={MapView} />
         <Route exact path={ROUTES.SCHEDULE} component={ScheduleView} />
-        <Route exact path={ROUTES.HOME} component={DashboardView} />
+        <Route exact path={ROUTES.HELP} component={HelpView} />
+        <Route exact path={ROUTES.JUDGING_TOOL} component={JudgingToolView} />
+
         <Route exact path={ROUTES.PAGENOTFOUND} component={PageNotFoundView} />
         <Redirect to="/404" />
       </Switch>

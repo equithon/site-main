@@ -249,7 +249,16 @@ const Submit = styled.div`
 
   & > p {
     margin: auto 0;
+
+    ${mediaSize.phone`
+      margin-top: 0.5em;
+    `}
   }
+
+  ${mediaSize.phone`
+    height: auto;
+    flex-direction: column;
+  `}
 `;
 
 const SubmitButton = styled(Button)`
@@ -272,6 +281,7 @@ const SubmitButton = styled(Button)`
 
   ${mediaSize.phone`
     width: 100%;
+    margin: auto 0;
   `}
 `;
 

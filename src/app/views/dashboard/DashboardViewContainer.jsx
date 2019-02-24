@@ -7,6 +7,7 @@ import DashboardViewComponent from "./DashboardViewComponent";
 import MapTileBG from "../../../static/img/dashboard/tiles/map.png";
 import CalendarTileBG from "../../../static/img/dashboard/tiles/schedule.png";
 import ApplicationTileBG from "../../../static/img/dashboard/tiles/application.png";
+import HelpTileBG from "../../../static/img/dashboard/tiles/help.png";
 
 const dashboardTiles = {
   schedule: {
@@ -56,6 +57,19 @@ const dashboardTiles = {
     linkTo: ROUTES.PROFILE,
     gridArea: "rightBot",
     backgroundColor: "#1ec77a"
+  },
+  judging_tool: {
+    label: "Judging Tool",
+    linkTo: ROUTES.JUDGING_TOOL,
+    gridArea: "centerTop",
+    backgroundColor: "#e9c24b",
+    disabled: true
+  },
+  help: {
+    label: "Info & Help",
+    linkTo: ROUTES.HELP,
+    gridArea: "rightTop",
+    backgroundImg: HelpTileBG,
   }
 };
 
@@ -64,7 +78,7 @@ const userDashboards = {
     dashboardTiles.application,
     dashboardTiles.map,
     dashboardTiles.schedule,
-    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.help,
     dashboardTiles.profile
   ],
   ORGANIZER: [
@@ -78,21 +92,21 @@ const userDashboards = {
     dashboardTiles.attendee_list_volunteer,
     dashboardTiles.map,
     dashboardTiles.schedule,
-    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.help,
     dashboardTiles.profile
   ],
   JUDGE: [
-    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.judging_tool,
     dashboardTiles.map,
     dashboardTiles.schedule,
-    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.help,
     dashboardTiles.profile
   ],
   GENERAL: [
     dashboardTiles.attendee_list_volunteer,
     dashboardTiles.map,
     dashboardTiles.schedule,
-    dashboardTiles.attendee_list_volunteer,
+    dashboardTiles.help,
     dashboardTiles.profile
   ]
 };

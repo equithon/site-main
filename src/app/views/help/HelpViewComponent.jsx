@@ -5,9 +5,6 @@ import { HOME } from "../../../utils/siteRoutes";
 import Barrier from "../../../static/img/misc/construction.svg";
 import Heading from "../../shared/Heading/HeadingComponent";
 
-// The template for a review of an application, including options, etc.
-const appReviewTemplate = {};
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -26,12 +23,13 @@ const Disclaimer = styled(Heading)`
 
   width: 80vw;
   text-align: center;
+
   margin: 0 auto;
 `;
 
 
 
-const AppReviewViewComponent = () => {
+const HelpViewComponent = () => {
 
   const [ shouldRedirect, updateShouldRedirect ] = useState(false);
 
@@ -47,10 +45,11 @@ const AppReviewViewComponent = () => {
     <Container>
       <Img src={Barrier} />
       <Disclaimer size="big" weight="normal" color="grey">
-        Whoops! This page is still in the works.
+        Whoops!
+        This page is still in the works.
       </Disclaimer>
     </Container>
   );
 };
 
-export default AppReviewViewComponent;
+export default HelpViewComponent;
