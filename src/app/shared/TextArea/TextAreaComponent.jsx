@@ -45,7 +45,7 @@ export default ({
   const [value, updateValue] = useState(defaultValue);
 
   useEffect(() => {
-    if (formikInfo.notUsing && value && (defaultValue !== value)) {
+    if (formikInfo.notUsing && (defaultValue !== value)) {
       onChangeHandler(value);
     }
   }, [value]);

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { compose } from "recompose";
 import ApplicationViewComponent from './ApplicationViewComponent';
-import { accessIfAuthenticated } from '../../../utils/siteAuth';
+import { accessIfRole } from '../../../utils/siteAuth';
 import SiteContext, { connectSiteContext } from "../../../utils/siteContext";
 
 
@@ -37,12 +37,13 @@ const mapContextStateToProps = ({ state: { firebase } }) => ({
 });
 
 const enhance = compose(
-  accessIfAuthenticated,
+  accessIfRole("HACKER"),
   connectSiteContext(mapContextStateToProps),
 );
 
 
 const ApplicationViewContainer = ({
+  curUser,
   fetchAppFirestore,
   updateAppFirestore,
   submitAppFirestore,
@@ -94,7 +95,7 @@ const ApplicationViewContainer = ({
 
 
   return (
-    <ApplicationViewComponent updateAppInfo={updateAppInfo} submitAppInfo={submitAppInfo} appState={appState} curAppInfo={localAppInfo} />
+    <ApplicationViewComponent curUserName={curUser && curUser.name} updateAppInfo={updateAppInfo} submitAppInfo={submitAppInfo} appState={appState} curAppInfo={localAppInfo} />
   );
 };
 

@@ -11,7 +11,7 @@ const siteToasts = {
   appModified: {
     iconName: "exclamation",
     backgroundColor: "warning",
-    contents: "Don't forget to finish your application!"
+    contents: "Don't forget to finish and submit your application!"
   },
   appSubmitted: {
     iconName: "check",
