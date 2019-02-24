@@ -23,6 +23,11 @@ const PageWrapper = styled.div`
   width: 80vw;
   margin: 10vh auto;
 
+  // make sure the header/back button appears on top
+  & > *:last-child {
+    z-index: 1;
+  }
+
   ${mediaSize.tablet`
     margin: 7vh auto;
   `};
@@ -30,9 +35,10 @@ const PageWrapper = styled.div`
 
 const HeadingContainer = styled.div`
   position: relative;
+  z-index: 2;
   height: 3em;
   left: 0;
-  margin-bottom: 0.5em;
+  margin-bottom: 2em;
 
   display: flex;
   flex-direction: row;
@@ -46,10 +52,11 @@ const HeadingContainer = styled.div`
 
 const BackButtonContainer = styled.div`
   position: fixed;
+  z-index: 2;
   height: 3em;
   top: 10vh;
   left: 5vw;
-  margin-bottom: 0.5em;
+  margin-bottom: 2em;
 
   display: flex;
   flex-direction: row;

@@ -22,6 +22,11 @@ const TextInput = styled.input`
       `0 0 3px 1px ${props.theme.colors[props.outlineColor] ||
         props.outlineColor}`};
   }
+
+  &:read-only {
+    background-color: hsl(0,0%,95%);
+    color: ${props => props.theme.colors.grey};
+  }
 `;
 
 export default ({
@@ -30,16 +35,18 @@ export default ({
   type = "text",
   defaultValue = "",
   placeholder = `Enter ${type} here`,
+  disabled,
   outlineColor = "lightBlack",
   onChangeHandler = () => {},
   onBlurHandler = () => {},
   formikInfo = { notUsing: true, field: {}, form: {} }
 }) => {
+
   const [value, updateValue] = useState(defaultValue);
 
   useEffect(() => {
-    if (formikInfo.notUsing) onChangeHandler(value);
-  });
+    if (formikInfo.notUsing && (defaultValue !== value)) onChangeHandler(value);
+  }, [value]);
 
   return (
     <TextInput
@@ -47,6 +54,8 @@ export default ({
       outlineColor={outlineColor}
       name={name}
       type={type}
+      value={value}
+      readOnly={disabled}
       placeholder={placeholder}
       onChange={e => updateValue(e.target.value)}
       onBlur={onBlurHandler}
