@@ -46,6 +46,8 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
       // create corresponding doc in /users Firestore collection
       .then(userCredential => {
+        console.log(userCredential)
+        console.log(this.auth.currentUser)
         try {
           this.firestore.collection('users').doc(userCredential.user.uid).set({ name, role: 'HACKER' });
         } catch(e) {

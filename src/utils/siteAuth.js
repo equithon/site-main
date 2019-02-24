@@ -18,7 +18,7 @@ export const withCurUserInfo = Component => props => {
 
   if(props.redirect) return Component;
 
-  if(value === null || !value.exists) { // pass in current user's profile details
+  if(value === null || !value || !value.exists) { // pass in current user's profile details
     return <Component {...props} />;
   }
 

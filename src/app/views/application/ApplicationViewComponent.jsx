@@ -375,15 +375,14 @@ const ApplicationViewComponent = ({
     delayedUpdateField(fieldId, value, curAppInfo);
   }
 
-  console.log(curUserName, curAppInfo)
-
+  
   return (
     <PageWrapper title="My Application">
       <Container>
         {(appState !== "FETCHING")
           ?
             <>
-              <Heading color="black" size="small" weight="normal">{`Hi ${curUserName}! Let's get to know you!.`}</Heading>
+              <Heading color="black" size="small" weight="normal">{`Hi ${curUserName}! Let's get to know you!`}</Heading>
               {appTemplate.map(qs => renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted))}
               {renderSubmit(saveState, appState, appFilledOut, submitAppInfo)}
             </>
