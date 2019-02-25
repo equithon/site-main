@@ -4,6 +4,7 @@ import { debounce } from "debounce";
 import { mediaSize } from "../../../utils/siteTools";
 
 import LoadingSpinner from "../../../static/img/loaders/default_color_secondary.svg";
+import WorldUniversityList from "../../../static/assets/world_universities_and_domains";
 import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
 import TextInput from "../../shared/TextInput/TextInputComponent";
 import TextArea from "../../shared/TextArea/TextAreaComponent";
@@ -11,7 +12,7 @@ import SelectDropdown from "../../shared/SelectDropdown/SelectDropdownComponent"
 import Button from "../../shared/Button/ButtonComponent";
 import Text from "../../shared/Text/TextComponent";
 import Heading from "../../shared/Heading/HeadingComponent";
-
+import Modal from "../../shared/Modal/ModalComponent";
 
 // The template for an application info, including options, etc.
 const appTemplate = [
@@ -24,40 +25,62 @@ const appTemplate = [
         question: {
           id: "studyType",
           type: "option",
-          placeholder: "Bachelor's",
+          placeholder: "Type to search or specify 'Other' option",
           options: [
             { label: "High School Diploma", value: "highschool" },
             { label: "Bachelor's", value: "undergrad" },
             { label: "Master's", value: "masters" },
             { label: "PhD", value: "phd" },
-          ]
+          ],
+          componentOptions: {
+            allowCreate: true
+          }
+        }
+      },
+      {
+        label: "What institution are you attending",
+        type: "select",
+        question: {
+          id: "studyInstitution",
+          type: "option",
+          placeholder: "Select a school",
+          options: WorldUniversityList.filter(uni => ["US", "CA"].includes(uni.alpha_two_code)).map(uni => ({
+            label: `${uni.name} (${uni.alpha_two_code})`,
+            value: uni.name && uni.name.toLowerCase().replace(/\W/g, '')
+          })),
+          componentOptions: {
+            allowCreate: true
+          }
         }
       },
       {
         label: "What are you studying?",
-        type: "select",
+        type: "text",
         question: {
           id: "studyProgram",
-          type: "option",
+          type: "text",
           placeholder: "Underwater Basket Weaving",
-          options: [
-            { label: "Engineering", value: "engineering" },
-            { label: "Computer Science", value: "cs" },
-            { label: "Math", value: "math" },
-            { label: "Literature", value: "literature" },
-            { label: "Business", value: "business" },
-            { label: "Graphic Design", value: "graphicdesign" },
-            { label: "Fine Arts", value: "finearts" },
-          ]
         },
       },
       {
         label: "When are you graduating?",
-        type: "text",
+        type: "select",
         question: {
           id: "studyGradYear",
-          type: "number",
-          placeholder: "2021"
+          type: "option",
+          placeholder: "Type to search or specify 'Other' option",
+          options: [
+            { label: "2019", value: "2019" },
+            { label: "2020", value: "2020" },
+            { label: "2021", value: "2021" },
+            { label: "2022", value: "2022" },
+            { label: "2023", value: "2023" },
+            { label: "2024", value: "2024" },
+            { label: "2025", value: "2025" }
+          ],
+          componentOptions: {
+            allowCreate: true
+          }
         },
       },
       {
@@ -90,19 +113,52 @@ const appTemplate = [
         },
       },
       {
-        label: "Are there any topics you're interested in learning about?",
+        label: "Are there any activities or topics you're interested in?",
         type: "select",
         question: {
           id: "interestedTopics",
           type: "option",
           optional: true,
-          placeholder: "??",
+          placeholder: "Feel free to add your own!",
           options: [
-            { label: "?", value: "?" },
-            { label: "??", value: "??" },
-            { label: "???", value: "???" },
-            { label: "????", value: "????" },
-          ]
+            {
+              label: "Workshops",
+              options: [
+                { label: "Intro to Programming", value: "intro-to-programming" },
+                { label: "Technical Interview Prep (Algorithms)", value: "tech-prep" },
+                { label: "Intro to Web Dev (HTML, CSS, JS)", value: "web-dev-intro" },
+                { label: "Advanced Web Dev (React, Backend, etc)", value: "web-dev-advanced" },
+                { label: "UI/UX Design", value: "ui/ux-design" },
+                { label: "Pitching Your Idea", value: "pitching" },
+                { label: "Ideation Workshop", value: "ideation" },
+              ]
+            },
+            {
+              label: "Activities",
+              options: [
+                { label: "LinkedIn Headshots", value: "linkedin-headshots" },
+                { label: "Photobooth", value: "photobooth" },
+                { label: "Therapy Dogs", value: "therapy-dogs" },
+                { label: "Interactive Post-It Wall", value: "post-it-wall" },
+                { label: "Networking Fair", value: "networking-fair" },
+                { label: "Cookie Decorating", value: "cookie-decorating" },
+              ]
+            },
+            {
+              label: "Other",
+              options: [
+                { label: "Fostering Entrepreneurship", value: "fostering-ent" },
+                { label: "Tech Talks", value: "tech-talks" },
+                { label: "Emerging Tech (ML, AI, CV, etc)", value: "emerging-tech" },
+                { label: "Recruiter Panel", value: "recruiter-panel" },
+              ]
+            }
+          ],
+          componentOptions: {
+            grouped: true,
+            allowCreate: true,
+            allowMultiple: true
+          }
         },
       },
       {
@@ -120,7 +176,10 @@ const appTemplate = [
             { label: "Mobility Rights", value: "mobility-rights" },
             { label: "Physical Accessibility", value: "physical-accessibility" },
             { label: "Not sure yet!", value: "undecided" },
-          ]
+          ],
+          componentOptions: {
+            allowMultiple: true
+          }
         },
       },
     ]
@@ -134,7 +193,7 @@ const appTemplate = [
         question: {
           id: "responseSocialEquity",
           type: "textArea",
-          placeholder: "A paragraph or two is fine!"
+          placeholder: "No need to write an essay!"
         },
       },
     ]
@@ -161,7 +220,7 @@ const appTemplate = [
         question: {
           id: "responsePersonalAnswer",
           type: "textArea",
-          placeholder: "A paragraph or two is fine!"
+          placeholder: "No need to write an essay!"
         },
       },
       {
@@ -177,7 +236,7 @@ const appTemplate = [
     ]
   },
   {
-    title: "A bonus question, just for fun.",
+    title: "A bonus question, just for fun!",
     content: [
       {
         label: "What is your favourite smell?",
@@ -249,7 +308,16 @@ const Submit = styled.div`
 
   & > p {
     margin: auto 0;
+
+    ${mediaSize.phone`
+      margin-top: 0.5em;
+    `}
   }
+
+  ${mediaSize.phone`
+    height: auto;
+    flex-direction: column;
+  `}
 `;
 
 const SubmitButton = styled(Button)`
@@ -272,9 +340,63 @@ const SubmitButton = styled(Button)`
 
   ${mediaSize.phone`
     width: 100%;
+    margin: auto 0;
   `}
 `;
 
+
+const ModalFrame = styled.div`
+  display: ${props => (props.show ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(88, 88, 88, 0.49);
+`;
+
+const ConfirmSubmitModal = styled(Modal)`
+  width: 40em;
+  height: 20em;
+  padding: 5em;
+
+  border-radius: ${props => props.theme.app.border.radius};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > * {
+    margin: auto;
+    text-align: center;
+  }
+
+  ${mediaSize.phone`
+    width: 85vw;
+    height: 60vw;
+    padding: 2em;
+  `}
+`;
+
+
+const ConfirmSubmit = ({ confirmSubmit, closeModal }) => (
+  <ConfirmSubmitModal
+    backgroundColor="lightBlack"
+    handleClickOutside={closeModal}
+    onClickCloseHandler={closeModal}
+  >
+    <div>
+      <Text size="big" color="white">Are you sure you want to submit?</Text>
+      <Text size="big" color="white">You won't be able to edit your application after.</Text>
+    </div>
+    <SubmitButton
+      label="Yes, Submit"
+      backgroundColor="secondary"
+      color="white"
+      onClickHandler={confirmSubmit}
+    />
+  </ConfirmSubmitModal>
+);
 
 
 
@@ -291,7 +413,7 @@ const renderQuestion = ({ label, type, question }, defaultValue, saveResponseHan
       break;
 
     case "select":
-      QuestionComponent = <SelectDropdown placeholder={question.placeholder} name={question.id} type={question.type} options={question.options} defaultValue={defaultValue} disabled={appSubmitted} onChangeHandler={value => saveResponseHandler(question.id, value)} />;
+      QuestionComponent = <SelectDropdown placeholder={question.placeholder} name={question.id} type={question.type} options={question.options} {...question.componentOptions} defaultValue={defaultValue} disabled={appSubmitted} onChangeHandler={value => saveResponseHandler(question.id, value)} />;
       break;
 
     default:
@@ -323,13 +445,15 @@ const renderSubmit = (saveState, appState, appFilled, submitHandler) => {
   else if(saveState === "SAVED") saveMsg = "Your responses have been saved.";
   return (
     <Submit>
-      {<SubmitButton
-        label="Submit"
-        backgroundColor="secondary"
-        color="white"
-        disabled={appState === "SUBMITTING" || !appFilled}
-        onClickHandler={submitHandler}
-                    />}
+      {
+        <SubmitButton
+          label="Submit"
+          backgroundColor="secondary"
+          color="white"
+          disabled={appState === "SUBMITTING" || !appFilled}
+          onClickHandler={submitHandler}
+        />
+      }
       <Text color="grey" size="normal">{saveMsg}</Text>
     </Submit>
   );
@@ -347,6 +471,7 @@ const ApplicationViewComponent = ({
 }) => {
 
   const [ saveState, updateSaveState ] = useState("READY");
+  const [ confirmSaveOpen, toggleConfirmSave ] = useState(false);
   const appSubmitted = appState === "SUBMITTED";
   const appFilledOut = appTemplate.every(qs => qs.content.every(q => (Object.keys(curAppInfo).includes(q.question.id) && curAppInfo && curAppInfo[q.question.id] !== "") || q.question.optional));
 
@@ -365,7 +490,15 @@ const ApplicationViewComponent = ({
     delayedUpdateField(fieldId, value, curAppInfo);
   }
 
-  console.log(curUserName, curAppInfo)
+  const closeModal = () => toggleConfirmSave(false);
+
+  const submitHandler = () => toggleConfirmSave(true);
+
+  const confirmSubmit = () => {
+    submitAppInfo();
+    closeModal();
+  }
+
 
   return (
     <PageWrapper title="My Application">
@@ -373,13 +506,20 @@ const ApplicationViewComponent = ({
         {(appState !== "FETCHING")
           ?
             <>
-              <Heading color="black" size="small" weight="normal">{`Hi ${curUserName}! Let's get to know you!.`}</Heading>
+              <Heading color="black" size="small" weight="normal">{`Hi ${curUserName.split(" ")[0]}! Let's get to know you!`}</Heading>
               {appTemplate.map(qs => renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted))}
-              {renderSubmit(saveState, appState, appFilledOut, submitAppInfo)}
+              {renderSubmit(saveState, appState, appFilledOut, submitHandler)}
             </>
           :
           <Loading />
         }
+
+        <ModalFrame show={confirmSaveOpen}>
+          <ConfirmSubmit
+            confirmSubmit={confirmSubmit}
+            closeModal={closeModal}
+          />
+        </ModalFrame>
 
       </Container>
     </PageWrapper>

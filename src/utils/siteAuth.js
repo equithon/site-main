@@ -18,8 +18,7 @@ export const withCurUserInfo = Component => props => {
 
   if(props.redirect) return Component;
 
-  if(value === null || !value.exists) { // pass in current user's profile details
-    // console.log('Unable to get user data. Please email Equithon support at hello@equithon.org');
+  if(value === null || !value || !value.exists) { // pass in current user's profile details
     return <Component {...props} />;
   }
 
@@ -78,7 +77,6 @@ export const accessIfAuthenticated = Component => props => {
   let AugmentedComponent;
   const { state: { firebase } } = useContext(SiteContext);
   const { initialising, user } = useAuthState(firebase.auth);
-  console.log({ initialising, user })
   const userLoggedIn = !initialising && (user !== null);
 
   if(initialising) {

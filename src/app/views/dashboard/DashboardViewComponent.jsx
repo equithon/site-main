@@ -10,6 +10,7 @@ import PageHeader from "./components/PageHeader/PageHeaderComponent";
 import NavTile from "./components/NavTile/NavTileComponent";
 
 const Container = styled.div`
+  max-width: 85vw;
   width: 85vw;
   height: 82vh;
   margin: 8vh auto 10vh auto;
@@ -24,6 +25,7 @@ const Container = styled.div`
   `};
 
   ${mediaSize.phone`
+    max-width: 80vw;
     width: 80vw;
     height: auto;
   `};
@@ -54,7 +56,7 @@ const Dashboard = styled.section`
   `};
 
   ${mediaSize.phone`
-    height: 85vh;
+    height: auto;
     padding: 0;
 
     grid-template-columns: auto;
@@ -69,6 +71,7 @@ const Dashboard = styled.section`
 
 const GreetingContainer = styled.div`
   grid-area: greeting;
+  overflow-x: hidden;
 
   ${mediaSize.tablet`
     white-space: nowrap;

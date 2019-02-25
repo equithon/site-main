@@ -18,6 +18,8 @@ export const PROFILE = {
 };
 export const EVENT = "/schedule/:eventId";
 export const PAGENOTFOUND = "/404";
+export const HELP = "/help";
+export const JUDGING_TOOL = "/judging";
 
 export const FINDER = {
   "/": HOME,
@@ -29,6 +31,8 @@ export const FINDER = {
   "/map": MAP,
   "/schedule": SCHEDULE,
   "/profile": PROFILE,
+  "/help": HELP,
+  "/judging": JUDGING_TOOL,
   "/404": PAGENOTFOUND
   // TODO: FINISH FILLING THIS IN
 };

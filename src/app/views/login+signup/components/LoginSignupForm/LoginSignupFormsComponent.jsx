@@ -143,8 +143,8 @@ const LoginSignupFormsComponent = ({
   validationSchemas,
   errorTable
 }) => {
-  const { dispatch } = useContext(SiteContext);
-  const [showLogin, toggleLogin] = useState(true);
+  const { state, dispatch } = useContext(SiteContext);
+  const [ showLogin, toggleLogin ] = useState(true);
 
   return (
     <ComponentContainer>
@@ -162,30 +162,40 @@ const LoginSignupFormsComponent = ({
           validationSchema={validationSchemas.login}
           onSubmit={(values, actions) => {
             logIn(values.loginEmail, values.loginPassword)
-              .then(() => {
-                actions.setSubmitting(false);
-                dispatch({
+            .then(() => {
+              actions.setSubmitting(false);
+              dispatch({
                   type: "UPDATE_DASHBOARD_GREETING",
-                  data: { value: getNewDashboardGreeting() }
-                });
-              })
-              .catch(err => {
-                const errMsg =
-                  err.code in errorTable
-                    ? errorTable[err.code]
-                    : errorTable.DEFAULT;
-                actions.setSubmitting(false);
-                actions.setStatus(errMsg);
+                data: { value: getNewDashboardGreeting() }
               });
+            })
+            .catch(err => {
+                const errMsg =
+              err.code in errorTable
+                ? errorTable[err.code]
+                : errorTable.DEFAULT;
+              actions.setSubmitting(false);
+              actions.setStatus(errMsg);
+            });
           }}
-          render={({ touched, errors, status, isSubmitting }) => {
+          render={({ touched, values, errors, status, setStatus, isSubmitting }) => {
             // hasErrors makes sure there are errors present, and that the error is on a field that has been touched
             const hasErrors =
-              Object.entries(errors).length !== 0 &&
-              touched[Object.keys(errors)[0]];
+            Object.entries(errors).length !== 0 &&
+            touched[Object.keys(errors)[0]];
             const hasStatus = status !== undefined;
             let errorMsg = hasErrors ? errors[Object.keys(errors)[0]] : "";
             errorMsg = hasStatus ? status : errorMsg;
+
+            const resetPassword = () => {
+              if(values && values.loginEmail && errors && !errors.loginEmail) {
+                state.firebase.resetPassword(values.loginEmail);
+                setStatus("A password reset link has been sent to your email.");
+              } else {
+                setStatus("Please make sure the inputted email is correct for your account.");
+              }
+
+            }
 
             return (
               <FormContents>
@@ -216,7 +226,7 @@ const LoginSignupFormsComponent = ({
                   color="error"
                   size="small"
                 >
-                  {errorMsg}
+                  {errorMsg} {!errors.loginEmail && <FormToggleText onClick={resetPassword}>Reset password</FormToggleText>}
                 </ErrorText>
 
                 <FormButton
