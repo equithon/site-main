@@ -27,10 +27,10 @@ const updateApplication = firebase => updatedAppInfo => {
 }
 
 // Submit a hacker's application. Non reversible.
-const submitApplication = firebase => () => {
+const submitApplication = firebase => updatedAppInfo => {
   if(firebase.auth.currentUser)
     firebase.firestore.collection('applications').doc(firebase.auth.currentUser.uid)
-      .update({ submitted: true, submittedAt: firebase.getTimestamp(new Date()) })
+      .update({ ...updatedAppInfo, submitted: true, submittedAt: firebase.getTimestamp(new Date()) })
 }
 
 
