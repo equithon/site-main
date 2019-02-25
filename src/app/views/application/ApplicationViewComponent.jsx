@@ -1,10 +1,9 @@
 import React, { useState, useCallback } from "react";
 import styled from "styled-components";
 import { debounce } from "debounce";
-import { mediaSize } from "../../../utils/siteTools";
+import { mediaSize, universityListOptions } from "../../../utils/siteTools";
 
 import LoadingSpinner from "../../../static/img/loaders/default_color_secondary.svg";
-import WorldUniversityList from "../../../static/assets/world_universities_and_domains";
 import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
 import TextInput from "../../shared/TextInput/TextInputComponent";
 import TextArea from "../../shared/TextArea/TextAreaComponent";
@@ -44,10 +43,7 @@ const appTemplate = [
           id: "studyInstitution",
           type: "option",
           placeholder: "Select a school",
-          options: WorldUniversityList.filter(uni => ["US", "CA"].includes(uni.alpha_two_code)).map(uni => ({
-            label: `${uni.name} (${uni.alpha_two_code})`,
-            value: uni.name && uni.name.toLowerCase().replace(/\W/g, '')
-          })),
+          options: universityListOptions,
           componentOptions: {
             allowCreate: true
           }
