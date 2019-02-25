@@ -17,6 +17,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Favicon from "../static/img/misc/favicon.ico";
 import SiteContext from "./siteContext";
+import WorldUniversityList from "../static/assets/world_universities_and_domains";
 
 library.add(
   faLightbulb,
@@ -70,3 +71,10 @@ export const HeadContents = () => {
     </Helmet>
   );
 };
+
+
+
+export const universityListOptions = WorldUniversityList.map(uni => ({
+  label: `${uni.name} (${uni.alpha_two_code})`,
+  value: uni.name && uni.name.toLowerCase().replace(/\W/g, '')
+}))
