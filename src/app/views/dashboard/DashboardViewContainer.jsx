@@ -70,6 +70,7 @@ const dashboardTiles = {
     linkTo: ROUTES.HELP,
     gridArea: "rightTop",
     backgroundImg: HelpTileBG,
+    disabled: true
   }
 };
 
