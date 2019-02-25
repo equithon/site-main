@@ -144,7 +144,7 @@ const LoginSignupFormsComponent = ({
   errorTable
 }) => {
   const { dispatch } = useContext(SiteContext);
-  const [showLogin, toggleLogin] = useState(true);
+  const [ showLogin, toggleLogin ] = useState(true);
 
   return (
     <ComponentContainer>

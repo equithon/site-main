@@ -12,7 +12,7 @@ import SelectDropdown from "../../shared/SelectDropdown/SelectDropdownComponent"
 import Button from "../../shared/Button/ButtonComponent";
 import Text from "../../shared/Text/TextComponent";
 import Heading from "../../shared/Heading/HeadingComponent";
-
+import Modal from "../../shared/Modal/ModalComponent";
 
 // The template for an application info, including options, etc.
 const appTemplate = [
@@ -236,7 +236,7 @@ const appTemplate = [
     ]
   },
   {
-    title: "A bonus question, just for fun.",
+    title: "A bonus question, just for fun!",
     content: [
       {
         label: "What is your favourite smell?",
@@ -345,6 +345,59 @@ const SubmitButton = styled(Button)`
 `;
 
 
+const ModalFrame = styled.div`
+  display: ${props => (props.show ? "flex" : "none")};
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(88, 88, 88, 0.49);
+`;
+
+const ConfirmSubmitModal = styled(Modal)`
+  width: 40em;
+  height: 20em;
+  padding: 5em;
+
+  border-radius: ${props => props.theme.app.border.radius};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  & > * {
+    margin: auto;
+    text-align: center;
+  }
+
+  ${mediaSize.phone`
+    width: 85vw;
+    height: 60vw;
+    padding: 2em;
+  `}
+`;
+
+
+const ConfirmSubmit = ({ confirmSubmit, closeModal }) => (
+  <ConfirmSubmitModal
+    backgroundColor="lightBlack"
+    handleClickOutside={closeModal}
+    onClickCloseHandler={closeModal}
+  >
+    <div>
+      <Text size="big" color="white">Are you sure you want to submit?</Text>
+      <Text size="big" color="white">You won't be able to edit your application after.</Text>
+    </div>
+    <SubmitButton
+      label="Yes, Submit"
+      backgroundColor="secondary"
+      color="white"
+      onClickHandler={confirmSubmit}
+    />
+  </ConfirmSubmitModal>
+);
+
 
 
 
@@ -392,13 +445,15 @@ const renderSubmit = (saveState, appState, appFilled, submitHandler) => {
   else if(saveState === "SAVED") saveMsg = "Your responses have been saved.";
   return (
     <Submit>
-      {<SubmitButton
-        label="Submit"
-        backgroundColor="secondary"
-        color="white"
-        disabled={appState === "SUBMITTING" || !appFilled}
-        onClickHandler={submitHandler}
-                    />}
+      {
+        <SubmitButton
+          label="Submit"
+          backgroundColor="secondary"
+          color="white"
+          disabled={appState === "SUBMITTING" || !appFilled}
+          onClickHandler={submitHandler}
+        />
+      }
       <Text color="grey" size="normal">{saveMsg}</Text>
     </Submit>
   );
@@ -416,6 +471,7 @@ const ApplicationViewComponent = ({
 }) => {
 
   const [ saveState, updateSaveState ] = useState("READY");
+  const [ confirmSaveOpen, toggleConfirmSave ] = useState(false);
   const appSubmitted = appState === "SUBMITTED";
   const appFilledOut = appTemplate.every(qs => qs.content.every(q => (Object.keys(curAppInfo).includes(q.question.id) && curAppInfo && curAppInfo[q.question.id] !== "") || q.question.optional));
 
@@ -434,6 +490,15 @@ const ApplicationViewComponent = ({
     delayedUpdateField(fieldId, value, curAppInfo);
   }
 
+  const closeModal = () => toggleConfirmSave(false);
+
+  const submitHandler = () => toggleConfirmSave(true);
+
+  const confirmSubmit = () => {
+    submitAppInfo();
+    closeModal();
+  }
+
 
   return (
     <PageWrapper title="My Application">
@@ -443,11 +508,18 @@ const ApplicationViewComponent = ({
             <>
               <Heading color="black" size="small" weight="normal">{`Hi ${curUserName.split(" ")[0]}! Let's get to know you!`}</Heading>
               {appTemplate.map(qs => renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted))}
-              {renderSubmit(saveState, appState, appFilledOut, submitAppInfo)}
+              {renderSubmit(saveState, appState, appFilledOut, submitHandler)}
             </>
           :
           <Loading />
         }
+
+        <ModalFrame show={confirmSaveOpen}>
+          <ConfirmSubmit
+            confirmSubmit={confirmSubmit}
+            closeModal={closeModal}
+          />
+        </ModalFrame>
 
       </Container>
     </PageWrapper>
