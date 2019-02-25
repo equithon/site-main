@@ -46,8 +46,6 @@ class Firebase {
     this.auth.createUserWithEmailAndPassword(email, password)
       // create corresponding doc in /users Firestore collection
       .then(userCredential => {
-        console.log(userCredential)
-        console.log(this.auth.currentUser)
         try {
           this.firestore.collection('users').doc(userCredential.user.uid).set({ name, role: 'HACKER' });
         } catch(e) {
@@ -77,7 +75,7 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
 
   // Request a password reset email for the current user
-  resetPassword = email => this.auth.sendPasswordResetEmail(email);
+  resetPassword = email => this.auth.sendPasswordResetEmail(email || this.auth.currentUser.email);
 
   getTimestamp = date => firebase.firestore.Timestamp.fromDate(date);
 

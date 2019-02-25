@@ -93,10 +93,10 @@ const ApplicationViewContainer = ({
     }
   }
 
-
   // save to firestore before component unmounts or page unloads
   useEffect(() => {
     window.addEventListener('beforeunload', () => updateAppFirestore(appRef.current));
+    dispatch({ type: "UPDATE_TITLE", data: { title: "My Application" }});
 
     return () => {
       window.removeEventListener('beforeunload', () => updateAppFirestore(appRef.current))
