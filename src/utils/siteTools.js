@@ -12,7 +12,8 @@ import {
   faQuestion,
   faChevronUp,
   faChevronDown,
-  faChevronCircleLeft
+  faChevronCircleLeft,
+  faTrophy
 } from "@fortawesome/free-solid-svg-icons";
 import Favicon from '../static/img/logo/logo_tiny_color.png';
 
@@ -27,7 +28,8 @@ library.add(
   faQuestion,
   faChevronUp,
   faChevronDown,
-  faChevronCircleLeft
+  faChevronCircleLeft,
+  faTrophy
 );
 
 export const displayWidthCutoffs = {

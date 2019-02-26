@@ -6,7 +6,7 @@ import Select from 'react-select';
 const SelectDropdown = styled(Select)`
   width: 100%;
   height: 100%;
-  padding: ${props => props.theme.app.container.padding};
+  padding: 0.2em;
 
   font-size: 100%;
   color: ${props =>
@@ -44,22 +44,24 @@ const SelectDropdown = styled(Select)`
 export default ({
   className,
   options,
-  placeholder = 'Select an option...',
-  defaultValue,
+  placeholder = "Select an option...",
+  defaultValue = "",
   disabled,
   allowMultiple,
-  outlineColor,
+  outlineColor = "lightBlack",
   onChangeHandler,
   formikInfo = { notUsing: true, field: {}, form: {} }
 }) => {
 
   const [value, updateValue] = useState(defaultValue);
   const [isFocused, toggleFocus] = useState(false);
-  const [isFilled, setFilled] = useState(defaultValue !== '');
+
 
   useEffect(() => {
-    if(defaultValue !== value) onChangeHandler(value);
-  });
+    if (formikInfo.notUsing && (defaultValue !== value)) {
+      onChangeHandler(value);
+    }
+  }, [value]);
 
   return (
     <SelectDropdown
@@ -70,7 +72,10 @@ export default ({
       isDisabled={disabled}
       placeholder={placeholder}
       options={options}
-      defaultValue={defaultValue && {value: defaultValue, label: options.find(o => o.value === defaultValue).label}}
+      value={value && {
+        value,
+        label: options.find(o => o.value === value).label
+      }}
       onBlur={() => toggleFocus(false)}
       onFocus={() => toggleFocus(true)}
       onChange={(option) => {setFilled(true); updateValue(option.value)}}

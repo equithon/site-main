@@ -36,22 +36,34 @@ export const withCurUserInfo = Component => props => {
 
 
 // This HOC only allows access to a component (usually a view/page) if the
-// user is logged in AND has an ORGANIZER role. It also passes the
+// user is logged in AND has an specific role. It also passes the
 // current user's information as a curUser prop for convenience.
-export const accessIfOrganizer = Component => props => {
+export const accessIfRole = permittedRoles => Component => props => {
   let AugmentedComponent;
+  let curUser;
   const { state: { firebase } } = useContext(SiteContext);
   const { initialising, user } = useAuthState(firebase.auth);
-  const userHasPermission = !initialising && (user !== null) && (user.role === "ORGANIZER");
+  const { loading, value } = useDocument(
+    firebase && firebase.firestore.doc(`users/${user && user.uid}`)
+  );
 
-  if(initialising) {
-    AugmentedComponent = withCurUserInfo(<PageLoadingView />)({});
+  try {
+     curUser = Object.assign({}, user, value && value.data());
+  } catch(e) {
+    console.log(e);
+  }
+
+  const userHasPermission = !initialising && !loading && (user !== undefined) && value && (curUser.role === permittedRoles || (Array.isArray(permittedRoles) && permittedRoles.includes(curUser.role)));
+
+  if(initialising || loading) {
+    AugmentedComponent = <PageLoadingView />;
   }
   else if(userHasPermission) {
-    AugmentedComponent = withCurUserInfo(Component)(props);
+    AugmentedComponent = <Component {...props} curUser={curUser} />
   }
   else {
-    AugmentedComponent = withCurUserInfo(<Redirect to="/account" />)({ redirect: true });
+    console.warn("Whoops! You don't have permission to view this page. If this is an error or a bug, please email alex@equithon.org.")
+    AugmentedComponent = <Redirect to="/" />;
   }
 
 
@@ -66,6 +78,7 @@ export const accessIfAuthenticated = Component => props => {
   let AugmentedComponent;
   const { state: { firebase } } = useContext(SiteContext);
   const { initialising, user } = useAuthState(firebase.auth);
+  console.log({ initialising, user })
   const userLoggedIn = !initialising && (user !== null);
 
   if(initialising) {
@@ -75,6 +88,7 @@ export const accessIfAuthenticated = Component => props => {
     AugmentedComponent = withCurUserInfo(Component)(props);
   }
   else {
+    console.warn("Whoops! You're not logged in. If this is an error or a bug, please email alex@equithon.org.")
     AugmentedComponent = withCurUserInfo(<Redirect to="/account" />)({ redirect: true });
   }
 
@@ -98,6 +112,7 @@ export const accessIfNotAuthenticated = Component => props => {
     AugmentedComponent = <Component {...props} />; // do nothing, they're unauthenticated
   }
   else {
+    console.warn("Whoops! You're logged in, so you can't view this page. If this is an error or a bug, please email alex@equithon.org.")
     AugmentedComponent = <Redirect to="/" />;
   }
 
