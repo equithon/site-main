@@ -53,6 +53,7 @@ const HeadingContainer = styled.div`
 `;
 
 const BackButtonContainer = styled.div`
+  -webkit-transform: translateZ(0);
   position: fixed;
   z-index: 2;
   height: 3em;
