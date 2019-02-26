@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Redirect } from "react-router-dom";
-import { HOME } from "../../../utils/siteRoutes";
-import Barrier from "../../../static/img/misc/construction.svg";
-import Heading from "../../shared/Heading/HeadingComponent";
+import { HOME } from "../../../../utils/siteRoutes";
+import Barrier from "../../../../static/img/misc/construction.svg";
+import Heading from "../../../shared/Heading/HeadingComponent";
 
 const Container = styled.div`
   width: 100vw;
@@ -20,7 +20,6 @@ const Img = styled.img`
 `;
 
 const Disclaimer = styled(Heading)`
-
   width: 80vw;
   text-align: center;
   margin: 0 auto;

@@ -1,10 +1,9 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { debounce } from "debounce";
 import { mediaSize, universityListOptions } from "../../../utils/siteTools";
 
 import LoadingSpinner from "../../../static/img/loaders/default_color_secondary.svg";
-import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
 import TextInput from "../../shared/TextInput/TextInputComponent";
 import TextArea from "../../shared/TextArea/TextAreaComponent";
 import SelectDropdown from "../../shared/SelectDropdown/SelectDropdownComponent";
@@ -285,6 +284,8 @@ const QuestionLabel = styled(Text)`
 const Loading = styled.div`
   width: 100%;
   height: 10vh;
+  margin: 50vh 0;
+
   // prevent from collapsing when there's no content during loading
   &:empty:after {
     content: "&nbsp;";
@@ -468,6 +469,8 @@ const ApplicationViewComponent = ({
 
   const [ saveState, updateSaveState ] = useState("READY");
   const [ confirmSaveOpen, toggleConfirmSave ] = useState(false);
+  const [ renderContent, updateRenderContent ] = useState(false);
+
   const appSubmitted = appState === "SUBMITTED";
   const appFilledOut = appTemplate.every(qs => qs.content.every(q => (Object.keys(curAppInfo).includes(q.question.id) && curAppInfo && curAppInfo[q.question.id] !== "") || q.question.optional));
 
@@ -480,6 +483,12 @@ const ApplicationViewComponent = ({
     updateAppInfo(newAppInfo);
     updateSaveState("SAVED");
   }, 1000), [submitAppInfo]);
+
+  useEffect(() => {
+    const appTimer = setTimeout(() => updateRenderContent(true), 500);
+
+    return () => clearTimeout(appTimer);
+  }, []);
 
   const saveResponseField = (fieldId, value) => {
     updateSaveState("SAVING");
@@ -497,9 +506,8 @@ const ApplicationViewComponent = ({
 
 
   return (
-    <PageWrapper title="My Application">
       <Container>
-        {(appState !== "FETCHING")
+        {(appState !== "FETCHING") && renderContent
           ?
             <>
               <Heading color="black" size="small" weight="normal">{`Hi ${curUserName.split(" ")[0]}! Let's get to know you!`}</Heading>
@@ -518,7 +526,6 @@ const ApplicationViewComponent = ({
         </ModalFrame>
 
       </Container>
-    </PageWrapper>
   );
 };
 

@@ -7,7 +7,7 @@ import LoginSignupFormsComponent from "./components/LoginSignupForm/LoginSignupF
 import WavesComponent from "./components/Waves/WavesComponent";
 
 const ViewContainer = styled.div`
-  height: 90vh;
+  height: 100vh;
   padding: 5vh 10vw;
   overflow-x: hidden;
 

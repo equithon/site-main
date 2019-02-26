@@ -103,6 +103,8 @@ const Loading = styled.div`
 `;
 
 export default ({
+  curUser,
+  someUser,
   history,
   prevLoc,
   isCurUser
@@ -188,17 +190,6 @@ export default ({
               <div className="infoFieldLabel">ATTENDING AS A...</div>
               <input
                 className="infoFieldValue"
-<<<<<<< HEAD
-                value={profileInfo.role && profileInfo.role.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase())}
-                readOnly
-                onChange={e => {
-                  e.persist();
-                  updateProfileInfo(prevInfo => ({
-                      ...prevInfo,
-                      role: e.target.value
-                  }));
-                }}
-=======
                 value={
                   profileInfo.role &&
                   profileInfo.role
@@ -206,7 +197,6 @@ export default ({
                   .replace(/\b(\w)/g, s => s.toUpperCase())
                 }
                 readOnly
->>>>>>> 8c462db... :fire: Add Firebase logic for applications and application reviews (#7)
               />
             </InfoField>
           </Info>
