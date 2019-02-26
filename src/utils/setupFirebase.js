@@ -1,21 +1,41 @@
 /* -------------- FIREBASE SETUP -------------- */
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
-import { createFirestoreInstance } from 'redux-firestore';
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
 
-import { firebaseConfig, rrfConfig } from './siteConfig';
-import appStore from '../ducks/store';
+import { firebaseConfig } from "./siteConfig";
+
+const curFirebaseConfig =
+  process.env.NODE_ENV === "production"
+    ? firebaseConfig.prod
+    : firebaseConfig.dev;
 
 
-const curFirebaseConfig = (process.env.NODE_ENV === 'production') ? firebaseConfig.prod : firebaseConfig.dev;
-firebase.initializeApp(curFirebaseConfig);
+class Firebase {
+  constructor() {
+    firebase.initializeApp(curFirebaseConfig);
 
-const reactReduxFirebase = {
-  firebase,
-  createFirestoreInstance,
-  config: rrfConfig,
-  dispatch: appStore.dispatch,
-};
+    this.auth = firebase.auth();
+    this.firestore = firebase.firestore();
+  }
 
-export default reactReduxFirebase;
+  createUser = (name, email, password) =>
+    this.auth.createUserWithEmailAndPassword(email, password)
+      // create corresponding doc in /users Firestore collection
+      .then(userCredential => {
+        this.firestore.collection('users').doc(userCredential.user.uid).set({ name, role: 'HACKER' })
+      });
+
+  signInUser = (email, password) =>
+    this.auth.signInWithEmailAndPassword(email, password);
+
+  signOutUser = () => this.auth.signOut();
+
+  resetPassword = email => this.auth.sendPasswordResetEmail(email);
+
+  updatePassword = password =>
+    this.auth.currentUser.updatePassword(password);
+}
+
+
+export default Firebase;

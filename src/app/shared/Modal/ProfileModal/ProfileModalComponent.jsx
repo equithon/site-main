@@ -113,21 +113,30 @@ const Loading = styled.div`
 
 export default ({
   firebase,
+<<<<<<< HEAD
   userProfile,
+=======
+  curUser,
+  someUser,
+>>>>>>> 1dbdbdf... :package: Replace Redux with Context API for store/dispatch, write custom logic for auth/firebase connections (#6)
   history,
   prevLoc,
   isCurUser
 }) => {
   const [profileLoaded, setProfileLoaded] = useState(
-    userProfile && userProfile.isLoaded && userProfile.name
+    isCurUser ? curUser !== undefined : someUser !== undefined
   );
-  const [profileInfo, updateProfileInfo] = useState(userProfile);
-  const isAdmin = profileLoaded && profileInfo.role === "ORGANIZER";
+  const [profileInfo, updateProfileInfo] = useState(
+    isCurUser ? curUser : someUser
+  );
+  // const isAdmin = profileLoaded && profileInfo.role === "ORGANIZER";
 
   useEffect(() => {
-    const nowLoaded = userProfile && userProfile.isLoaded && userProfile.name;
+    const nowLoaded = isCurUser
+      ? curUser !== undefined
+      : someUser !== undefined;
     if (!profileLoaded && nowLoaded) {
-      updateProfileInfo(userProfile);
+      updateProfileInfo(isCurUser ? curUser : someUser);
       setProfileLoaded(true);
     } else if (profileLoaded) {
       updateFirebaseProfile(firebase, profileInfo);

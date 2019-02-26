@@ -148,15 +148,15 @@ const ActionTooltip = styled(ReactTooltip)`
 
 /* ---------------------- DASHBOARD COMPONENT ------------------------------- */
 const DashboardViewComponent = ({
-  logOutUser,
-  curUserProfile,
+  logOut,
+  curUser,
   greetingInfo,
   toastInfo,
   userDashboards
 }) => (
   <Container>
     <PageHeader>
-      <ActionButton onClick={logOutUser} data-tip="Log Out">
+      <ActionButton onClick={logOut} data-tip="Log Out">
         <FontAwesomeIcon icon="door-open" size="1x" color="grey" />
       </ActionButton>
       <ActionTooltip place="bottom" effect="float" />
@@ -168,9 +168,7 @@ const DashboardViewComponent = ({
           {greetingInfo.greeting},
         </Heading>
         <Heading size="4em">
-          {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
-            ? `${curUserProfile.name.split(" ")[0]}.`
-            : ""}
+          {curUser ? `${curUser.name.split(" ")[0]}.` : ""}
         </Heading>
         <Heading size="small" weight="normal" color="grey">
           {greetingInfo.subgreeting}
@@ -188,10 +186,9 @@ const DashboardViewComponent = ({
       </ToastContainer>
 
       <TilesContainer>
-        {curUserProfile &&
-          curUserProfile.isLoaded &&
-          userDashboards[curUserProfile.role] &&
-          userDashboards[curUserProfile.role].map(tileInfo => (
+        {curUser &&
+          userDashboards[curUser.role] &&
+          userDashboards[curUser.role].map(tileInfo => (
             <NavTile key={tileInfo.label} info={tileInfo} />
           ))}
       </TilesContainer>
