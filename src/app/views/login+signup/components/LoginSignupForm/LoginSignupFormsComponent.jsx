@@ -3,7 +3,7 @@ import styled from "styled-components";
 import posed from "react-pose";
 import { Formik, Form, Field } from "formik";
 import { mediaSize } from "../../../../../utils/siteTools";
-import { SiteContext } from "../../../../../utils/siteContext";
+import SiteContext from "../../../../../utils/siteContext";
 
 import LoadingSpinner from "../../../../../static/img/loaders/default.svg";
 import TextInput from "../../../../shared/TextInput/TextInputComponent";

@@ -21,6 +21,30 @@ const reducer = (state, action) => {
     case "RESET":
       return INITIAL_CONTEXT_STATE;
 
+    case "UPDATE_HACKER_APPLICATION":
+      return {
+        ...state,
+        curAppInfo: action.data
+      };
+
+    case "SUBMIT_HACKER_APP":
+      return {
+        ...state,
+        curAppInfo: "SUBMITTED"
+      };
+
+    case "UPDATE_APP_REVIEW":
+      return {
+        ...state,
+        curAppReview: action.data
+      };
+      
+    case "SUBMIT_APP_REVIEW":
+      return {
+        ...state,
+        curAppReview: "SUBMITTED"
+      };
+
     case "UPDATE_DASHBOARD_GREETING":
       return {
         ...state,
@@ -35,9 +59,17 @@ const reducer = (state, action) => {
   }
 };
 
-export const SiteContext = createContext();
+const SiteContext = createContext();
 
 export const SiteContextConsumer = SiteContext.Consumer;
+
+export const SiteContextProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
+  const value = { state, dispatch };
+
+  return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
+};
+
 
 // maps state in site context store to props that the component will receive
 export const connectSiteContext = (
@@ -48,11 +80,4 @@ export const connectSiteContext = (
   </SiteContextConsumer>
 );
 
-const SiteContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, INITIAL_CONTEXT_STATE);
-  const value = { state, dispatch };
-
-  return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
-};
-
-export default SiteContextProvider;
+export default SiteContext;

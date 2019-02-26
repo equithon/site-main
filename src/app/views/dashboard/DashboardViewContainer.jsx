@@ -13,14 +13,16 @@ const dashboardTiles = {
     label: "Event Schedule",
     linkTo: ROUTES.SCHEDULE,
     gridArea: "leftTop",
-    backgroundImg: CalendarTileBG
+    backgroundImg: CalendarTileBG,
+    disabled: true
   },
   map: {
     label: "Event Map",
     linkTo: ROUTES.MAP,
     gridArea: "leftBot",
     backgroundImg: MapTileBG,
-    color: "black"
+    color: "black",
+    disabled: true
   },
   application: {
     label: "My Application",
@@ -32,19 +34,22 @@ const dashboardTiles = {
     label: "Application Review",
     linkTo: ROUTES.APP_REVIEW,
     gridArea: "centerTop",
-    backgroundColor: "#e3a368"
+    backgroundColor: "#e3a368",
+    disabled: true
   },
   attendee_list_volunteer: {
     label: "Check In Tool",
     linkTo: ROUTES.ATTENDEE_LIST_VOLUNTEER,
     gridArea: "rightTop",
-    backgroundColor: "#66ADEF"
+    backgroundColor: "#66ADEF",
+    disabled: true
   },
   attendee_list_organizer: {
     label: "Attendee List",
     linkTo: ROUTES.ATTENDEE_LIST_ORGANIZER,
     gridArea: "rightTop",
-    backgroundColor: "#bb7cc1"
+    backgroundColor: "#bb7cc1",
+    disabled: true
   },
   profile: {
     label: "My Profile",

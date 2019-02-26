@@ -68,8 +68,8 @@ export const GlobalStyles = createGlobalStyle`
 
     box-sizing: border-box;
 
-    font-family: ${app.font.family}
-    font-weight: ${app.font.weight.normal}
+    font-family: ${app.font.family};
+    font-weight: ${app.font.weight.normal};
   }
 
   @font-face {

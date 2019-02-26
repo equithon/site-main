@@ -189,7 +189,7 @@ const DashboardViewComponent = ({
         {curUser &&
           userDashboards[curUser.role] &&
           userDashboards[curUser.role].map(tileInfo => (
-            <NavTile key={tileInfo.label} info={tileInfo} />
+            <NavTile key={tileInfo.label} {...tileInfo} />
           ))}
       </TilesContainer>
     </Dashboard>

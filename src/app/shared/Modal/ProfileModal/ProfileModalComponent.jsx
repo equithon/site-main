@@ -1,21 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { mediaSize } from "../../../../utils/siteTools";
 import LoadingSpinner from "../../../../static/img/loaders/default.svg";
+import SiteContext from "../../../../utils/siteContext";
 
 import Modal from "../ModalComponent";
 import Heading from "../../Heading/HeadingComponent";
 
-
-const closeProfileModal = (history, prevLoc) => {
-  history.replace(prevLoc);
-};
-
-const updateFirebaseProfile = (firebase, profileInfo) => {
-  console.log(profileInfo);
-  // TODO: FIX THIS to update properly
-  // firebase.updateProfile({ name: profileInfo.name });
-};
 
 const ProfileModal = styled(Modal)`
   width: 60vw;
@@ -112,24 +103,28 @@ const Loading = styled.div`
 `;
 
 export default ({
-  firebase,
-<<<<<<< HEAD
-  userProfile,
-=======
-  curUser,
-  someUser,
->>>>>>> 1dbdbdf... :package: Replace Redux with Context API for store/dispatch, write custom logic for auth/firebase connections (#6)
   history,
   prevLoc,
   isCurUser
 }) => {
+  const { state: { firebase } } = useContext(SiteContext);
+
   const [profileLoaded, setProfileLoaded] = useState(
     isCurUser ? curUser !== undefined : someUser !== undefined
   );
   const [profileInfo, updateProfileInfo] = useState(
     isCurUser ? curUser : someUser
   );
-  // const isAdmin = profileLoaded && profileInfo.role === "ORGANIZER";
+
+  const updateFirebaseProfile = () => {
+    console.log(curUser, profileInfo);
+    if(curUser) firebase.updateUserName(curUser.uid, profileInfo.name);
+  };
+
+  const closeProfileModal = () => {
+    updateFirebaseProfile();
+    history.replace(prevLoc);
+  };
 
   useEffect(() => {
     const nowLoaded = isCurUser
@@ -138,8 +133,6 @@ export default ({
     if (!profileLoaded && nowLoaded) {
       updateProfileInfo(isCurUser ? curUser : someUser);
       setProfileLoaded(true);
-    } else if (profileLoaded) {
-      updateFirebaseProfile(firebase, profileInfo);
     }
   });
 
@@ -177,7 +170,8 @@ export default ({
               <div className="infoFieldLabel">EMAIL</div>
               <input
                 className="infoFieldValue"
-                defaultValue={profileInfo.email}
+                value={profileInfo.email}
+                readOnly
               />
               {/* TODO: add email change */}
             </InfoField>
@@ -195,6 +189,7 @@ export default ({
               <div className="infoFieldLabel">ATTENDING AS A...</div>
               <input
                 className="infoFieldValue"
+<<<<<<< HEAD
                 value={profileInfo.role && profileInfo.role.toLowerCase().replace(/\b(\w)/g, s => s.toUpperCase())}
                 readOnly
                 onChange={e => {
@@ -204,6 +199,15 @@ export default ({
                       role: e.target.value
                   }));
                 }}
+=======
+                value={
+                  profileInfo.role &&
+                  profileInfo.role
+                  .toLowerCase()
+                  .replace(/\b(\w)/g, s => s.toUpperCase())
+                }
+                readOnly
+>>>>>>> 8c462db... :fire: Add Firebase logic for applications and application reviews (#7)
               />
               {/* TODO: add role change */}
             </InfoField>
