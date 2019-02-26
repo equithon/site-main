@@ -1,64 +1,60 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const Container = styled.input`
+
+const TextInput = styled.input`
   width: 100%;
   height: 100%;
-  padding: 0.8em;
+  padding: ${props => props.theme.app.container.padding};
 
   font-size: 100%;
   color: ${props =>
     props.theme.colors[props.outlineColor] ||
-    props.outlineColor ||
-    props.theme.colors.black};
+    props.outlineColor};
 
   border-radius: ${props => props.theme.app.border.radius};
   border: ${props =>
     `2px solid ${props.theme.colors[props.outlineColor] ||
-      props.outlineColor ||
-      props.theme.colors.lightBlack}`};
+      props.outlineColor}`};
 
   transition: box-shadow 400ms ease-in-out;
-  &.touched,
   &:focus {
     outline: none;
     box-shadow: ${props =>
       `0 0 3px 1px ${props.theme.colors[props.outlineColor] ||
-        props.outlineColor ||
-        props.theme.colors.lightBlack}`};
+        props.outlineColor}`};
   }
 `;
 
-const TextInput = ({
+export default ({
   className,
   name,
-  type = "text",
-  defaultValue = "",
-  placeholder,
-  outlineColor,
+  type = 'text',
+  defaultValue = '',
+  placeholder = `Enter ${type} here`,
+  outlineColor = 'lightBlack',
   onChangeHandler = () => {},
   onBlurHandler = () => {},
-  formikInfo = { field: {}, form: {} }
+  formikInfo = { notUsing: true, field: {}, form: {} }
 }) => {
-  const [curValue, updateCurValue] = useState(defaultValue);
+
+  const [value, updateValue] = useState(defaultValue);
 
   useEffect(() => {
-    if (!formikInfo) onChangeHandler(curValue);
+    if(formikInfo.notUsing) onChangeHandler(value);
   });
 
   return (
-    <Container
+    <TextInput
       className={className}
+      outlineColor={outlineColor}
       name={name}
       type={type}
       placeholder={placeholder}
-      outlineColor={outlineColor}
-      onChange={e => updateCurValue(e.target.value)}
+      onChange={e => updateValue(e.target.value)}
       onBlur={onBlurHandler}
       {...formikInfo.field}
       formikForm={formikInfo.form}
     />
   );
 };
-
-export default TextInput;

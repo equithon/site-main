@@ -6,11 +6,10 @@ import { compose } from "recompose";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-const Container = styled.div`
-  position: relative;
+import Card from "../Card/CardComponent";
+
+const Modal = styled(Card)`
   margin: auto;
-  border-radius: ${props => props.theme.app.border.radius};
-  color: white;
 `;
 
 const CloseButton = styled.button`
@@ -19,11 +18,13 @@ const CloseButton = styled.button`
   right: -1vw;
   width: 2vw;
   height: 2vw;
+
   border: none;
   border-radius: 50%;
 
   cursor: pointer;
 
+  will-change: transform;
   transition: transform 150ms ease-in-out;
   transform: scale(1.01);
   &:hover {
@@ -45,23 +46,27 @@ const CloseButton = styled.button`
   `};
 `;
 
-const Modal = ({
-  className,
-  backgroundColor,
-  onCloseClickHandler,
-  children
-}) => (
-  <Container className={className} backgroundColor={backgroundColor}>
-    <CloseButton onClick={() => onCloseClickHandler()}>
-      <FontAwesomeIcon icon="times" size="1x" color="grey" />
-    </CloseButton>
-    {children}
-  </Container>
-);
-
 const enhance = compose(
   onClickOutside,
   withRouter
 );
 
-export default enhance(Modal);
+export default enhance(({
+  className,
+  backgroundColor,
+  backgroundImg,
+  onClickCloseHandler,
+  children
+}) => (
+  <Modal
+    className={className}
+    backgroundColor={backgroundColor}
+    backgroundImg={backgroundImg}
+  >
+    <CloseButton onClick={onClickCloseHandler}>
+      <FontAwesomeIcon icon="times" size="1x" color="grey" />
+    </CloseButton>
+
+    {children}
+  </Modal>
+));

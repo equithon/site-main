@@ -19,6 +19,7 @@ export const PROFILE = {
 export const EVENT = "/schedule/:eventId";
 export const PAGENOTFOUND = "/404";
 
+
 export const FINDER = {
   "/": HOME,
   "/account": SIGNUP_LOGIN,

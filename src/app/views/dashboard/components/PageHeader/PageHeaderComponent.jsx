@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 import ColorLogo from "../../../../../static/img/logo/logo_tiny_color.png";
-import Heading from "../../../../common/Heading/HeadingComponent";
+import Heading from "../../../../shared/Heading/HeadingComponent";
 
-const Container = styled.div`
+const Header = styled.header`
   height: 6vh;
   position: relative;
 
@@ -14,10 +14,9 @@ const Container = styled.div`
 `;
 
 const MainContents = styled.div`
-  height: 100%;
   display: flex;
 
-  cursor: ${props => (props.clickable ? "pointer" : "normal")};
+  cursor: ${props => (props.clickable ? "pointer" : "auto")};
 `;
 
 const Logo = styled.img`
@@ -29,22 +28,22 @@ const Title = styled(Heading)`
   margin: auto 0 auto 1vw;
 `;
 
-const ExtraContents = styled.div``;
+const ExtraContents = styled.div`
+  margin: auto 0;
+`;
 
-const PageHeader = ({ title = "Equithon", onClickHandler, children }) => (
-  <Container>
+export default ({ title = "Equithon", onClickHandler, children }) => (
+  <Header>
     <MainContents
       onClick={onClickHandler}
       clickable={onClickHandler !== undefined}
     >
       <Logo src={ColorLogo} />
-      <Title size="med" color="primary">
+      <Title size="normal" color="primary">
         {title}
       </Title>
     </MainContents>
 
     <ExtraContents>{children}</ExtraContents>
-  </Container>
+  </Header>
 );
-
-export default PageHeader;

@@ -1,3 +1,4 @@
+// conig for Firebase (keys stored in gitignored .env file)
 export const firebaseConfig = {
   dev: {
     apiKey: process.env.REACT_APP_DEV_API_KEY,
@@ -17,6 +18,7 @@ export const firebaseConfig = {
   }
 };
 
+// config for react-redux-firebase
 export const rrfConfig = {
   userProfile: 'users',
   useFirestoreForProfile: true // use Firestore for Profile instead of Realtime DB

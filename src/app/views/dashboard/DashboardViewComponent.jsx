@@ -1,27 +1,37 @@
 import React from "react";
 import styled from "styled-components";
 import ReactTooltip from "react-tooltip";
-import { Heading, Text } from "grommet";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { mediaSize } from "../../../utils/siteTools";
 
-import ToastCard from "../../common/ToastCard/ToastCardComponent";
+import Heading from "../../shared/Heading/HeadingComponent";
+import ToastCard from "../../shared/Card/ToastCard/ToastCardComponent";
 import PageHeader from "./components/PageHeader/PageHeaderComponent";
 import NavTile from "./components/NavTile/NavTileComponent";
 
+
 const Container = styled.div`
   width: 85vw;
-  height: 86vh;
-  margin: 7vh auto;
+  height: 82vh;
+  margin: 8vh auto 10vh auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  ${mediaSize.tablet`
+    height: 86vh;
+    margin: 7vh auto;
+  `};
 
   ${mediaSize.phone`
-    width: 75vw;
+    width: 80vw;
+    height: auto;
   `};
 `;
 
-const DashboardContainer = styled.div`
+const Dashboard = styled.section`
   height: 65vh;
-  padding: 5vh 5px 0 5px;
 
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -32,12 +42,13 @@ const DashboardContainer = styled.div`
     "toast tiles";
 
   ${mediaSize.tablet`
-    padding: 1em 1em;
     height: 75vh;
-    margin-top: 2vw;
+    padding: 1em 1em;
+    margin-top: 3vh;
+
     grid-template-columns: 3fr 1fr 2fr;
     grid-template-rows: 2fr 8fr;
-    grid-row-gap: 5vw;
+    grid-row-gap: 2em;
     grid-template-areas:
       "greeting greeting toast"
       "tiles tiles tiles";
@@ -45,11 +56,11 @@ const DashboardContainer = styled.div`
 
   ${mediaSize.phone`
     height: 85vh;
-    margin-top: 0;
     padding: 0;
+
     grid-template-columns: auto;
     grid-template-rows: 3fr 2fr auto;
-    grid-row-gap: 1em;
+    grid-row-gap: 2em;
     grid-template-areas:
       "greeting"
       "toast"
@@ -60,35 +71,12 @@ const DashboardContainer = styled.div`
 const GreetingContainer = styled.div`
   grid-area: greeting;
 
-  & span {
-    color: ${props => props.theme.colors.grey};
-    font-weight: 600;
-  }
-
-  & h1 {
-    color: ${props => props.theme.colors.lightBlack};
-  }
-
   ${mediaSize.tablet`
     white-space: nowrap;
-    & h1 {
-      font-size: 4em;
-      line-height: normal;
-    }
   `};
 
   ${mediaSize.phone`
     white-space: normal;
-
-    & span {
-      font-size: 1.5em;
-      line-height: normal;
-    }
-
-    & h1 {
-      font-size: 3em;
-      line-height: normal;
-    }
   `};
 `;
 
@@ -136,7 +124,7 @@ const TilesContainer = styled.div`
   `};
 `;
 
-const ActionButton = styled.div`
+const ActionButton = styled.span`
   display: inline-block;
   cursor: pointer;
   margin: 0 1vw;
@@ -153,10 +141,8 @@ const ActionButton = styled.div`
 `;
 
 const ActionTooltip = styled(ReactTooltip)`
-  font-family: "SF Pro Display" !important;
-  font-weight: 600 !important;
   background-color: ${props => props.theme.colors.grey} !important;
-  padding: 0 0.5em;
+  padding: 0.5em;
   margin: 0;
 `;
 
@@ -176,22 +162,24 @@ const DashboardViewComponent = ({
       <ActionTooltip place="bottom" effect="float" />
     </PageHeader>
 
-    <DashboardContainer>
+    <Dashboard>
       <GreetingContainer>
-        <Text size="xxlarge" responsive={false}>
+        <Heading size="small" weight="normal" color="grey">
           {greetingInfo.greeting},
-        </Text>
-        <Heading level="1" size="large" margin="xsmall">
+        </Heading>
+        <Heading size="4em">
           {curUserProfile && curUserProfile.isLoaded && curUserProfile.name
             ? `${curUserProfile.name.split(" ")[0]}.`
             : ""}
         </Heading>
-        <Text size="xxlarge">{greetingInfo.subgreeting}</Text>
+        <Heading size="small" weight="normal" color="grey">
+          {greetingInfo.subgreeting}
+        </Heading>
       </GreetingContainer>
 
       <ToastContainer>
         <ToastCard
-          iconName={toastInfo.iconName}
+          icon={toastInfo.iconName}
           backgroundColor={toastInfo.backgroundColor}
           className="dashboardToast"
         >
@@ -207,7 +195,7 @@ const DashboardViewComponent = ({
             <NavTile key={tileInfo.label} info={tileInfo} />
           ))}
       </TilesContainer>
-    </DashboardContainer>
+    </Dashboard>
   </Container>
 );
 

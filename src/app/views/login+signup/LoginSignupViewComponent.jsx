@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mediaSize } from "../../../utils/siteTools";
 
 import PageHeader from "../dashboard/components/PageHeader/PageHeaderComponent";
 import LoginSignupFormsComponent from "./components/LoginSignupForm/LoginSignupFormsComponent";
@@ -13,6 +14,10 @@ const ViewContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  ${mediaSize.phone`
+    height: 100vh;
+  `}
 `;
 
 const LoginSignupViewComponent = ({

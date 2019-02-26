@@ -21,22 +21,42 @@ export const colors = {
   green: "#6cc46a"
 };
 
+export const sizes = {
+  heading: {
+    big: "2.5em",
+    normal: "2em",
+    small: "1.5em"
+  },
+  bodyText: {
+    big: "1.2em",
+    normal: "1em",
+    small: "0.8em",
+    tiny: "0.5em"
+  }
+}
+
 export const app = {
   font: {
     family: "SF Pro Display",
-    weight: "600",
-    size: "18px",
-    height: "20px"
+    weight: {
+      bold: "600",
+      normal: "500",
+      light: "400",
+    },
   },
   border: {
     width: "2px",
     radius: "6px"
+  },
+  container: {
+    padding: "0.8em"
   }
 };
 
 const siteTheme = {
   colors,
-  app
+  app,
+  sizes
 };
 
 export default siteTheme;
@@ -49,7 +69,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 
     font-family: ${app.font.family}
-    font-weight: ${app.font.weight}
+    font-weight: ${app.font.weight.normal}
   }
 
   @font-face {
