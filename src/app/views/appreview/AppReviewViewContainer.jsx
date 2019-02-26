@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { compose } from "recompose";
 import AppReviewViewComponent from './AppReviewViewComponent';
-import { accessIfOrganizer } from '../../../utils/siteAuth';
+import { accessIfRole } from '../../../utils/siteAuth';
 import SiteContext, { connectSiteContext } from "../../../utils/siteContext";
 
 
@@ -31,7 +31,7 @@ const mapContextStateToProps = ({ state: { firebase } }) => ({
 });
 
 const enhance = compose(
-  accessIfOrganizer,
+  accessIfRole("ORGANIZER"),
   connectSiteContext(mapContextStateToProps),
 );
 

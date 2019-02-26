@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Barrier from "../../../static/img/misc/pagenotfound.svg";
+import { Redirect } from "react-router-dom";
+import { HOME } from "../../../utils/siteRoutes";
+import Barrier from "../../../static/img/misc/construction.svg";
 import Heading from "../../shared/Heading/HeadingComponent";
 
 const Container = styled.div`
@@ -18,18 +20,34 @@ const Img = styled.img`
 `;
 
 const Disclaimer = styled(Heading)`
+
+  width: 80vw;
+  text-align: center;
   margin: 0 auto;
 `;
 
 
-const PageNotFoundViewContainer = () => (
-  <Container>
-    <Img src={Barrier} />
-    <Disclaimer size="big" weight="normal" color="grey">
-      Looks like you&apos;re a bit lost.
-    </Disclaimer>
-  </Container>
-);
+const PageNotFoundViewContainer = () => {
+
+  const [ shouldRedirect, updateShouldRedirect ] = useState(false);
+
+  useEffect(() => {
+    const delayedRedirect = setTimeout(() => updateShouldRedirect(true), 2000);
+
+    return () => clearTimeout(delayedRedirect);
+  }, []);
+
+  if(shouldRedirect) return <Redirect noThrow to={HOME} />;
+
+  return (
+    <Container>
+      <Img src={Barrier} />
+      <Disclaimer size="big" weight="normal" color="grey">
+        Looks like you&apos;re a bit lost.
+      </Disclaimer>
+    </Container>
+  );
+};
 
 
 export default PageNotFoundViewContainer;

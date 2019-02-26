@@ -1,5 +1,5 @@
-import React from 'react';
-import Helmet from 'react-helmet';
+import React, { useContext } from "react";
+import Helmet from "react-helmet";
 import { css } from "styled-components";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -15,8 +15,8 @@ import {
   faChevronCircleLeft,
   faTrophy
 } from "@fortawesome/free-solid-svg-icons";
-import Favicon from '../static/img/logo/logo_tiny_color.png';
-
+import Favicon from "../static/img/misc/favicon.ico";
+import SiteContext from "./siteContext";
 
 library.add(
   faLightbulb,
@@ -50,20 +50,21 @@ export const mediaSize = Object.keys(displayWidthCutoffs).reduce((acc, label) =>
 
 
 // react-helmet header
-export const HeadContents = ({
-  pageTitle = 'Equithon'
-}) => (
-  <Helmet>
-    <title>{pageTitle}</title>
-    <meta
-      name="description"
-      content="Personalized dashboard and home base for Equithon 2019 attendees."
-    />
-    <link
-      rel="icon"
-      href={Favicon}
-      sizes={['16x16', '32x32', '64x64', '128x128']}
-      type="image/png"
-    />
-  </Helmet>
-);
+export const HeadContents = () => {
+  const { state: { siteTitle } } = useContext(SiteContext);
+  return (
+    <Helmet>
+      <title>{siteTitle}</title>
+      <meta
+        name="description"
+        content="Personalized dashboard and home base for Equithon 2019 attendees."
+      />
+      <link
+        rel="icon"
+        href={Favicon}
+        sizes={["16x16", "32x32", "64x64", "128x128"]}
+        type="image/ico"
+      />
+    </Helmet>
+  );
+};

@@ -5,9 +5,6 @@ import { HOME } from "../../../utils/siteRoutes";
 import Barrier from "../../../static/img/misc/construction.svg";
 import Heading from "../../shared/Heading/HeadingComponent";
 
-// The template for a review of an application, including options, etc.
-const appReviewTemplate = {};
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -31,7 +28,7 @@ const Disclaimer = styled(Heading)`
 
 
 
-const AppReviewViewComponent = () => {
+const JudgingToolViewComponent = () => {
 
   const [ shouldRedirect, updateShouldRedirect ] = useState(false);
 
@@ -53,4 +50,4 @@ const AppReviewViewComponent = () => {
   );
 };
 
-export default AppReviewViewComponent;
+export default JudgingToolViewComponent;

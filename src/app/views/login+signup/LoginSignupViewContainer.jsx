@@ -43,7 +43,7 @@ const getNewDashboardGreeting = () => {
     greeting = "Good evening";
   }
 
-  let subGreeting = "Today's the day! Happy hacking!";
+  let subgreeting = "Today's the day! Happy hacking!";
   const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
   const curDate = new Date();
   const eventDate = new Date(curDate.getFullYear(), 4, 3);
@@ -51,12 +51,13 @@ const getNewDashboardGreeting = () => {
     (eventDate.getTime() - curDate.getTime()) / oneDay
   );
 
-  if (daysUntilEvent)
-    subGreeting = `There are ${daysUntilEvent} days until Equithon!`;
+  if (daysUntilEvent) {
+    subgreeting = `There are ${daysUntilEvent} days until Equithon!`;
+  }
 
   return {
     greeting,
-    subGreeting
+    subgreeting
   };
 };
 

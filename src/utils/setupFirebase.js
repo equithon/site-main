@@ -75,7 +75,7 @@ class Firebase {
     this.auth.currentUser.updatePassword(password);
 
   // Request a password reset email for the current user
-  resetPassword = email => this.auth.sendPasswordResetEmail(email);
+  resetPassword = email => this.auth.sendPasswordResetEmail(email || this.auth.currentUser.email);
 
   getTimestamp = date => firebase.firestore.Timestamp.fromDate(date);
 

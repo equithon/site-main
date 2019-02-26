@@ -115,9 +115,9 @@ export default ({
   const [profileInfo, updateProfileInfo] = useState(
     isCurUser ? curUser : someUser
   );
+  const [passwordFieldLabel, updatePasswordFieldLabel] = useState("CHANGE / RESET PASSWORD");
 
   const updateFirebaseProfile = () => {
-    console.log(curUser, profileInfo);
     if(curUser) firebase.updateUserName(curUser.uid, profileInfo.name);
   };
 
@@ -173,15 +173,14 @@ export default ({
                 value={profileInfo.email}
                 readOnly
               />
-              {/* TODO: add email change */}
             </InfoField>
 
             <InfoField gridarea="password">
               <ChangePasswordLabel
                 className="infoFieldLabel"
-                onClick={() => console.log("TODO: allow change password")}
+                onClick={() => {updatePasswordFieldLabel("A PASSWORD RESET LINK HAS BEEN SENT TO YOUR EMAIL."); firebase.resetPassword()}}
               >
-                CHANGE PASSWORD
+                {passwordFieldLabel}
               </ChangePasswordLabel>
             </InfoField>
 
@@ -209,7 +208,6 @@ export default ({
                 readOnly
 >>>>>>> 8c462db... :fire: Add Firebase logic for applications and application reviews (#7)
               />
-              {/* TODO: add role change */}
             </InfoField>
           </Info>
         </Profile>

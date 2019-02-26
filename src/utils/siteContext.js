@@ -22,6 +22,7 @@ const siteToasts = {
 
 
 const INITIAL_CONTEXT_STATE = {
+  siteTitle: "Equithon",
   firebase: new Firebase(),
   dashboardInfo: {
     greetingInfo: {
@@ -36,6 +37,12 @@ const reducer = (state, action) => {
   switch (action.type) {
     case "RESET":
       return INITIAL_CONTEXT_STATE;
+
+    case "UPDATE_TITLE":
+      return {
+        ...state,
+        siteTitle: action.data.title
+      };
 
     case "UPDATE_APP_REVIEW":
       return {

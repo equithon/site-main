@@ -1,9 +1,13 @@
 import React from 'react';
+import { compose } from "recompose";
+
 import MapViewComponent from './MapViewComponent';
 
 
-// this is where we would normally do the redux stuffz
-const MapViewContainer = () => <MapViewComponent/>;
+const enhance = compose(
+);
+
+const MapViewContainer = () => <MapViewComponent />;
 
 
-export default MapViewContainer;
+export default enhance(MapViewContainer);
