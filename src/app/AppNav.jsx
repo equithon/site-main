@@ -14,7 +14,7 @@ import MyProfileView from "./views/myprofile/MyProfileViewContainer";
 import EventView from "./views/event/EventViewContainer";
 import HelpView from "./views/help/HelpViewContainer";
 import JudgingToolView from "./views/judging/JudgingToolViewContainer";
-import PageNotFoundView from "./views/404/PageNotFoundContainer";
+import PageNotFoundView from "./views/misc/404/PageNotFoundContainer";
 
 import * as ROUTES from "../utils/siteRoutes";
 

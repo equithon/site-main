@@ -1,10 +1,12 @@
 import React, { Children, useState } from "react";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
+import { compose } from "recompose";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useScrollYPosition } from "react-use-scroll-position";
 import { mediaSize } from "../../../utils/siteTools";
 import { HOME } from "../../../utils/siteRoutes";
+import { withExceptionHandler } from "../../../utils/setupErrHandling";
 
 import Heading from "../Heading/HeadingComponent";
 
@@ -100,7 +102,13 @@ const BackButton = styled.div`
   }
 `;
 
-export default withRouter(({
+
+const enhance = compose(
+  withExceptionHandler,
+  withRouter,
+);
+
+const PageWrapperComponent = enhance(({
   className,
   title,
   history,
@@ -139,3 +147,11 @@ export default withRouter(({
     </PageWrapper>
   );
 });
+
+export default PageWrapperComponent;
+
+export const withPageWrapper = ({ title }) => Component => props => (
+  <PageWrapperComponent title={title}>
+    <Component {...props} />
+  </PageWrapperComponent>
+);

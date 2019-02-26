@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDocument } from 'react-firebase-hooks/firestore';
 import { compose } from "recompose";
-import ApplicationViewComponent from './ApplicationViewComponent';
 import { accessIfRole } from '../../../utils/siteAuth';
 import SiteContext, { connectSiteContext } from "../../../utils/siteContext";
+import { withPageWrapper } from "../../shared/PageWrapper/PageWrapperComponent";
 
+import ApplicationViewComponent from './ApplicationViewComponent';
 
 
 // Fetches a hacker's application from Firestore.
@@ -43,8 +44,10 @@ const mapContextStateToProps = ({ state: { firebase } }) => ({
 
 const enhance = compose(
   accessIfRole("HACKER"),
+  withPageWrapper({ title: "My Application" }),
   connectSiteContext(mapContextStateToProps),
 );
+
 
 
 const ApplicationViewContainer = ({
@@ -61,7 +64,6 @@ const ApplicationViewContainer = ({
   const [ localAppInfo, updateLocalAppInfo ] = useState({ submitted: false });
   const appRef = useRef();
   appRef.current = localAppInfo;
-
 
   const updateAppInfo = newAppInfo => {
     const newLocalAppInfo = {
@@ -93,6 +95,7 @@ const ApplicationViewContainer = ({
     }
   }
 
+
   // save to firestore before component unmounts or page unloads
   useEffect(() => {
     window.addEventListener('beforeunload', () => updateAppFirestore(appRef.current));
@@ -106,7 +109,7 @@ const ApplicationViewContainer = ({
 
 
   return (
-    <ApplicationViewComponent curUserName={curUser && curUser.name} updateAppInfo={updateAppInfo} submitAppInfo={submitAppInfo} appState={appState} curAppInfo={localAppInfo} />
+      <ApplicationViewComponent curUserName={curUser && curUser.name} updateAppInfo={updateAppInfo} submitAppInfo={submitAppInfo} appState={appState} curAppInfo={localAppInfo} />
   );
 };
 

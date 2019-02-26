@@ -2,6 +2,8 @@ import { compose, withProps } from "recompose";
 import { connectSiteContext } from "../../../utils/siteContext";
 import { accessIfAuthenticated } from "../../../utils/siteAuth";
 import * as ROUTES from "../../../utils/siteRoutes";
+import { withExceptionHandler } from "../../../utils/setupErrHandling";
+
 import DashboardViewComponent from "./DashboardViewComponent";
 
 import MapTileBG from "../../../static/img/dashboard/tiles/map.png";
@@ -119,6 +121,7 @@ const mapContextStateToProps = ({ state: { firebase, dashboardInfo } }) => ({
 });
 
 const enhance = compose(
+  withExceptionHandler,
   accessIfAuthenticated,
   connectSiteContext(mapContextStateToProps),
   withProps({

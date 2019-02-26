@@ -34,6 +34,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.14",
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "@sentry/browser": "^4.6.4",
     "ajv": "^6.8.1",
     "debounce": "^1.2.0",
     "firebase": "^5.8.2",
@@ -62,6 +63,7 @@
   "devDependencies": {
     "@babel/core": "^7.2.2",
     "@percy-io/percy-storybook": "^2.1.0",
+    "@sentry/webpack-plugin": "^1.6.2",
     "@storybook/react": "^4.1.11",
     "babel-eslint": "9.0.0",
     "babel-jest": "^23.6.0",

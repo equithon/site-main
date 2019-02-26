@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from "react";
 import Firebase from "./setupFirebase";
-
+import Sentry from "./setupErrHandling";
 
 const siteToasts = {
   welcomeBack: {
@@ -24,6 +24,7 @@ const siteToasts = {
 const INITIAL_CONTEXT_STATE = {
   siteTitle: "Equithon",
   firebase: new Firebase(),
+  sentry: new Sentry(),
   dashboardInfo: {
     greetingInfo: {
       greeting: "Hey there",

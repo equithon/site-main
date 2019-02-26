@@ -4,7 +4,6 @@ import { debounce } from "debounce";
 import { mediaSize, universityListOptions } from "../../../utils/siteTools";
 
 import LoadingSpinner from "../../../static/img/loaders/default_color_secondary.svg";
-import PageWrapper from "../../shared/PageWrapper/PageWrapperComponent";
 import TextInput from "../../shared/TextInput/TextInputComponent";
 import TextArea from "../../shared/TextArea/TextAreaComponent";
 import SelectDropdown from "../../shared/SelectDropdown/SelectDropdownComponent";
@@ -497,7 +496,6 @@ const ApplicationViewComponent = ({
 
 
   return (
-    <PageWrapper title="My Application">
       <Container>
         {(appState !== "FETCHING")
           ?
@@ -518,7 +516,6 @@ const ApplicationViewComponent = ({
         </ModalFrame>
 
       </Container>
-    </PageWrapper>
   );
 };
 

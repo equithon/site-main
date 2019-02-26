@@ -2,6 +2,8 @@ import { compose, withProps } from "recompose";
 import * as Yup from "yup";
 import { accessIfNotAuthenticated } from "../../../utils/siteAuth";
 import { connectSiteContext } from "../../../utils/siteContext";
+import { withExceptionHandler } from "../../../utils/setupErrHandling";
+
 import LoginSignupViewComponent from "./LoginSignupViewComponent";
 
 const errorTable = {
@@ -67,6 +69,7 @@ const mapContextToProps = ({ state: { firebase } }) => ({
 });
 
 const enhance = compose(
+  withExceptionHandler,
   accessIfNotAuthenticated,
   connectSiteContext(mapContextToProps),
   withProps({
