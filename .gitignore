@@ -80,10 +80,15 @@ yarn-error.log
 # misc
 .DS_Store
 .env.local
+.env.development
 .env.development.local
+.env.test
 .env.test.local
 .env.production.local
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# for testing with Storybook and Percy
+storybook-static

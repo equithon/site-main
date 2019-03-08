@@ -1,0 +1,48 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /users/{userId} {
+    	allow read: if request.auth.uid == userId;
+      allow update, delete: if request.auth.uid == userId
+      											&& request.resource.data.role == resource.data.role;
+      allow create: if request.auth.uid == userId
+      							&& request.resource.data.role == "HACKER";
+
+
+      allow read: if request.auth.uid != null
+                  && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "VOLUNTEER";
+    	allow update: if request.auth.uid != null
+      							&& get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "VOLUNTEER";
+
+
+      allow read, write: if request.auth.uid != null
+                     		 && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "ORGANIZER";
+
+    }
+
+    match /applications/{applicationId} {
+      allow read: if request.auth.uid == applicationId;
+      allow create: if request.auth.uid == applicationId
+      						  && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "HACKER";
+      allow update: if request.auth.uid == applicationId
+      							&& get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "HACKER";
+
+
+      allow read: if request.auth.uid != null
+      						&& get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "ORGANIZER";
+    	allow update: if request.auth.uid != null
+      							&& get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "ORGANIZER";
+    }
+
+    match /events/{event} {
+      allow read;
+      allow write: if request.auth.uid != null
+      						 && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "ORGANIZER";
+    }
+
+    match /mailinglist/{mailinglistEmail} {
+      allow read: if false;
+      allow write;
+    }
+  }
+}

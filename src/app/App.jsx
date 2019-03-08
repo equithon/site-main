@@ -1,23 +1,24 @@
-import * as React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React from "react";
+import { ThemeProvider } from "styled-components";
+import { BrowserRouter as AppRouter, Route } from "react-router-dom";
+import siteTheme, { GlobalStyles } from "../utils/siteStyles";
+import { HeadContents } from "../utils/siteTools";
+import { SiteContextProvider } from "../utils/siteContext";
 
-// COMPONENTS
-import DashboardContainer from './dashboard/DashboardContainer';
-import LoginContainer from './login+signup/LoginContainer';
+import AppNav from "./AppNav";
 
-
-// DATA
-import * as ROUTES from '../utils/siteRoutes';
-
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Route exact path={ROUTES.HOME} component={DashboardContainer} />
-        <Route exact path={ROUTES.SIGNUP_LOGIN} component={LoginContainer} />
-      </div>
-    </Router>
-  );
-}
+const App = () => (
+  <ThemeProvider theme={siteTheme}>
+    <SiteContextProvider>
+      <>
+        <HeadContents />
+        <GlobalStyles />
+        <AppRouter>
+          <Route component={AppNav} />
+        </AppRouter>
+      </>
+    </SiteContextProvider>
+  </ThemeProvider>
+);
 
 export default App;
