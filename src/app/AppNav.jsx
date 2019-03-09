@@ -16,6 +16,8 @@ import EventView from "./views/event/EventViewContainer";
 import HelpView from "./views/help/HelpViewContainer";
 import JudgingToolView from "./views/judging/JudgingToolViewContainer";
 import PageNotFoundView from "./views/misc/404/PageNotFoundContainer";
+import RsvpView from "./views/rsvp/RsvpViewContainer";
+
 
 import * as ROUTES from "../utils/siteRoutes";
 
@@ -129,6 +131,7 @@ const AppNav = ({ location }) => {
         <Route exact path={ROUTES.SCHEDULE} component={ScheduleView} />
         <Route exact path={ROUTES.HELP} component={HelpView} />
         <Route exact path={ROUTES.JUDGING_TOOL} component={JudgingToolView} />
+        <Route exact path={ROUTES.APP_STATUS} component={RsvpView} />
 
         <Route exact path={ROUTES.PAGENOTFOUND} component={PageNotFoundView} />
         <Redirect to="/404" />

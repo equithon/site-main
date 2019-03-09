@@ -20,7 +20,7 @@ export const EVENT = "/schedule/:eventId";
 export const PAGENOTFOUND = "/404";
 export const HELP = "/help";
 export const JUDGING_TOOL = "/judging";
-
+export const APP_STATUS = "/status";
 
 export const FINDER = {
   "/": HOME,
@@ -34,6 +34,7 @@ export const FINDER = {
   "/profile": PROFILE,
   "/help": HELP,
   "/judging": JUDGING_TOOL,
-  "/404": PAGENOTFOUND
+  "/404": PAGENOTFOUND,
+  "/status": APP_STATUS
   // TODO: FINISH FILLING THIS IN
 };

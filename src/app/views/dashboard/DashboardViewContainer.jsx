@@ -1,3 +1,4 @@
+import React from "react";
 import { compose, withProps } from "recompose";
 import { connectSiteContext } from "../../../utils/siteContext";
 import { accessIfAuthenticated } from "../../../utils/siteAuth";
@@ -30,6 +31,12 @@ const dashboardTiles = {
   application: {
     label: "My Application",
     linkTo: ROUTES.APPLICATION,
+    gridArea: "centerTop",
+    backgroundImg: ApplicationTileBG
+  },
+  rsvp: {
+    label: "Application Status",
+    linkTo: ROUTES.APP_STATUS,
     gridArea: "centerTop",
     backgroundImg: ApplicationTileBG
   },
@@ -124,9 +131,13 @@ const enhance = compose(
   withExceptionHandler,
   accessIfAuthenticated,
   connectSiteContext(mapContextStateToProps),
-  withProps({
-    userDashboards
-  })
 );
 
-export default enhance(DashboardViewComponent);
+export default enhance(({ curUser, ...props }) => {
+  if(curUser && curUser.role === "HACKER") { //  && curUser.reviewed) { TODO; uncomment this
+    userDashboards.HACKER.shift(); // remove application tile
+    userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
+  }
+
+  return <DashboardViewComponent curUser={curUser} userDashboards={userDashboards} {...props} />;
+});
