@@ -31,7 +31,7 @@ export default ({
   color = "white",
   backgroundColor = "black",
   type = "button",
-  onClickHandler = () => console.log(`clicked ${label} button`)
+  onClickHandler = () => {}
 }) => (
   <Button
     className={className}

@@ -23,6 +23,14 @@ const firebaseConfig = {
   }
 };
 
+const prodConfig = {
+  apiKey: "AIzaSyBqfsxK5YJ44FRi_8mJtR3HiorXKtYzKM0",
+  authDomain: "equithon-platform-2019.firebaseapp.com",
+  databaseURL: "https://equithon-platform-2019.firebaseio.com",
+  projectId: "equithon-platform-2019",
+  storageBucket: "equithon-platform-2019.appspot.com",
+  messagingSenderId: "740846697122"
+};
 
 const curFirebaseConfig =
   process.env.NODE_ENV === "production"
@@ -30,11 +38,9 @@ const curFirebaseConfig =
     : firebaseConfig.dev;
 
 
-
-
 class Firebase {
   constructor() {
-    firebase.initializeApp(curFirebaseConfig);
+    firebase.initializeApp(prodConfig);
 
     this.auth = firebase.auth();
     this.firestore = firebase.firestore();
