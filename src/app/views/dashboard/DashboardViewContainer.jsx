@@ -134,10 +134,10 @@ const enhance = compose(
 );
 
 export default enhance(({ curUser, ...props }) => {
-  if(curUser && curUser.role === "HACKER") { //  && curUser.reviewed) { TODO; uncomment this
-    userDashboards.HACKER.shift(); // remove application tile
-    userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
-  }
+  // if(curUser && curUser.role === "HACKER") { //  && curUser.reviewed) { TODO; uncomment this
+  //   userDashboards.HACKER.shift(); // remove application tile
+  //   userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
+  // }
 
   return <DashboardViewComponent curUser={curUser} userDashboards={userDashboards} {...props} />;
 });

@@ -23,15 +23,6 @@ const firebaseConfig = {
   }
 };
 
-const prodConfig = {
-  apiKey: "AIzaSyBqfsxK5YJ44FRi_8mJtR3HiorXKtYzKM0",
-  authDomain: "equithon-platform-2019.firebaseapp.com",
-  databaseURL: "https://equithon-platform-2019.firebaseio.com",
-  projectId: "equithon-platform-2019",
-  storageBucket: "equithon-platform-2019.appspot.com",
-  messagingSenderId: "740846697122"
-};
-
 const curFirebaseConfig =
   process.env.NODE_ENV === "production"
     ? firebaseConfig.prod
@@ -40,7 +31,7 @@ const curFirebaseConfig =
 
 class Firebase {
   constructor() {
-    firebase.initializeApp(prodConfig);
+    firebase.initializeApp(curFirebaseConfig);
 
     this.auth = firebase.auth();
     this.firestore = firebase.firestore();
@@ -57,7 +48,8 @@ class Firebase {
         } catch(e) {
           console.log(e);
         }
-      });
+      })
+      .catch(err => console.log(err));
 
   // Sign in a user using an email and password
   signInUser = (email, password) =>
