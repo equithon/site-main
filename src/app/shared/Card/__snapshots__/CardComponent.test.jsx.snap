@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders correctly 1`] = `
+.c0 {
+  padding: 0.8em;
+  border-radius: 6px;
+  color: white;
+  background-color: #454545;
+  cursor: auto;
+  will-change: transform;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  -webkit-transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+.c0:hover {
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
+}
+
+<_default>
+  <styled.div
+    backgroundColor="black"
+    clickable={false}
+    color="white"
+  >
+    <StyledComponent
+      backgroundColor="black"
+      clickable={false}
+      color="white"
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": false,
+            "lastClassName": "c0",
+            "rules": Array [
+              "
+  padding: ",
+              [Function],
+              ";
+  border-radius: ",
+              [Function],
+              ";
+
+  color: ",
+              [Function],
+              ";
+  background-color: ",
+              [Function],
+              ";
+  background: ",
+              [Function],
+              ";
+
+  // only display cursor or expand on hover if clickable
+  cursor: ",
+              [Function],
+              ";
+
+  will-change: transform;
+  transition: transform 150ms ease-in-out;
+  transform: scale(1.01);
+  &:hover {
+    transform: ",
+              [Function],
+              ";
+  }
+",
+            ],
+          },
+          "displayName": "styled.div",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "div",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+    >
+      <div
+        className="c0"
+        color="white"
+      />
+    </StyledComponent>
+  </styled.div>
+</_default>
+`;
