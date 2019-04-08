@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { mediaSize } from "../../../../../utils/siteTools";
 
 import Heading from "../../../../shared/Heading/HeadingComponent";
 import Card from "../../../../shared/Card/CardComponent";
@@ -32,8 +31,10 @@ export default ({
   gridArea,
   disabled
 }) => {
-
-  const augmentedLinkTo = (typeof linkTo === 'object') ? { ...linkTo, state: { ...linkTo.state, cameFromApp: true }} : { pathname: linkTo, state: { cameFromApp: true }};
+  const augmentedLinkTo =
+    typeof linkTo === "object"
+      ? { ...linkTo, state: { ...linkTo.state, cameFromApp: true } }
+      : { pathname: linkTo, state: { cameFromApp: true } };
   const [tileClicked, setClicked] = useState(false);
 
   if (tileClicked) setClicked(false);

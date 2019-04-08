@@ -28,7 +28,7 @@ const appTemplate = [
             { label: "High School Diploma", value: "highschool" },
             { label: "Bachelor's", value: "undergrad" },
             { label: "Master's", value: "masters" },
-            { label: "PhD", value: "phd" },
+            { label: "PhD", value: "phd" }
           ],
           componentOptions: {
             allowCreate: true
@@ -54,8 +54,8 @@ const appTemplate = [
         question: {
           id: "studyProgram",
           type: "text",
-          placeholder: "Underwater Basket Weaving",
-        },
+          placeholder: "Underwater Basket Weaving"
+        }
       },
       {
         label: "When are you graduating?",
@@ -76,7 +76,7 @@ const appTemplate = [
           componentOptions: {
             allowCreate: true
           }
-        },
+        }
       },
       {
         label: "Where are you travelling from?",
@@ -85,8 +85,8 @@ const appTemplate = [
           id: "travellingFrom",
           type: "text",
           placeholder: "Mars"
-        },
-      },
+        }
+      }
     ]
   },
   {
@@ -103,9 +103,12 @@ const appTemplate = [
             { label: "Not a lot, but looking to learn!", value: "little" },
             { label: "I have some.", value: "some" },
             { label: "I have a decent amount.", value: "more" },
-            { label: "I'm the expert my grandma calls for tech support!", value: "expert" },
+            {
+              label: "I'm the expert my grandma calls for tech support!",
+              value: "expert"
+            }
           ]
-        },
+        }
       },
       {
         label: "Are there any activities or topics you're interested in?",
@@ -119,13 +122,25 @@ const appTemplate = [
             {
               label: "Workshops",
               options: [
-                { label: "Intro to Programming", value: "intro-to-programming" },
-                { label: "Technical Interview Prep (Algorithms)", value: "tech-prep" },
-                { label: "Intro to Web Dev (HTML, CSS, JS)", value: "web-dev-intro" },
-                { label: "Advanced Web Dev (React, Backend, etc)", value: "web-dev-advanced" },
+                {
+                  label: "Intro to Programming",
+                  value: "intro-to-programming"
+                },
+                {
+                  label: "Technical Interview Prep (Algorithms)",
+                  value: "tech-prep"
+                },
+                {
+                  label: "Intro to Web Dev (HTML, CSS, JS)",
+                  value: "web-dev-intro"
+                },
+                {
+                  label: "Advanced Web Dev (React, Backend, etc)",
+                  value: "web-dev-advanced"
+                },
                 { label: "UI/UX Design", value: "ui/ux-design" },
                 { label: "Pitching Your Idea", value: "pitching" },
-                { label: "Ideation Workshop", value: "ideation" },
+                { label: "Ideation Workshop", value: "ideation" }
               ]
             },
             {
@@ -136,7 +151,7 @@ const appTemplate = [
                 { label: "Therapy Dogs", value: "therapy-dogs" },
                 { label: "Interactive Post-It Wall", value: "post-it-wall" },
                 { label: "Networking Fair", value: "networking-fair" },
-                { label: "Cookie Decorating", value: "cookie-decorating" },
+                { label: "Cookie Decorating", value: "cookie-decorating" }
               ]
             },
             {
@@ -144,8 +159,11 @@ const appTemplate = [
               options: [
                 { label: "Fostering Entrepreneurship", value: "fostering-ent" },
                 { label: "Tech Talks", value: "tech-talks" },
-                { label: "Emerging Tech (ML, AI, CV, etc)", value: "emerging-tech" },
-                { label: "Recruiter Panel", value: "recruiter-panel" },
+                {
+                  label: "Emerging Tech (ML, AI, CV, etc)",
+                  value: "emerging-tech"
+                },
+                { label: "Recruiter Panel", value: "recruiter-panel" }
               ]
             }
           ],
@@ -154,7 +172,7 @@ const appTemplate = [
             allowCreate: true,
             allowMultiple: true
           }
-        },
+        }
       },
       {
         label: "Do you have a category you want to work on at Equithon?",
@@ -169,28 +187,32 @@ const appTemplate = [
             { label: "Female Empowerment", value: "female-empowerment" },
             { label: "Mental Health", value: "mental-health" },
             { label: "Mobility Rights", value: "mobility-rights" },
-            { label: "Physical Accessibility", value: "physical-accessibility" },
-            { label: "Not sure yet!", value: "undecided" },
+            {
+              label: "Physical Accessibility",
+              value: "physical-accessibility"
+            },
+            { label: "Not sure yet!", value: "undecided" }
           ],
           componentOptions: {
             allowMultiple: true
           }
-        },
-      },
+        }
+      }
     ]
   },
   {
     title: "Now, let's see your passion for social equity!",
     content: [
       {
-        label: "Tell us about a social equity issue that you are interested in learning more about.",
+        label:
+          "Tell us about a social equity issue that you are interested in learning more about.",
         type: "textLong",
         question: {
           id: "responseSocialEquity",
           type: "textArea",
           placeholder: "No need to write an essay!"
-        },
-      },
+        }
+      }
     ]
   },
   {
@@ -204,10 +226,16 @@ const appTemplate = [
           type: "option",
           placeholder: "Up to you!",
           options: [
-            { label: "What is an achievement you are proud of?", value: "achievement-highlight" },
-            { label: "Tell us about a time you learned something new.", value: "learning-new" },
+            {
+              label: "What is an achievement you are proud of?",
+              value: "achievement-highlight"
+            },
+            {
+              label: "Tell us about a time you learned something new.",
+              value: "learning-new"
+            }
           ]
-        },
+        }
       },
       {
         label: "Write a bit about your chosen prompt above!",
@@ -216,7 +244,7 @@ const appTemplate = [
           id: "responsePersonalAnswer",
           type: "textArea",
           placeholder: "No need to write an essay!"
-        },
+        }
       },
       {
         label: "Are there any links that you want us to check out?",
@@ -226,7 +254,7 @@ const appTemplate = [
           type: "url",
           optional: true,
           placeholder: "Portfolio, previous work, Github, LinkedIn, etc."
-        },
+        }
       }
     ]
   },
@@ -241,13 +269,11 @@ const appTemplate = [
           type: "text",
           optional: true,
           placeholder: "Be creative!"
-        },
-      },
+        }
+      }
     ]
   }
 ];
-
-
 
 const Container = styled.div`
   width: 50vw;
@@ -271,7 +297,7 @@ const QuestionSet = styled.div`
 
 const QuestionTitle = styled(Heading)`
   margin: 0.5em 0;
-`
+`;
 
 const Question = styled.div`
   margin-bottom: 1em;
@@ -341,7 +367,6 @@ const SubmitButton = styled(Button)`
   `}
 `;
 
-
 const ModalFrame = styled.div`
   display: ${props => (props.show ? "flex" : "none")};
   position: fixed;
@@ -375,7 +400,6 @@ const ConfirmSubmitModal = styled(Modal)`
   `}
 `;
 
-
 const ConfirmSubmit = ({ confirmSubmit, closeModal }) => (
   <ConfirmSubmitModal
     backgroundColor="lightBlack"
@@ -383,8 +407,12 @@ const ConfirmSubmit = ({ confirmSubmit, closeModal }) => (
     onClickCloseHandler={closeModal}
   >
     <div>
-      <Text size="big" color="white">Are you sure you want to submit?</Text>
-      <Text size="big" color="white">You won't be able to edit your application after.</Text>
+      <Text size="big" color="white">
+        Are you sure you want to submit?
+      </Text>
+      <Text size="big" color="white">
+        You won&apos;t be able to edit your application after.
+      </Text>
     </div>
     <SubmitButton
       label="Yes, Submit"
@@ -395,22 +423,53 @@ const ConfirmSubmit = ({ confirmSubmit, closeModal }) => (
   </ConfirmSubmitModal>
 );
 
-
-
-
-const renderQuestion = ({ label, type, question }, defaultValue, saveResponseHandler, appSubmitted) => {
+const renderQuestion = (
+  { label, type, question },
+  defaultValue,
+  saveResponseHandler,
+  appSubmitted
+) => {
   let QuestionComponent;
-  switch(type) {
+  switch (type) {
     case "text":
-      QuestionComponent = <TextInput placeholder={question.placeholder} name={question.id} type={question.type} defaultValue={defaultValue} disabled={appSubmitted} onChangeHandler={value => saveResponseHandler(question.id, value)} />;
+      QuestionComponent = (
+        <TextInput
+          placeholder={question.placeholder}
+          name={question.id}
+          type={question.type}
+          defaultValue={defaultValue}
+          disabled={appSubmitted}
+          onChangeHandler={value => saveResponseHandler(question.id, value)}
+        />
+      );
       break;
 
     case "textLong":
-      QuestionComponent = <TextArea placeholder={question.placeholder} name={question.id} type={question.type} defaultValue={defaultValue} disabled={appSubmitted} onChangeHandler={value => saveResponseHandler(question.id, value)} />;
+      QuestionComponent = (
+        <TextArea
+          placeholder={question.placeholder}
+          name={question.id}
+          type={question.type}
+          defaultValue={defaultValue}
+          disabled={appSubmitted}
+          onChangeHandler={value => saveResponseHandler(question.id, value)}
+        />
+      );
       break;
 
     case "select":
-      QuestionComponent = <SelectDropdown placeholder={question.placeholder} name={question.id} type={question.type} options={question.options} {...question.componentOptions} defaultValue={defaultValue} disabled={appSubmitted} onChangeHandler={value => saveResponseHandler(question.id, value)} />;
+      QuestionComponent = (
+        <SelectDropdown
+          placeholder={question.placeholder}
+          name={question.id}
+          type={question.type}
+          options={question.options}
+          {...question.componentOptions}
+          defaultValue={defaultValue}
+          disabled={appSubmitted}
+          onChangeHandler={value => saveResponseHandler(question.id, value)}
+        />
+      );
       break;
 
     default:
@@ -419,27 +478,48 @@ const renderQuestion = ({ label, type, question }, defaultValue, saveResponseHan
 
   return (
     <Question key={question.id}>
-      <QuestionLabel color="grey" size="small" weight="bold">{label.toUpperCase()}{question.optional ? "" : "*"}</QuestionLabel>
+      <QuestionLabel color="grey" size="small" weight="bold">
+        {label.toUpperCase()}
+        {question.optional ? "" : "*"}
+      </QuestionLabel>
       {QuestionComponent}
     </Question>
   );
-}
+};
 
-const renderQuestionSet = ({ title, content}, curAppInfo, saveResponseHandler, appSubmitted) => (
+const renderQuestionSet = (
+  { title, content },
+  curAppInfo,
+  saveResponseHandler,
+  appSubmitted
+) => (
   <QuestionSet key={title}>
-    <QuestionTitle color="black" size="small" weight="normal">{title}</QuestionTitle>
-    {content.map(q => renderQuestion(q, curAppInfo[q.question.id], saveResponseHandler, appSubmitted))}
+    <QuestionTitle color="black" size="small" weight="normal">
+      {title}
+    </QuestionTitle>
+    {content.map(q =>
+      renderQuestion(
+        q,
+        curAppInfo[q.question.id],
+        saveResponseHandler,
+        appSubmitted
+      )
+    )}
   </QuestionSet>
-)
+);
 
 const renderSubmit = (saveState, appState, appFilled, submitHandler) => {
-  if(appState === "SUBMITTED") {
-    return <Text color="green" size="normal">Your application has been submitted!</Text>
+  if (appState === "SUBMITTED") {
+    return (
+      <Text color="green" size="normal">
+        Your application has been submitted!
+      </Text>
+    );
   }
 
   let saveMsg;
-  if(saveState === "SAVING") saveMsg = "Saving...";
-  else if(saveState === "SAVED") saveMsg = "Your responses have been saved.";
+  if (saveState === "SAVING") saveMsg = "Saving...";
+  else if (saveState === "SAVED") saveMsg = "Your responses have been saved.";
   return (
     <Submit>
       {
@@ -451,38 +531,47 @@ const renderSubmit = (saveState, appState, appFilled, submitHandler) => {
           onClickHandler={submitHandler}
         />
       }
-      <Text color="grey" size="normal">{saveMsg}</Text>
+      <Text color="grey" size="normal">
+        {saveMsg}
+      </Text>
     </Submit>
   );
-}
-
-
-
+};
 
 const ApplicationViewComponent = ({
   curUserName,
   curAppInfo,
   updateAppInfo,
   submitAppInfo,
-  appState,
+  appState
 }) => {
-
-  const [ saveState, updateSaveState ] = useState("READY");
-  const [ confirmSaveOpen, toggleConfirmSave ] = useState(false);
-  const [ renderContent, updateRenderContent ] = useState(false);
+  const [saveState, updateSaveState] = useState("READY");
+  const [confirmSaveOpen, toggleConfirmSave] = useState(false);
+  const [renderContent, updateRenderContent] = useState(false);
 
   const appSubmitted = appState === "SUBMITTED";
-  const appFilledOut = appTemplate.every(qs => qs.content.every(q => (Object.keys(curAppInfo).includes(q.question.id) && curAppInfo && curAppInfo[q.question.id] !== "") || q.question.optional));
+  const appFilledOut = appTemplate.every(qs =>
+    qs.content.every(
+      q =>
+        (Object.keys(curAppInfo).includes(q.question.id) &&
+          curAppInfo &&
+          curAppInfo[q.question.id] !== "") ||
+        q.question.optional
+    )
+  );
 
-  const delayedUpdateField = useCallback(debounce((fieldId, value, appInfo) => {
-    const newAppInfo = {
-      ...appInfo,
-      [fieldId]: value
-    }
+  const delayedUpdateField = useCallback(
+    debounce((fieldId, value, appInfo) => {
+      const newAppInfo = {
+        ...appInfo,
+        [fieldId]: value
+      };
 
-    updateAppInfo(newAppInfo);
-    updateSaveState("SAVED");
-  }, 1000), [submitAppInfo]);
+      updateAppInfo(newAppInfo);
+      updateSaveState("SAVED");
+    }, 1000),
+    [submitAppInfo]
+  );
 
   useEffect(() => {
     const appTimer = setTimeout(() => updateRenderContent(true), 500);
@@ -493,7 +582,7 @@ const ApplicationViewComponent = ({
   const saveResponseField = (fieldId, value) => {
     updateSaveState("SAVING");
     delayedUpdateField(fieldId, value, curAppInfo);
-  }
+  };
 
   const closeModal = () => toggleConfirmSave(false);
 
@@ -502,30 +591,28 @@ const ApplicationViewComponent = ({
   const confirmSubmit = () => {
     submitAppInfo();
     closeModal();
-  }
-
+  };
 
   return (
-      <Container>
-        {(appState !== "FETCHING") && renderContent
-          ?
-            <>
-              <Heading color="black" size="small" weight="normal">{`Hi ${curUserName.split(" ")[0]}! Let's get to know you!`}</Heading>
-              {appTemplate.map(qs => renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted))}
-              {renderSubmit(saveState, appState, appFilledOut, submitHandler)}
-            </>
-          :
-          <Loading />
-        }
+    <Container>
+      {appState !== "FETCHING" && renderContent ? (
+        <>
+          <Heading color="black" size="small" weight="normal">{`Hi ${
+            curUserName.split(" ")[0]
+          }! Let's get to know you!`}</Heading>
+          {appTemplate.map(qs =>
+            renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted)
+          )}
+          {renderSubmit(saveState, appState, appFilledOut, submitHandler)}
+        </>
+      ) : (
+        <Loading />
+      )}
 
-        <ModalFrame show={confirmSaveOpen}>
-          <ConfirmSubmit
-            confirmSubmit={confirmSubmit}
-            closeModal={closeModal}
-          />
-        </ModalFrame>
-
-      </Container>
+      <ModalFrame show={confirmSaveOpen}>
+        <ConfirmSubmit confirmSubmit={confirmSubmit} closeModal={closeModal} />
+      </ModalFrame>
+    </Container>
   );
 };
 

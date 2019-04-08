@@ -5,9 +5,6 @@ import { HOME } from "../../../utils/siteRoutes";
 import Barrier from "../../../static/img/misc/construction.svg";
 import Heading from "../../shared/Heading/HeadingComponent";
 
-// The template for a review of an application, including options, etc.
-const appReviewTemplate = {};
-
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -23,17 +20,13 @@ const Img = styled.img`
 `;
 
 const Disclaimer = styled(Heading)`
-
   width: 80vw;
   text-align: center;
   margin: 0 auto;
 `;
 
-
-
 const AppReviewViewComponent = () => {
-
-  const [ shouldRedirect, updateShouldRedirect ] = useState(false);
+  const [shouldRedirect, updateShouldRedirect] = useState(false);
 
   useEffect(() => {
     const delayedRedirect = setTimeout(() => updateShouldRedirect(true), 2000);
@@ -41,7 +34,7 @@ const AppReviewViewComponent = () => {
     return () => clearTimeout(delayedRedirect);
   }, []);
 
-  if(shouldRedirect) return <Redirect noThrow to={HOME} />;
+  if (shouldRedirect) return <Redirect noThrow to={HOME} />;
 
   return (
     <Container>

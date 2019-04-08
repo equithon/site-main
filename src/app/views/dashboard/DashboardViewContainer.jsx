@@ -1,5 +1,5 @@
 import React from "react";
-import { compose, withProps } from "recompose";
+import { compose } from "recompose";
 import { connectSiteContext } from "../../../utils/siteContext";
 import { accessIfAuthenticated } from "../../../utils/siteAuth";
 import * as ROUTES from "../../../utils/siteRoutes";
@@ -130,14 +130,20 @@ const mapContextStateToProps = ({ state: { firebase, dashboardInfo } }) => ({
 const enhance = compose(
   withExceptionHandler,
   accessIfAuthenticated,
-  connectSiteContext(mapContextStateToProps),
+  connectSiteContext(mapContextStateToProps)
 );
 
 export default enhance(({ curUser, ...props }) => {
-  // if(curUser && curUser.role === "HACKER") { //  && curUser.reviewed) { TODO; uncomment this
-  //   userDashboards.HACKER.shift(); // remove application tile
-  //   userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
-  // }
+  if (curUser && curUser.role === "HACKER" && curUser.submitted) {
+    userDashboards.HACKER.shift(); // remove application tile
+    userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
+  }
 
-  return <DashboardViewComponent curUser={curUser} userDashboards={userDashboards} {...props} />;
+  return (
+    <DashboardViewComponent
+      curUser={curUser}
+      userDashboards={userDashboards}
+      {...props}
+    />
+  );
 });
