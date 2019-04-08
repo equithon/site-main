@@ -3,30 +3,37 @@
 exports[`Button renders correctly 1`] = `
 .c0 {
   cursor: pointer;
-  padding: 1em 2em;
-  border-radius: 50px;
+  padding: 0.8em;
+  border-radius: 6px;
+  font-size: 100%;
   color: white;
-  background-color: #696969;
-  -webkit-transition: background-color 250ms ease-in-out;
-  transition: background-color 250ms ease-in-out;
+  background-color: #454545;
+  will-change: filter;
+  -webkit-transition: filter 250ms ease-in-out;
+  transition: filter 250ms ease-in-out;
+}
+
+.c0:hover {
+  -webkit-filter: brightness(110%);
+  filter: brightness(110%);
 }
 
 .c0:focus {
   outline: none;
 }
 
-.c0:hover {
-  background-color: #4B4B4B;
-}
-
-<Button
+<_default
   label="Default"
 >
   <styled.button
+    backgroundColor="black"
+    color="white"
     onClick={[Function]}
     type="button"
   >
     <StyledComponent
+      backgroundColor="black"
+      color="white"
       forwardedComponent={
         Object {
           "$$typeof": Symbol(react.forward_ref),
@@ -38,25 +45,30 @@ exports[`Button renders correctly 1`] = `
             "rules": Array [
               "
   cursor: pointer;
-  padding: 1em 2em;
+  padding: ",
+              [Function],
+              ";
   border-radius: ",
               [Function],
               ";
 
-  color: white;
+  font-size: 100%;
+  color: ",
+              [Function],
+              ";
   background-color: ",
               [Function],
               ";
 
-  &:focus {
-    outline: none;
+  will-change: filter;
+  transition: filter 250ms ease-in-out;
+  &:hover {
+    filter: brightness(110%);
   }
 
-  transition: background-color 250ms ease-in-out;
-  &:hover {
-    background-color: ",
-              [Function],
-              ";
+  // remove annoying blue Chrome outline when focused
+  &:focus {
+    outline: none;
   }
 ",
             ],
@@ -77,6 +89,7 @@ exports[`Button renders correctly 1`] = `
     >
       <button
         className="c0"
+        color="white"
         onClick={[Function]}
         type="button"
       >
@@ -84,5 +97,5 @@ exports[`Button renders correctly 1`] = `
       </button>
     </StyledComponent>
   </styled.button>
-</Button>
+</_default>
 `;

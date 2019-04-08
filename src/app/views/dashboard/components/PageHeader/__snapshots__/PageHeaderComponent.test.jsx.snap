@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should render correctly with a button 1`] = `undefined`;
+
 exports[`should render correctly with no children 1`] = `undefined`;
