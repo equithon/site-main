@@ -9,7 +9,8 @@ const Button = styled.button`
 
   font-size: 100%;
   color: ${props => props.theme.colors[props.color] || props.color};
-  background-color: ${props => props.theme.colors[props.backgroundColor] || props.backgroundColor};
+  background-color: ${props =>
+    props.theme.colors[props.backgroundColor] || props.backgroundColor};
 
   will-change: filter;
   transition: filter 250ms ease-in-out;
@@ -31,7 +32,7 @@ export default ({
   color = "white",
   backgroundColor = "black",
   type = "button",
-  onClickHandler = () => console.log(`clicked ${label} button`)
+  onClickHandler = () => {}
 }) => (
   <Button
     className={className}
@@ -41,6 +42,6 @@ export default ({
     backgroundColor={backgroundColor}
     onClick={disabled ? null : onClickHandler}
   >
-    {icon ? <FontAwesomeIcon icon={icon} size='1x' /> : label}
+    {icon ? <FontAwesomeIcon icon={icon} size="1x" /> : label}
   </Button>
 );

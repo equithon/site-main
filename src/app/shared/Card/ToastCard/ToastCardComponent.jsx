@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { mediaSize } from "../../../../utils/siteTools";
 import Card from "../CardComponent";
 
 const ToastCard = styled(Card)`
@@ -26,8 +25,8 @@ const Contents = styled.div`
 export default ({
   className,
   icon,
-  color = 'white',
-  backgroundColor = 'primary',
+  color = "white",
+  backgroundColor = "primary",
   backgroundImg,
   onClickHandler,
   children
@@ -39,7 +38,10 @@ export default ({
     backgroundImg={backgroundImg}
     onClickHandler={onClickHandler}
   >
-    <Icon> <FontAwesomeIcon icon={icon} size="2x" /> </Icon>
+    <Icon>
+      {" "}
+      <FontAwesomeIcon icon={icon} size="2x" />{" "}
+    </Icon>
     <Contents> {children} </Contents>
   </ToastCard>
 );

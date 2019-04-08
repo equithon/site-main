@@ -2,13 +2,14 @@
 
 exports[`Heading renders correctly 1`] = `
 .c0 {
+  display: block;
+  margin: 0;
+  color: #454545;
   font-size: 2em;
-  font-weight: 500;
-  color: #AAAAAA;
-  margin-bottom: 0.5em;
+  font-weight: 600;
 }
 
-<styled.div>
+<styled.h1>
   <StyledComponent
     forwardedComponent={
       Object {
@@ -20,22 +21,26 @@ exports[`Heading renders correctly 1`] = `
           "lastClassName": "c0",
           "rules": Array [
             "
-  font-size: 2em;
-  font-weight: 500;
+  display: block;
+  margin: 0;
+
   color: ",
             [Function],
             ";
-  margin-bottom: ",
+  font-size: ",
+            [Function],
+            ";
+  font-weight: ",
             [Function],
             ";
 ",
           ],
         },
-        "displayName": "styled.div",
+        "displayName": "styled.h1",
         "foldedComponentIds": Array [],
         "render": [Function],
         "styledComponentId": "sc-bdVaJa",
-        "target": "div",
+        "target": "h1",
         "toString": [Function],
         "warnTooManyClasses": [Function],
         "withComponent": [Function],
@@ -43,11 +48,11 @@ exports[`Heading renders correctly 1`] = `
     }
     forwardedRef={null}
   >
-    <div
+    <h1
       className="c0"
     >
       Test Heading
-    </div>
+    </h1>
   </StyledComponent>
-</styled.div>
+</styled.h1>
 `;

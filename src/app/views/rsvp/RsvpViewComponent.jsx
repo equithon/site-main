@@ -13,7 +13,7 @@ import Heading from "../../shared/Heading/HeadingComponent";
 import Modal from "../../shared/Modal/ModalComponent";
 
 // The template for an application info, including options, etc.
-const appTemplate = [
+const rsvpTemplate = [
   {
     title: "",
     content: [
@@ -538,39 +538,38 @@ const renderSubmit = (saveState, appState, appFilled, submitHandler) => {
   );
 };
 
-const ApplicationViewComponent = ({
-  curUserName,
-  curAppInfo,
-  updateAppInfo,
-  submitAppInfo,
-  appState
+const RsvpViewComponent = ({
+  curUser,
+  curRsvpInfo,
+  updateRsvpInfo,
+  submitRsvpInfo,
+  rsvpState
 }) => {
   const [saveState, updateSaveState] = useState("READY");
   const [confirmSaveOpen, toggleConfirmSave] = useState(false);
   const [renderContent, updateRenderContent] = useState(false);
-
-  const appSubmitted = appState === "SUBMITTED";
-  const appFilledOut = appTemplate.every(qs =>
+  const rsvpSubmitted = rsvpState === "SUBMITTED";
+  const rsvpFilledOut = rsvpTemplate.every(qs =>
     qs.content.every(
       q =>
-        (Object.keys(curAppInfo).includes(q.question.id) &&
-          curAppInfo &&
-          curAppInfo[q.question.id] !== "") ||
+        (Object.keys(curRsvpInfo).includes(q.question.id) &&
+          curRsvpInfo &&
+          curRsvpInfo[q.question.id] !== "") ||
         q.question.optional
     )
   );
 
   const delayedUpdateField = useCallback(
-    debounce((fieldId, value, appInfo) => {
-      const newAppInfo = {
-        ...appInfo,
+    debounce((fieldId, value, rsvpInfo) => {
+      const newRsvpInfo = {
+        ...rsvpInfo,
         [fieldId]: value
       };
 
-      updateAppInfo(newAppInfo);
+      updateRsvpInfo(newRsvpInfo);
       updateSaveState("SAVED");
     }, 1000),
-    [submitAppInfo]
+    [submitRsvpInfo]
   );
 
   useEffect(() => {
@@ -581,7 +580,7 @@ const ApplicationViewComponent = ({
 
   const saveResponseField = (fieldId, value) => {
     updateSaveState("SAVING");
-    delayedUpdateField(fieldId, value, curAppInfo);
+    delayedUpdateField(fieldId, value, curRsvpInfo);
   };
 
   const closeModal = () => toggleConfirmSave(false);
@@ -589,22 +588,42 @@ const ApplicationViewComponent = ({
   const submitHandler = () => toggleConfirmSave(true);
 
   const confirmSubmit = () => {
-    submitAppInfo();
+    submitRsvpInfo();
     closeModal();
   };
 
+  const contentToRender =
+    curUser && curUser.accepted ? (
+      <>
+        <Heading color="black" size="small" weight="normal">{`Hi ${curUser &&
+          curUser.name.split(
+            " "
+          )[0]}! We're excited to offer you a spot at Equithon 2019. Fill out this RSVP!`}</Heading>
+        {curUser &&
+          curUser.accepted &&
+          rsvpTemplate.map(qs =>
+            renderQuestionSet(qs, curRsvpInfo, saveResponseField, rsvpSubmitted)
+          )}
+        {curUser &&
+          curUser.accepted &&
+          renderSubmit(saveState, rsvpState, rsvpFilledOut, submitHandler)}
+      </>
+    ) : (
+      <div>
+        <Heading color="black" size="small" weight="normal">{`Hi ${curUser &&
+          curUser.name.split(
+            " "
+          )[0]}, unfortunately we weren't able to offer you a spot at Equithon 2019.`}</Heading>
+        <Text color="black" weight="normal">
+          We appreciated your application, and we encourage you to still get
+          involved by volunteering, mentoring, or applying next year.
+        </Text>
+      </div>
+    );
   return (
     <Container>
-      {appState !== "FETCHING" && renderContent ? (
-        <>
-          <Heading color="black" size="small" weight="normal">{`Hi ${
-            curUserName.split(" ")[0]
-          }! Let's get to know you!`}</Heading>
-          {appTemplate.map(qs =>
-            renderQuestionSet(qs, curAppInfo, saveResponseField, appSubmitted)
-          )}
-          {renderSubmit(saveState, appState, appFilledOut, submitHandler)}
-        </>
+      {rsvpState !== "FETCHING" && renderContent ? (
+        contentToRender
       ) : (
         <Loading />
       )}
@@ -616,4 +635,4 @@ const ApplicationViewComponent = ({
   );
 };
 
-export default ApplicationViewComponent;
+export default RsvpViewComponent;

@@ -2,37 +2,35 @@
 
 exports[`Button renders correctly 1`] = `
 .c0 {
-  cursor: pointer;
   padding: 0.8em;
   border-radius: 6px;
-  font-size: 100%;
   color: white;
   background-color: #454545;
-  will-change: filter;
-  -webkit-transition: filter 250ms ease-in-out;
-  transition: filter 250ms ease-in-out;
+  cursor: auto;
+  will-change: transform;
+  -webkit-transition: -webkit-transform 150ms ease-in-out;
+  -webkit-transition: transform 150ms ease-in-out;
+  transition: transform 150ms ease-in-out;
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .c0:hover {
-  -webkit-filter: brightness(110%);
-  filter: brightness(110%);
+  -webkit-transform: scale(1.01);
+  -ms-transform: scale(1.01);
+  transform: scale(1.01);
 }
 
-.c0:focus {
-  outline: none;
-}
-
-<_default
-  label="Default"
->
-  <styled.button
+<_default>
+  <styled.div
     backgroundColor="black"
+    clickable={false}
     color="white"
-    onClick={[Function]}
-    type="button"
   >
     <StyledComponent
       backgroundColor="black"
+      clickable={false}
       color="white"
       forwardedComponent={
         Object {
@@ -44,7 +42,6 @@ exports[`Button renders correctly 1`] = `
             "lastClassName": "c0",
             "rules": Array [
               "
-  cursor: pointer;
   padding: ",
               [Function],
               ";
@@ -52,50 +49,49 @@ exports[`Button renders correctly 1`] = `
               [Function],
               ";
 
-  font-size: 100%;
   color: ",
               [Function],
               ";
   background-color: ",
               [Function],
               ";
+  background: ",
+              [Function],
+              ";
 
-  will-change: filter;
-  transition: filter 250ms ease-in-out;
+  // only display cursor or expand on hover if clickable
+  cursor: ",
+              [Function],
+              ";
+
+  will-change: transform;
+  transition: transform 150ms ease-in-out;
+  transform: scale(1.01);
   &:hover {
-    filter: brightness(110%);
-  }
-
-  // remove annoying blue Chrome outline when focused
-  &:focus {
-    outline: none;
+    transform: ",
+              [Function],
+              ";
   }
 ",
             ],
           },
-          "displayName": "styled.button",
+          "displayName": "styled.div",
           "foldedComponentIds": Array [],
           "render": [Function],
           "styledComponentId": "sc-bdVaJa",
-          "target": "button",
+          "target": "div",
           "toString": [Function],
           "warnTooManyClasses": [Function],
           "withComponent": [Function],
         }
       }
       forwardedRef={null}
-      onClick={[Function]}
-      type="button"
     >
-      <button
+      <div
         className="c0"
         color="white"
-        onClick={[Function]}
-        type="button"
-      >
-        Default
-      </button>
+      />
     </StyledComponent>
-  </styled.button>
+  </styled.div>
 </_default>
 `;

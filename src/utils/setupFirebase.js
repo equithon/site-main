@@ -23,14 +23,10 @@ const firebaseConfig = {
   }
 };
 
-
 const curFirebaseConfig =
   process.env.NODE_ENV === "production"
     ? firebaseConfig.prod
     : firebaseConfig.dev;
-
-
-
 
 class Firebase {
   constructor() {
@@ -43,15 +39,20 @@ class Firebase {
   // Create a new user with an email and password, and create a corresponding
   // document in the /users Firestore collection with their name and role
   createUser = (name, email, password) =>
-    this.auth.createUserWithEmailAndPassword(email, password)
+    this.auth
+      .createUserWithEmailAndPassword(email, password)
       // create corresponding doc in /users Firestore collection
       .then(userCredential => {
         try {
-          this.firestore.collection('users').doc(userCredential.user.uid).set({ name, role: 'HACKER' });
-        } catch(e) {
+          this.firestore
+            .collection("users")
+            .doc(userCredential.user.uid)
+            .set({ name, role: "HACKER" });
+        } catch (e) {
           console.log(e);
         }
-      });
+      })
+      .catch(err => console.log(err));
 
   // Sign in a user using an email and password
   signInUser = (email, password) =>
@@ -60,26 +61,26 @@ class Firebase {
   // Sign out the current user, if one is signed in
   signOutUser = () => this.auth.signOut();
 
-
   // Update the name of the user in the /users collection with the specified userId
   updateUserName = (userId, updatedName) => {
     try {
-      this.firestore.collection('users').doc(userId).update({ name: updatedName });
-    } catch(e) {
+      this.firestore
+        .collection("users")
+        .doc(userId)
+        .update({ name: updatedName });
+    } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   // Update the password of the current user
-  updatePassword = password =>
-    this.auth.currentUser.updatePassword(password);
+  updatePassword = password => this.auth.currentUser.updatePassword(password);
 
   // Request a password reset email for the current user
-  resetPassword = email => this.auth.sendPasswordResetEmail(email || this.auth.currentUser.email);
+  resetPassword = email =>
+    this.auth.sendPasswordResetEmail(email || this.auth.currentUser.email);
 
   getTimestamp = date => firebase.firestore.Timestamp.fromDate(date);
-
 }
-
 
 export default Firebase;

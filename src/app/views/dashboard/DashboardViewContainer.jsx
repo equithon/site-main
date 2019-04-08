@@ -1,4 +1,5 @@
-import { compose, withProps } from "recompose";
+import React from "react";
+import { compose } from "recompose";
 import { connectSiteContext } from "../../../utils/siteContext";
 import { accessIfAuthenticated } from "../../../utils/siteAuth";
 import * as ROUTES from "../../../utils/siteRoutes";
@@ -30,6 +31,12 @@ const dashboardTiles = {
   application: {
     label: "My Application",
     linkTo: ROUTES.APPLICATION,
+    gridArea: "centerTop",
+    backgroundImg: ApplicationTileBG
+  },
+  rsvp: {
+    label: "Application Status",
+    linkTo: ROUTES.APP_STATUS,
     gridArea: "centerTop",
     backgroundImg: ApplicationTileBG
   },
@@ -123,10 +130,20 @@ const mapContextStateToProps = ({ state: { firebase, dashboardInfo } }) => ({
 const enhance = compose(
   withExceptionHandler,
   accessIfAuthenticated,
-  connectSiteContext(mapContextStateToProps),
-  withProps({
-    userDashboards
-  })
+  connectSiteContext(mapContextStateToProps)
 );
 
-export default enhance(DashboardViewComponent);
+export default enhance(({ curUser, ...props }) => {
+  if (curUser && curUser.role === "HACKER" && curUser.submitted) {
+    userDashboards.HACKER.shift(); // remove application tile
+    userDashboards.HACKER.unshift(dashboardTiles.rsvp); // add rsvp tile
+  }
+
+  return (
+    <DashboardViewComponent
+      curUser={curUser}
+      userDashboards={userDashboards}
+      {...props}
+    />
+  );
+});
